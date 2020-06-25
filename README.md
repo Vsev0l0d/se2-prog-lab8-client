@@ -1,1 +1,1 @@
-Сервер - https://github.com/Vsev0l0d/se2-prog-lab7-server
+Сервер - https://github.com/MrAureliuss/se2-prog-lab8-server
