@@ -44,7 +44,7 @@
             </Pane>
             <TextField layoutX="34.0" layoutY="139.0" prefHeight="27.0" prefWidth="293.0" promptText="Придумайте логин" style="-fx-background-radius: 1em;" />
             <Button fx:id="regUserBtn" layoutX="34.0" layoutY="297.0" mnemonicParsing="false" onAction="#regUserAction" prefHeight="40.0" prefWidth="293.0" style="-fx-background-radius: 1em; -fx-background-color: #e57f31#e57f31 #e57f31#e57f31;" text="Зарегистрироваться" />
-            <Button fx:id="authUserWindowBtn" alignment="CENTER" graphicTextGap="12.0" layoutX="34.0" layoutY="356.0" mnemonicParsing="false" onAction="#displayAuthWindow" prefHeight="40.0" prefWidth="293.0" style="-fx-background-radius: 1em; -fx-background-color: #e57f31#e57f31 #e57f31#e57f31;" text="К авторизации" />
+            <Button fx:id="authUserWindowBtn" alignment="CENTER" graphicTextGap="12.0" layoutX="34.0" layoutY="356.0" mnemonicParsing="false" onAction="#displayAuthWindow" prefHeight="40.0" prefWidth="293.0" style="-fx-background-radius: 1em; -fx-background-color: #e57f31#e57f31 #e57f31#e57f31;" text="Авторизация" />
             <PasswordField layoutX="34.0" layoutY="182.0" prefHeight="27.0" prefWidth="293.0" promptText="Придумайте пароль" style="-fx-background-radius: 1em;" />
             <PasswordField layoutX="34.0" layoutY="225.0" prefHeight="27.0" prefWidth="293.0" promptText="Повторите пароль" style="-fx-background-radius: 1em;" />
          </children>
