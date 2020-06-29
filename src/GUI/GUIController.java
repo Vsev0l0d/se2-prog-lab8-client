@@ -77,7 +77,13 @@ public class GUIController {
             Injector injector = Guice.createInjector(new ClientModule());
             CommandReceiver commandReceiver = injector.getInstance(CommandReceiver.class);
 
-            commandReceiver.tryAuth(userLoginField.getText(), userPasswordField.getText());
+            try {
+                commandReceiver.tryAuth(userLoginField.getText(), userPasswordField.getText());
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         } else showAlert("Вы не ввели логин или пароль!");
 
 
