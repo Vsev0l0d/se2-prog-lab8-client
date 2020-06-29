@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="344.0" style="-fx-background-radius: 1em;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.GUIController">
+   <children>
+      <Pane layoutX="-2.0" prefHeight="405.0" prefWidth="352.0" style="-fx-background-color: #293541#293541;">
+         <children>
+            <Pane prefHeight="82.0" prefWidth="351.0" style="-fx-background-color: #e57f31#e57f31;">
+               <children>
+                  <ImageView fitHeight="79.0" fitWidth="103.0" layoutX="23.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/Nikita.png" />
+                     </image>
+                  </ImageView>
+                  <Text layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Study" wrappingWidth="90.24800109863281">
+                     <font>
+                        <Font name="Avenir Next Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="139.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grou" wrappingWidth="90.24800109863281">
+                     <font>
+                        <Font name="Avenir Next Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="194.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="P" wrappingWidth="90.24800109863281">
+                     <font>
+                        <Font name="Avenir Next Bold" size="48.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="213.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="roject" wrappingWidth="90.24800109863281">
+                     <font>
+                        <Font name="Avenir Next Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <TextField fx:id="userLoginField" layoutX="30.0" layoutY="162.0" prefHeight="27.0" prefWidth="293.0" promptText="Введите ваш логин" style="-fx-background-radius: 1em;" />
+            <Button fx:id="authUserBtn" layoutX="29.0" layoutY="278.0" mnemonicParsing="false" onAction="#authUserAction" prefHeight="40.0" prefWidth="293.0" style="-fx-background-radius: 1em; -fx-background-color: #e57f31#e57f31 #e57f31#e57f31;" text="Авторизация" />
+            <Button fx:id="regUserWindowBtn" layoutX="29.0" layoutY="336.0" mnemonicParsing="false" onAction="#displayRegWindow" prefHeight="40.0" prefWidth="293.0" style="-fx-background-radius: 1em; -fx-background-color: #e57f31#e57f31 #e57f31#e57f31;" text="Регистрация" />
+            <PasswordField fx:id="userPasswordField" layoutX="29.0" layoutY="212.0" prefHeight="27.0" prefWidth="293.0" promptText="Введите ваш пароль" style="-fx-background-radius: 1em;" />
+
+         </children>
+      </Pane>
+   </children>
+</Pane>

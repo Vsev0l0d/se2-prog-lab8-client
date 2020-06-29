@@ -46,6 +46,11 @@ public class CommandReceiverImp implements CommandReceiver {
     }
 
     @Override
+    public void tryAuth(String login, String password) throws ClassNotFoundException, InterruptedException {
+        requestHandler(new SerializedAuth(login, password));
+    }
+
+    @Override
     public void setAuthorizationData(String login, String password){
         this.login = login;
         this.password = password;
