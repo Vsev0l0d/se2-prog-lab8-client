@@ -1,9 +1,11 @@
 package GUI;
 
 import Client.ClientModule;
-import Commands.SerializedAuth;
+import Commands.Utils.HashEncrypterImp;
 import Interfaces.CommandReceiver;
+import Interfaces.HashEncrypter;
 import com.google.inject.Guice;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +22,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class GUIController {
+    private final HashEncrypter hashEncrypter = new HashEncrypterImp();
+
     @FXML
     private Button authUserBtn;
     @FXML
@@ -78,7 +82,7 @@ public class GUIController {
             CommandReceiver commandReceiver = injector.getInstance(CommandReceiver.class);
 
             try {
-                commandReceiver.tryAuth(userLoginField.getText(), userPasswordField.getText());
+                commandReceiver.tryAuth(userLoginField.getText().trim(), hashEncrypter.encryptString(userPasswordField.getText().trim()));
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
