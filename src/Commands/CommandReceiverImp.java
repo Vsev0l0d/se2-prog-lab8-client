@@ -30,24 +30,26 @@ public class CommandReceiverImp implements CommandReceiver {
     private final Receiver receiver;
     private final Register register;
     private final Selector selector;
+    private final HashEncrypter hashEncrypter;
     private String login;
     private String password;
 
     @Inject
-    public CommandReceiverImp(CommandInvoker commandInvoker, Session session,
-                              Sender sender, ElementCreator elementCreator, Receiver receiver, Register register) throws IOException {
+    public CommandReceiverImp(CommandInvoker commandInvoker, Session session, Sender sender, ElementCreator elementCreator,
+                              Receiver receiver, Register register, HashEncrypter hashEncrypter) throws IOException {
         this.commandInvoker = commandInvoker;
         socketChannel = session.getSocketChannel();
         this.sender = sender;
         this.elementCreator = elementCreator;
         this.receiver = receiver;
         this.register = register;
+        this.hashEncrypter = hashEncrypter;
         selector = Selector.open();
     }
 
     @Override
     public void tryAuth(String login, String password) throws ClassNotFoundException, InterruptedException {
-        requestHandler(new SerializedAuth(login, password));
+        requestHandler(new SerializedAuth(login, hashEncrypter.encryptString(password)));
     }
 
     @Override
