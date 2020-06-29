@@ -1,3 +1,5 @@
+package Client;
+
 import Client.DecryptingImp;
 import Client.ReceiverImp;
 import Client.SenderImp;
@@ -21,12 +23,10 @@ import com.google.inject.multibindings.Multibinder;
 public class ClientModule extends AbstractModule {
     @Override
     protected void configure() {
-        bind(ConsoleManager.class).to(ConsoleManagerImp.class);
         bind(CommandInvoker.class).to(CommandInvokerImp.class);
         bind(ElementCreator.class).to(ElementCreatorImp.class);
         bind(Sender.class).to(SenderImp.class);
         bind(Session.class).to(SessionImp.class);
-        bind(LoginPassReader.class).to(LoginPassReaderImp.class);
         bind(CommandReceiver.class).to(CommandReceiverImp.class);
         bind(Receiver.class).to(ReceiverImp.class);
         bind(Decrypting.class).to(DecryptingImp.class);

@@ -22,7 +22,7 @@ public class SessionImp implements Session {
 
     @Inject
     public SessionImp() {
-        FileReader fileReader= null;
+        FileReader fileReader = null;
         try {
             fileReader = new FileReader(System.getProperty("user.dir") + "/config.txt");
             Scanner scan = new Scanner(fileReader);

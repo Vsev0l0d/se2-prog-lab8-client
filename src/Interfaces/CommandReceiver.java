@@ -36,4 +36,6 @@ public interface CommandReceiver {
     void register(String login, String password) throws IOException, InterruptedException, ClassNotFoundException;
 
     void executeScript(String path);
+
+    void tryAuth(String login, String password) throws ClassNotFoundException, InterruptedException;
 }

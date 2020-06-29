@@ -12,9 +12,6 @@ import java.io.*;
 public class Main extends Application {
     public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException {
         launch(args);
-        Injector injector = Guice.createInjector(new ClientModule());
-        ConsoleManager consoleManager = injector.getInstance(ConsoleManager.class);
-        consoleManager.startInteractiveMode();
     }
 
     @Override
@@ -23,6 +20,5 @@ public class Main extends Application {
         primaryStage.setTitle("StudyGroupProject. Авторизация.");
         primaryStage.setScene(new Scene(root, 350, 405));
         primaryStage.show();
-
     }
 }
