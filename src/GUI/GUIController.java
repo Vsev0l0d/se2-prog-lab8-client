@@ -82,7 +82,8 @@ public class GUIController {
             CommandReceiver commandReceiver = injector.getInstance(CommandReceiver.class);
 
             try {
-                commandReceiver.tryAuth(userLoginField.getText().trim(), hashEncrypter.encryptString(userPasswordField.getText().trim()));
+                commandReceiver.tryAuth(userLoginField.getText().trim(),
+                        hashEncrypter.encryptString(userPasswordField.getText().trim()));
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
@@ -102,6 +103,4 @@ public class GUIController {
 
         alert.showAndWait();
     }
-
-
 }
