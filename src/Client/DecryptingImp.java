@@ -27,7 +27,7 @@ public class DecryptingImp implements Decrypting {
                 Parent sceneFXML = loader.load();
                 HiPanelController ctrl = (loader.getController());
                 if (serializedResAuth.getRes()) {
-                    System.out.println("ass");
+                    ctrl.displayMainStageWindow();
                 } else ctrl.showAlert("Вы не зарегистрированы!");
             }
 
