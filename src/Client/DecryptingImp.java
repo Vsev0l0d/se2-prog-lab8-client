@@ -3,6 +3,7 @@ package Client;
 import Commands.SerializedCommands.*;
 import Commands.SerializedResAuth;
 import GUI.Controllers.HiPanelController;
+import GUI.Controllers.RegistrationController;
 import Interfaces.Decrypting;
 import com.google.inject.Singleton;
 import javafx.fxml.FXMLLoader;
@@ -33,9 +34,9 @@ public class DecryptingImp implements Decrypting {
             if (serializedResAuth.getType().equals("reg")) {
                 FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/Register.fxml"));
                 Parent sceneFXML = loader.load();
-                HiPanelController ctrl = (loader.getController());
+                RegistrationController ctrl = (loader.getController());
                 if (serializedResAuth.getRes()) {
-                    System.out.println("asds");
+                    ctrl.showSuccessMessage("Пользователь успешно зарегистрирован");
                 } else ctrl.showAlert("Пользователь с таким логином уже существует!");
             }
         }

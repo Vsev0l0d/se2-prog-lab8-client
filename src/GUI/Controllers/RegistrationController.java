@@ -33,14 +33,14 @@ public class RegistrationController {
 
 
     @FXML
-    void regUserAction(ActionEvent event) {
+    void regUserAction(ActionEvent event) throws IOException {
         if (!newLoginField.getText().isEmpty() && !newPasswordField.getText().isEmpty() && !repNewPasswordField.getText().isEmpty()) {
             if (newPasswordField.getText().equals(repNewPasswordField.getText())) {
                 Injector injector = Guice.createInjector(new ClientModule());
                 CommandReceiver commandReceiver = injector.getInstance(CommandReceiver.class);
 
                 try {
-                    commandReceiver.register(newLoginField.getText().trim(), newPasswordField.getText().trim());
+                    commandReceiver.register(newLoginField.getText(), newPasswordField.getText());
                 } catch (ClassNotFoundException | InterruptedException | IOException e) {
                     e.printStackTrace();
                 }
@@ -64,9 +64,19 @@ public class RegistrationController {
         }
     }
 
-    public void showAlert(String alertMessage) {
+    public void showAlert(String alertMessage) throws IOException {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Ошибка!");
+
+        alert.setHeaderText(null);
+        alert.setContentText(alertMessage);
+
+        alert.showAndWait();
+    }
+
+    public void showSuccessMessage(String alertMessage) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Успех!");
 
         alert.setHeaderText(null);
         alert.setContentText(alertMessage);
