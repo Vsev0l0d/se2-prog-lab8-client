@@ -49,7 +49,7 @@ public class CommandReceiverImp implements CommandReceiver {
 
     @Override
     public void tryAuth(String login, String password) throws ClassNotFoundException, InterruptedException {
-        requestHandler(new SerializedAuth(login, hashEncrypter.encryptString(password)));
+        requestHandler(new SerializedAuthOrReg(login, hashEncrypter.encryptString(password), "auth"));
     }
 
     @Override
@@ -185,7 +185,7 @@ public class CommandReceiverImp implements CommandReceiver {
 
     @Override
     public void register(String login, String password) throws InterruptedException, ClassNotFoundException {
-        requestHandler(new SerializedCommand(register, login, password));
+        requestHandler(new SerializedAuthOrReg(login, hashEncrypter.encryptString(password), "reg"));
     }
 
     @Override
@@ -255,20 +255,22 @@ public class CommandReceiverImp implements CommandReceiver {
 
     private void requestHandler(Object serializedObject) throws InterruptedException, ClassNotFoundException {
         try {
-            socketChannel.configureBlocking(false);
-            socketChannel.register(selector, SelectionKey.OP_WRITE);
-            while (selector.select() > 0) {
-                Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
-                while (iterator.hasNext()) {
-                    SelectionKey selectionKey = iterator.next();
-                    iterator.remove();
-                    if (selectionKey.isWritable()) {
-                        socketChannel.register(selector, SelectionKey.OP_READ);
-                        sender.sendObject(serializedObject);
-                    }
-                    if (selectionKey.isReadable()) {
-                        receiver.receive(socketChannel);
-                        return;
+            if (socketChannel != null) {
+                socketChannel.configureBlocking(false);
+                socketChannel.register(selector, SelectionKey.OP_WRITE);
+                while (selector.select() > 0) {
+                    Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
+                    while (iterator.hasNext()) {
+                        SelectionKey selectionKey = iterator.next();
+                        iterator.remove();
+                        if (selectionKey.isWritable()) {
+                            socketChannel.register(selector, SelectionKey.OP_READ);
+                            sender.sendObject(serializedObject);
+                        }
+                        if (selectionKey.isReadable()) {
+                            receiver.receive(socketChannel);
+                            return;
+                        }
                     }
                 }
             }

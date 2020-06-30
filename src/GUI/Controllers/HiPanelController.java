@@ -1,4 +1,4 @@
-package GUI;
+package GUI.Controllers;
 
 import Client.ClientModule;
 import Commands.Utils.HashEncrypterImp;
@@ -21,15 +21,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class GUIController {
+public class HiPanelController {
     @FXML
     private Button authUserBtn;
     @FXML
     private Button regUserWindowBtn;
-    @FXML
-    private Button regUserBtn;
-    @FXML
-    private Button authUserWindowBtn;
     @FXML
     private TextField userLoginField;
     @FXML
@@ -52,28 +48,6 @@ public class GUIController {
     }
 
     @FXML
-    void displayAuthWindow(ActionEvent event) {
-        Parent root;
-        try {
-            root = FXMLLoader.load(getClass().getClassLoader().getResource("GUI/Views/HiPanel.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("StudyGroupProject. Авторизация.");
-            stage.setScene(new Scene(root, 350, 405));
-            stage.show();
-            ((Node)(event.getSource())).getScene().getWindow().hide();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    @FXML
-    void regUserAction(ActionEvent event) {
-
-    }
-
-    @FXML
     void authUserAction(ActionEvent event) {
         if (!userLoginField.getText().isEmpty() && !userPasswordField.getText().isEmpty()) {
             Injector injector = Guice.createInjector(new ClientModule());
@@ -81,9 +55,7 @@ public class GUIController {
 
             try {
                 commandReceiver.tryAuth(userLoginField.getText().trim(), userPasswordField.getText().trim());
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
+            } catch (ClassNotFoundException | InterruptedException e) {
                 e.printStackTrace();
             }
         } else showAlert("Вы не ввели логин или пароль!");
@@ -91,7 +63,7 @@ public class GUIController {
 
     }
 
-    private void showAlert(String alertMessage) {
+    public void showAlert(String alertMessage) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Ошибка!");
 

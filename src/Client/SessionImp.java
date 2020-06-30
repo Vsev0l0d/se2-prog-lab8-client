@@ -1,8 +1,11 @@
 package Client;
 
+import GUI.Controllers.HiPanelController;
 import Interfaces.Session;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -10,7 +13,6 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.SocketException;
 import java.nio.channels.SocketChannel;
-import java.sql.SQLOutput;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -21,8 +23,12 @@ public class SessionImp implements Session {
     private int port;
 
     @Inject
-    public SessionImp() {
+    public SessionImp() throws IOException {
         FileReader fileReader = null;
+
+        FXMLLoader loader = new FXMLLoader(SessionImp.class.getResource("/GUI/Views/HiPanel.fxml"));
+        Parent sceneFXML = loader.load();
+        HiPanelController ctrl = (loader.getController());
         try {
             fileReader = new FileReader(System.getProperty("user.dir") + "/config.txt");
             Scanner scan = new Scanner(fileReader);
@@ -31,41 +37,30 @@ public class SessionImp implements Session {
             port = Integer.parseInt(data[1]);
             fileReader.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Не найден файл config.txt, создайте его в директории " +
+            ctrl.showAlert("Не найден файл config.txt, создайте его в директории " +
                     System.getProperty("user.dir") +" и напишите туда хост и порт через пробел");
-            System.exit(0);
+            return;
         } catch (IOException e) {
-            System.out.println("Ошибка при чтении из конфигурационного файла: " + e);
-            System.exit(0);
+            ctrl.showAlert("Ошибка при чтении из конфигурационного файла: " + e);
+            return;
         } catch (NumberFormatException ex) {
-            System.out.println("порт должен быть целым числом");
-            System.exit(0);
-        } catch (NoSuchElementException e){
-            System.out.println("Напишите в файл config.txt хост и порт через пробел");
-            System.exit(0);
+            ctrl.showAlert("Порт должен быть целым числом");
+            return;
+        } catch (NoSuchElementException e) {
+            ctrl.showAlert("Напишите в файл config.txt хост и порт через пробел");
+            return;
         }
 
 
-        for (int i = 0; true; i++){
-            try {
-                InetSocketAddress inetSocketAddress = new InetSocketAddress(hostName, port);
-                socketChannel = SocketChannel.open(inetSocketAddress);
-                socketChannel.configureBlocking(false);
+        try {
+            InetSocketAddress inetSocketAddress = new InetSocketAddress(hostName, port);
+            socketChannel = SocketChannel.open(inetSocketAddress);
+            socketChannel.configureBlocking(false);
 
-                System.out.println(String.format("Подключение к удаленному адресу %s по порту %d", hostName, port));
-                break;
-            } catch (SocketException ex) {
-                System.out.println("Не удалось подключиться к удаленному адресу...");
-                if (i == 2) System.exit(0);
-                System.out.println("Попробую снова");
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        } catch (SocketException ex) {
+            ctrl.showAlert("Не удалось подключиться к удаленному адресу...");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
