@@ -75,19 +75,19 @@
          <children>
             <TableView fx:id="tableView" prefHeight="401.0" prefWidth="1179.0" style="-fx-background-radius: 1em; -fx-background-color: gainsboro gainsboro;">
               <columns>
-                <TableColumn prefWidth="38.0" text="id" />
-                <TableColumn prefWidth="112.0" text="name" />
-                  <TableColumn prefWidth="38.413299560546875" text="x" />
-                  <TableColumn prefWidth="34.522308349609375" text="y" />
-                  <TableColumn prefWidth="203.47769165039062" text="creationDate" />
-                  <TableColumn prefWidth="87.26116943359375" text="studentsCount" />
-                  <TableColumn prefWidth="102.91595458984375" text="formOfEducation" />
-                  <TableColumn prefWidth="92.83062744140625" text="semesterEnum" />
-                  <TableColumn prefWidth="92.83062744140625" text="adminName" />
-                  <TableColumn prefWidth="92.83062744140625" text="height" />
-                  <TableColumn prefWidth="92.83062744140625" text="eyeColor" />
-                  <TableColumn prefWidth="92.83062744140625" text="hairColor" />
-                  <TableColumn prefWidth="92.83062744140625" text="nationality" />
+                <TableColumn prefWidth="38.0" text="id" fx:id="idColumn"/>
+                <TableColumn prefWidth="112.0" text="name" fx:id="nameColumn"/>
+                  <TableColumn prefWidth="38.413299560546875" text="x" fx:id="xColumn"/>
+                  <TableColumn prefWidth="34.522308349609375" text="y" fx:id="yColumn"/>
+                  <TableColumn prefWidth="203.47769165039062" text="creationDate" fx:id="creationDateColumn"/>
+                  <TableColumn prefWidth="87.26116943359375" text="studentsCount" fx:id="studentsCountColumn"/>
+                  <TableColumn prefWidth="102.91595458984375" text="formOfEducation" fx:id="formOfEducationColumn"/>
+                  <TableColumn prefWidth="92.83062744140625" text="semesterEnum" fx:id="semesterEnumColumn"/>
+                  <TableColumn prefWidth="92.83062744140625" text="adminName" fx:id="adminNameColumn"/>
+                  <TableColumn prefWidth="92.83062744140625" text="height" fx:id="heightColumn"/>
+                  <TableColumn prefWidth="92.83062744140625" text="eyeColor" fx:id="eyeColorColumn"/>
+                  <TableColumn prefWidth="92.83062744140625" text="hairColor" fx:id="hairColorColumn"/>
+                  <TableColumn prefWidth="92.83062744140625" text="nationality" fx:id="nationalityColumn"/>
               </columns>
             </TableView>
          </children>

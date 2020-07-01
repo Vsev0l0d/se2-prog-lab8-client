@@ -1,20 +1,20 @@
 package GUI.Controllers;
 
-import BasicClasses.StudyGroup;
-import Client.ClientModule;
-import Interfaces.CommandReceiver;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import BasicClasses.*;
+import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.io.IOException;
+import java.util.LinkedList;
 
 public class MainStageController {
-    @FXML
-    private TableView<StudyGroup> tableView;
+    private ObservableList<StudyGroup> observableList = FXCollections.observableArrayList();
+
     @FXML
     private Button toTableBtn;
     @FXML
@@ -25,15 +25,53 @@ public class MainStageController {
     private Button aboutFagotsBtn;
 
     @FXML
-    public void initialize() {
-        Injector injector = Guice.createInjector(new ClientModule());
-        CommandReceiver commandReceiver = injector.getInstance(CommandReceiver.class);
+    private TableView<StudyGroup> tableView;
+    @FXML
+    private TableColumn<StudyGroup, Integer> idColumn;
+    @FXML
+    private TableColumn<StudyGroup, String> nameColumn;
+    @FXML
+    private TableColumn<StudyGroup, Integer> xColumn;
+    @FXML
+    private TableColumn<StudyGroup, Float> yColumn;
+    @FXML
+    private TableColumn<StudyGroup, java.time.ZonedDateTime> creationDateColumn;
+    @FXML
+    private TableColumn<StudyGroup, Integer> studentsCountColumn;
+    @FXML
+    private TableColumn<StudyGroup, FormOfEducation> formOfEducationColumn;
+    @FXML
+    private TableColumn<StudyGroup, Semester> semesterEnumColumn;
+    @FXML
+    private TableColumn<StudyGroup, String> adminNameColumn;
+    @FXML
+    private TableColumn<StudyGroup, Integer> heightColumn;
+    @FXML
+    private TableColumn<StudyGroup, String> eyeColorColumn;
+    @FXML
+    private TableColumn<StudyGroup, String> hairColorColumn;
+    @FXML
+    private TableColumn<StudyGroup, String> nationalityColumn;
 
-        try {
-            commandReceiver.getCollection();
-        } catch (ClassNotFoundException | InterruptedException e) {
-            e.printStackTrace();
-        }
+    @FXML
+    public void initialize() {
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        xColumn.setCellValueFactory(studyGroup -> new SimpleIntegerProperty((studyGroup.getValue().getCoordinates().getX())).asObject());
+        yColumn.setCellValueFactory(studyGroup -> new SimpleFloatProperty((studyGroup.getValue().getCoordinates().getY())).asObject());
+        creationDateColumn.setCellValueFactory(new PropertyValueFactory<>("creationDate"));
+        studentsCountColumn.setCellValueFactory(new PropertyValueFactory<>("studentsCount"));
+        formOfEducationColumn.setCellValueFactory(new PropertyValueFactory<>("formOfEducation"));
+        semesterEnumColumn.setCellValueFactory(new PropertyValueFactory<>("semesterEnum"));
+        adminNameColumn.setCellValueFactory(studyGroup -> new SimpleStringProperty((studyGroup.getValue().getGroupAdmin().getName())));
+        heightColumn.setCellValueFactory(studyGroup -> new SimpleIntegerProperty((studyGroup.getValue().getGroupAdmin().getHeight())).asObject());
+        eyeColorColumn.setCellValueFactory(studyGroup -> new SimpleStringProperty((studyGroup.getValue().getGroupAdmin().getEyeColor().toString())));
+        hairColorColumn.setCellValueFactory(studyGroup -> new SimpleStringProperty((studyGroup.getValue().getGroupAdmin().getHairColor().toString())));
+        nationalityColumn.setCellValueFactory(studyGroup -> new SimpleStringProperty((studyGroup.getValue().getGroupAdmin().getNationality().toString())));
+
+//        observableList.add(new StudyGroup("a", new Coordinates(11,11), 11, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
+        tableView.setItems(observableList);
+//        observableList.add(new StudyGroup("ss", new Coordinates(11,11), 11, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
     }
 
     public void showAlert(String alertMessage) {
@@ -44,5 +82,9 @@ public class MainStageController {
         alert.setContentText(alertMessage);
 
         alert.showAndWait();
+    }
+
+    public void setObservableList(LinkedList<StudyGroup> linkedList) {
+        this.observableList = FXCollections.observableArrayList(linkedList);
     }
 }
