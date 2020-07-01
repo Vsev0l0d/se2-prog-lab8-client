@@ -67,7 +67,7 @@ public class HiPanelController {
             root = FXMLLoader.load(getClass().getClassLoader().getResource("GUI/Views/MainStage.fxml"));
             Stage stage = new Stage();
             stage.setTitle("StudyGroupProject. MainStage.");
-            stage.setScene(new Scene(root, 500, 500));
+            stage.setScene(new Scene(root, 1330, 493));
             stage.show();
         }
         catch (IOException e) {

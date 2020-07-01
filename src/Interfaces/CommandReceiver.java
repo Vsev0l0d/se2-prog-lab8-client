@@ -38,4 +38,6 @@ public interface CommandReceiver {
     void executeScript(String path);
 
     void tryAuth(String login, String password) throws ClassNotFoundException, InterruptedException;
+
+    void getCollection() throws ClassNotFoundException, InterruptedException;
 }

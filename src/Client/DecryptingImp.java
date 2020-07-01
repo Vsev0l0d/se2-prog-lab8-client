@@ -1,5 +1,7 @@
 package Client;
 
+import BasicClasses.StudyGroup;
+import Commands.SerializedCollection;
 import Commands.SerializedCommands.*;
 import Commands.SerializedResAuth;
 import GUI.Controllers.HiPanelController;
@@ -10,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
 @Singleton
 public class DecryptingImp implements Decrypting {
@@ -39,6 +42,11 @@ public class DecryptingImp implements Decrypting {
                     ctrl.showSuccessMessage("Пользователь успешно зарегистрирован");
                 } else ctrl.showAlert("Пользователь с таким логином уже существует!");
             }
+        }
+
+        if (o instanceof SerializedCollection) {
+            SerializedCollection serializedCollection = (SerializedCollection) o;
+            LinkedList<StudyGroup> linkedList = serializedCollection.getLinkedList();
         }
     }
 }

@@ -5,6 +5,7 @@ import BasicClasses.StudyGroup;
 import Commands.ConcreteCommands.*;
 import Commands.SerializedCommands.SerializedArgumentCommand;
 import Commands.SerializedCommands.SerializedCombinedCommand;
+import Commands.SerializedCommands.SerializedMessage;
 import Commands.SerializedCommands.SerializedObjectCommand;
 import Interfaces.*;
 import com.google.inject.Inject;
@@ -280,5 +281,10 @@ public class CommandReceiverImp implements CommandReceiver {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void getCollection() throws ClassNotFoundException, InterruptedException {
+        requestHandler(new SerializedMessage("return_collection"));
     }
 }
