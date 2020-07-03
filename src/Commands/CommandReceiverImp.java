@@ -287,4 +287,9 @@ public class CommandReceiverImp implements CommandReceiver {
     public void getCollection() throws ClassNotFoundException, InterruptedException {
         requestHandler(new SerializedMessage("return_collection"));
     }
+
+    @Override
+    public String getLogin() {
+        return login;
+    }
 }

@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.*;
@@ -26,6 +27,8 @@ public class MainStageController implements Initializable {
     private List<List<Integer>> idElementsAllUsers = new ArrayList<>();
     private CommandReceiver commandReceiver;
 
+    @FXML
+    public Text hiText;
     @FXML
     public Pane groupMap;
     @FXML
@@ -176,6 +179,7 @@ public class MainStageController implements Initializable {
 
     public void setCommandReceiver(CommandReceiver commandReceiver) {
         this.commandReceiver = commandReceiver;
+        hiText.setText(commandReceiver.getLogin());
     }
 
     public void showTable(ActionEvent actionEvent) {

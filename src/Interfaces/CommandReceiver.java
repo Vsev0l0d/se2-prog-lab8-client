@@ -40,4 +40,6 @@ public interface CommandReceiver {
     void tryAuth(String login, String password) throws ClassNotFoundException, InterruptedException;
 
     void getCollection() throws ClassNotFoundException, InterruptedException;
+
+    String getLogin();
 }
