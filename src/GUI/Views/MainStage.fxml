@@ -93,7 +93,13 @@
               </columns>
             </TableView>
             <Pane fx:id="executeCommand" layoutY="-2.0" prefHeight="420.0" prefWidth="1078.0" visible="false" />
-            <Pane fx:id="aboutFagots" layoutX="-1.0" prefHeight="420.0" prefWidth="1078.0" visible="false" />
+            <Pane fx:id="aboutFagots" layoutX="-1.0" prefHeight="420.0" prefWidth="1078.0" visible="false">
+               <Text fontSmoothingType="LCD" layoutX="14.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Примите лабу пожалуйста">
+                  <font>
+                     <Font size="47.0" />
+                  </font>
+               </Text>
+            </Pane>
          </children>
       </Pane>
    </children>
