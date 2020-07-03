@@ -74,7 +74,7 @@
       </Pane>
       <Pane layoutX="119.0" layoutY="75.0" prefHeight="420.0" prefWidth="1078.0" style="-fx-background-color: gainsboro;">
          <children>
-            <FlowPane fx:id="groupMap" layoutX="-2.0" prefHeight="420.0" prefWidth="1078.0" visible="false" />
+            <Pane fx:id="groupMap" layoutX="-2.0" prefHeight="420.0" prefWidth="1078.0" visible="false" />
             <TableView fx:id="tableView" layoutY="-4.0" prefHeight="420.0" prefWidth="1078.0" style="-fx-background-radius: 1em; -fx-background-color: gainsboro gainsboro;">
               <columns>
                 <TableColumn fx:id="idColumn" prefWidth="38.0" text="id" />

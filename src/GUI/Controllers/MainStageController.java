@@ -27,7 +27,7 @@ public class MainStageController implements Initializable {
     private CommandReceiver commandReceiver;
 
     @FXML
-    public FlowPane groupMap;
+    public Pane groupMap;
     @FXML
     public Pane executeCommand;
     @FXML
@@ -76,7 +76,8 @@ public class MainStageController implements Initializable {
         objects.add(0);
         idElementsAllUsers.add(objects);
         observableList.add(new StudyGroup("a", new Coordinates(100,11), 16, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
-        observableList.add(new StudyGroup("a", new Coordinates(11,100), 1, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
+        observableList.add(new StudyGroup("a", new Coordinates(11,100), 100, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
+        observableList.add(new StudyGroup("a", new Coordinates(11,100), 30, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
         observableList.add(new StudyGroup("a", new Coordinates(300,51), 1, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -114,8 +115,8 @@ public class MainStageController implements Initializable {
             if (size < 15) size = 15;
             Circle circle = new Circle();
             circle.setRadius(size);
-            circle.setLayoutX(studyGroup.getCoordinates().getX());
-            circle.setLayoutY(studyGroup.getCoordinates().getY());
+            circle.setLayoutX(studyGroup.getCoordinates().getX() + 100);
+            circle.setLayoutY(studyGroup.getCoordinates().getY() + 100);
 
             for (Map.Entry<javafx.scene.paint.Color, List<Integer>> entry : colorListHashMap.entrySet()){
                 if (entry.getValue().contains(studyGroup.getId())){
@@ -151,6 +152,9 @@ public class MainStageController implements Initializable {
             circles.add(circle);
             circleStudyGroupHashMap.put(circle,studyGroup);
         }
+        groupMap.getChildren().clear();
+        circles.sort(Comparator.comparing(Circle::getRadius));
+        Collections.reverse(circles);
         groupMap.getChildren().setAll(circles);
     }
 
