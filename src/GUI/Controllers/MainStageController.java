@@ -7,6 +7,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,6 +23,7 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MainStageController implements Initializable {
     private ObservableList<StudyGroup> observableList = FXCollections.observableArrayList();
@@ -31,10 +34,6 @@ public class MainStageController implements Initializable {
     @FXML private Pane groupMap;
     @FXML private Pane executeCommand;
     @FXML private Pane aboutFagots;
-    @FXML private Button toTableBtn;
-    @FXML private Button toGroupMapBtn;
-    @FXML private Button executeCommandBtn;
-    @FXML private Button aboutFagotsBtn;
     @FXML private TableView<StudyGroup> tableView;
 
     @FXML private TableColumn<StudyGroup, Integer> idColumn;
@@ -71,15 +70,15 @@ public class MainStageController implements Initializable {
         objects.add(0);
         idElementsAllUsers.add(objects);
         observableList.add(new StudyGroup("a", new Coordinates(100,11), 16, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
-        observableList.add(new StudyGroup("a", new Coordinates(11,100), 100, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
-        observableList.add(new StudyGroup("a", new Coordinates(11,100), 30, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
-        observableList.add(new StudyGroup("a", new Coordinates(300,51), 1, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
+        observableList.add(new StudyGroup("a", new Coordinates(11,100), 100, FormOfEducation.FULL_TIME_EDUCATION, Semester.FOURTH, new Person("11", 11, Color.RED, Color.BLACK, Country.CHINA)));
+        observableList.add(new StudyGroup("a", new Coordinates(11,100), 30, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.USA)));
+        observableList.add(new StudyGroup("a", new Coordinates(300,51), 1, null, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
 
-        formOfEducationFilter.setItems(FXCollections.observableArrayList(Arrays.stream(FormOfEducation.values()).map(Enum::toString).collect(Collectors.toList())));
-        semesterEnumFilter.setItems(FXCollections.observableArrayList(Arrays.stream(Semester.values()).map(Enum::toString).collect(Collectors.toList())));
-        eyeColorFilter.setItems(FXCollections.observableArrayList(Arrays.stream(Color.values()).map(Enum::toString).collect(Collectors.toList())));
-        hairColorFilter.setItems(FXCollections.observableArrayList(Arrays.stream(Color.values()).map(Enum::toString).collect(Collectors.toList())));
-        nationalityFilter.setItems(FXCollections.observableArrayList(Arrays.stream(Country.values()).map(Enum::toString).collect(Collectors.toList())));
+        formOfEducationFilter.setItems(FXCollections.observableArrayList(Stream.concat(Stream.of(FormOfEducation.values()).map(Enum::toString), Stream.of("null", "")).collect(Collectors.toList())));
+        semesterEnumFilter.setItems(FXCollections.observableArrayList((Stream.concat(Stream.of(Semester.values()).map(Enum::toString), Stream.of("")).collect(Collectors.toList()))));
+        eyeColorFilter.setItems(FXCollections.observableArrayList(Stream.concat(Stream.of(Color.values()).map(Enum::toString), Stream.of("")).collect(Collectors.toList())));
+        hairColorFilter.setItems(FXCollections.observableArrayList(Stream.concat(Stream.of(Color.values()).map(Enum::toString), Stream.of("")).collect(Collectors.toList())));
+        nationalityFilter.setItems(FXCollections.observableArrayList(Stream.concat(Stream.of(Country.values()).map(Enum::toString), Stream.of("")).collect(Collectors.toList())));
 
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -96,10 +95,35 @@ public class MainStageController implements Initializable {
         nationalityColumn.setCellValueFactory(studyGroup -> new SimpleStringProperty((studyGroup.getValue().getGroupAdmin().getNationality().toString())));
         fillTable();
         visual();
+        updateTable();
     }
 
     public void fillTable() {
         tableView.setItems(observableList);
+    }
+
+    public void updateTable() {
+        FilteredList<StudyGroup> filtered = new FilteredList<>(observableList, t -> true);
+        idFilter.textProperty().addListener((observable, oldValue, newValue) -> filtered.setPredicate(studyGroup -> Integer.toString(studyGroup.getId()).equals(newValue)));
+        nameFilter.textProperty().addListener((observable, oldValue, newValue) -> filtered.setPredicate(studyGroup -> studyGroup.getName().toLowerCase().contains(newValue.toLowerCase())));
+        xFilter.textProperty().addListener((observable, oldValue, newValue) -> filtered.setPredicate(studyGroup -> studyGroup.getCoordinates().getX().toString().toLowerCase().equals(newValue.toLowerCase())));
+        yFilter.textProperty().addListener((observable, oldValue, newValue) -> filtered.setPredicate(studyGroup -> studyGroup.getCoordinates().getX().toString().toLowerCase().equals(newValue.toLowerCase())));
+        creationDateFilter.textProperty().addListener((observable, oldValue, newValue) -> filtered.setPredicate(studyGroup -> studyGroup.getCreationDate().toString().toLowerCase().equals(newValue.toLowerCase())));
+        studentsCountFilter.textProperty().addListener((observable, oldValue, newValue) -> filtered.setPredicate(studyGroup -> studyGroup.getStudentsCount().toString().toLowerCase().contains(newValue.toLowerCase())));
+        formOfEducationFilter.setOnAction(event -> filtered.setPredicate(studyGroup -> {
+            String formOfEducation = studyGroup.getFormOfEducation() == null ? "null" : String.valueOf(studyGroup.getFormOfEducation());
+            return formOfEducation.contains(formOfEducationFilter.getValue());
+        }));
+        semesterEnumFilter.setOnAction(event -> filtered.setPredicate(studyGroup -> studyGroup.getSemesterEnum().toString().contains(semesterEnumFilter.getValue())));
+        adminNameFilter.textProperty().addListener((observable, oldValue, newValue) -> filtered.setPredicate(studyGroup -> studyGroup.getGroupAdmin().getName().toLowerCase().contains(newValue.toLowerCase())));
+        heightFilter.textProperty().addListener((observable, oldValue, newValue) -> filtered.setPredicate(studyGroup -> Double.toString(studyGroup.getGroupAdmin().getHeight()).toLowerCase().equals(newValue.toLowerCase())));
+        eyeColorFilter.setOnAction(event -> filtered.setPredicate(studyGroup -> studyGroup.getGroupAdmin().getEyeColor().toString().contains(semesterEnumFilter.getValue())));
+        hairColorFilter.setOnAction(event -> filtered.setPredicate(studyGroup -> studyGroup.getGroupAdmin().getHairColor().toString().contains(hairColorFilter.getValue())));
+        nationalityFilter.setOnAction(event -> filtered.setPredicate(studyGroup -> studyGroup.getGroupAdmin().getNationality().toString().contains(nationalityFilter.getValue())));
+
+        SortedList<StudyGroup> sorted = new SortedList<>(filtered);
+        sorted.comparatorProperty().bind(tableView.comparatorProperty());
+        tableView.setItems(sorted);
     }
 
     public void visual() {
