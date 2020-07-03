@@ -14,64 +14,56 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class MainStageController implements Initializable {
     private ObservableList<StudyGroup> observableList = FXCollections.observableArrayList();
     private List<List<Integer>> idElementsAllUsers = new ArrayList<>();
     private CommandReceiver commandReceiver;
 
-    @FXML
-    public Text hiText;
-    @FXML
-    public Pane groupMap;
-    @FXML
-    public Pane executeCommand;
-    @FXML
-    public Pane aboutFagots;
-    @FXML
-    private Button toTableBtn;
-    @FXML
-    private Button toGroupMapBtn;
-    @FXML
-    private Button executeCommandBtn;
-    @FXML
-    private Button aboutFagotsBtn;
-    @FXML
-    private TableView<StudyGroup> tableView;
+    @FXML private Text hiText;
+    @FXML private Pane groupMap;
+    @FXML private Pane executeCommand;
+    @FXML private Pane aboutFagots;
+    @FXML private Button toTableBtn;
+    @FXML private Button toGroupMapBtn;
+    @FXML private Button executeCommandBtn;
+    @FXML private Button aboutFagotsBtn;
+    @FXML private TableView<StudyGroup> tableView;
 
-    @FXML
-    private TableColumn<StudyGroup, Integer> idColumn;
-    @FXML
-    private TableColumn<StudyGroup, String> nameColumn;
-    @FXML
-    private TableColumn<StudyGroup, Integer> xColumn;
-    @FXML
-    private TableColumn<StudyGroup, Float> yColumn;
-    @FXML
-    private TableColumn<StudyGroup, java.time.ZonedDateTime> creationDateColumn;
-    @FXML
-    private TableColumn<StudyGroup, Integer> studentsCountColumn;
-    @FXML
-    private TableColumn<StudyGroup, FormOfEducation> formOfEducationColumn;
-    @FXML
-    private TableColumn<StudyGroup, Semester> semesterEnumColumn;
-    @FXML
-    private TableColumn<StudyGroup, String> adminNameColumn;
-    @FXML
-    private TableColumn<StudyGroup, Integer> heightColumn;
-    @FXML
-    private TableColumn<StudyGroup, String> eyeColorColumn;
-    @FXML
-    private TableColumn<StudyGroup, String> hairColorColumn;
-    @FXML
-    private TableColumn<StudyGroup, String> nationalityColumn;
+    @FXML private TableColumn<StudyGroup, Integer> idColumn;
+    @FXML private TableColumn<StudyGroup, String> nameColumn;
+    @FXML private TableColumn<StudyGroup, Integer> xColumn;
+    @FXML private TableColumn<StudyGroup, Float> yColumn;
+    @FXML private TableColumn<StudyGroup, java.time.ZonedDateTime> creationDateColumn;
+    @FXML private TableColumn<StudyGroup, Integer> studentsCountColumn;
+    @FXML private TableColumn<StudyGroup, FormOfEducation> formOfEducationColumn;
+    @FXML private TableColumn<StudyGroup, Semester> semesterEnumColumn;
+    @FXML private TableColumn<StudyGroup, String> adminNameColumn;
+    @FXML private TableColumn<StudyGroup, Integer> heightColumn;
+    @FXML private TableColumn<StudyGroup, String> eyeColorColumn;
+    @FXML private TableColumn<StudyGroup, String> hairColorColumn;
+    @FXML private TableColumn<StudyGroup, String> nationalityColumn;
+
+    @FXML private TextField idFilter;
+    @FXML private TextField nameFilter;
+    @FXML private TextField xFilter;
+    @FXML private TextField yFilter;
+    @FXML private TextField creationDateFilter;
+    @FXML private TextField studentsCountFilter;
+    @FXML private ChoiceBox<String> formOfEducationFilter;
+    @FXML private ChoiceBox<String> semesterEnumFilter;
+    @FXML private TextField adminNameFilter;
+    @FXML private TextField heightFilter;
+    @FXML private ChoiceBox<String> eyeColorFilter;
+    @FXML private ChoiceBox<String> hairColorFilter;
+    @FXML private ChoiceBox<String> nationalityFilter;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -82,6 +74,13 @@ public class MainStageController implements Initializable {
         observableList.add(new StudyGroup("a", new Coordinates(11,100), 100, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
         observableList.add(new StudyGroup("a", new Coordinates(11,100), 30, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
         observableList.add(new StudyGroup("a", new Coordinates(300,51), 1, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
+
+        formOfEducationFilter.setItems(FXCollections.observableArrayList(Arrays.stream(FormOfEducation.values()).map(Enum::toString).collect(Collectors.toList())));
+        semesterEnumFilter.setItems(FXCollections.observableArrayList(Arrays.stream(Semester.values()).map(Enum::toString).collect(Collectors.toList())));
+        eyeColorFilter.setItems(FXCollections.observableArrayList(Arrays.stream(Color.values()).map(Enum::toString).collect(Collectors.toList())));
+        hairColorFilter.setItems(FXCollections.observableArrayList(Arrays.stream(Color.values()).map(Enum::toString).collect(Collectors.toList())));
+        nationalityFilter.setItems(FXCollections.observableArrayList(Arrays.stream(Country.values()).map(Enum::toString).collect(Collectors.toList())));
+
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         xColumn.setCellValueFactory(studyGroup -> new SimpleIntegerProperty((studyGroup.getValue().getCoordinates().getX())).asObject());
