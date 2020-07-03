@@ -13,6 +13,8 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -46,7 +48,6 @@ public class DecryptingImp implements Decrypting {
                     } catch (ClassNotFoundException | InterruptedException e) {
                         e.printStackTrace();
                     }
-                    ctrl.displayMainStageWindow();
                 } else ctrl.showAlert("Вы не зарегистрированы!");
             }
 
@@ -68,8 +69,13 @@ public class DecryptingImp implements Decrypting {
             FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/MainStage.fxml"));
             Parent sceneFXML = loader.load();
             MainStageController ctrl = (loader.getController());
+
             ctrl.setCommandReceiver(commandReceiver);
             ctrl.setObservableList(linkedList);
+            Stage stage = new Stage();
+            stage.setTitle("StudyGroupProject. MainStage.");
+            stage.setScene(new Scene(sceneFXML, 1330, 493));
+            stage.show();
         }
     }
 }

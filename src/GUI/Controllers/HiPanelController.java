@@ -64,19 +64,6 @@ public class HiPanelController {
         } else showAlert("Вы не ввели логин или пароль!");
     }
 
-    public void displayMainStageWindow() { // it's булщит
-        Parent root;
-        try {
-            root = FXMLLoader.load(getClass().getClassLoader().getResource("GUI/Views/MainStage.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("StudyGroupProject. MainStage.");
-            stage.setScene(new Scene(root, 1330, 493));
-            stage.show();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void showAlert(String alertMessage) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
