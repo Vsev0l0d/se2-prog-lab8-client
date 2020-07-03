@@ -39,6 +39,7 @@ public class DecryptingImp implements Decrypting {
                 FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/HiPanel.fxml"));
                 Parent sceneFXML = loader.load();
                 HiPanelController ctrl = (loader.getController());
+                ctrl.setCommandReceiver(commandReceiver);
                 if (serializedResAuth.getRes()) {
                     try {
                         commandReceiver.getCollection();
@@ -53,6 +54,7 @@ public class DecryptingImp implements Decrypting {
                 FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/Register.fxml"));
                 Parent sceneFXML = loader.load();
                 RegistrationController ctrl = (loader.getController());
+                ctrl.setCommandReceiver(commandReceiver);
                 if (serializedResAuth.getRes()) {
                     ctrl.showSuccessMessage("Пользователь успешно зарегистрирован");
                 } else ctrl.showAlert("Пользователь с таким логином уже существует!");
@@ -66,6 +68,7 @@ public class DecryptingImp implements Decrypting {
             FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/MainStage.fxml"));
             Parent sceneFXML = loader.load();
             MainStageController ctrl = (loader.getController());
+            ctrl.setCommandReceiver(commandReceiver);
             ctrl.setObservableList(linkedList);
         }
     }

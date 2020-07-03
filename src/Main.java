@@ -1,3 +1,9 @@
+import Client.ClientModule;
+import Client.DecryptingImp;
+import GUI.Controllers.HiPanelController;
+import Interfaces.CommandReceiver;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,7 +20,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/Views/HiPanel.fxml"));
+        Injector injector = Guice.createInjector(new ClientModule());
+        CommandReceiver commandReceiver = injector.getInstance(CommandReceiver.class);
+        FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/HiPanel.fxml"));
+        Parent root = loader.load();
+        HiPanelController ctrl = (loader.getController());
+        ctrl.setCommandReceiver(commandReceiver);
         primaryStage.setTitle("StudyGroupProject. Авторизация.");
         primaryStage.setScene(new Scene(root, 350, 405));
         primaryStage.show();

@@ -1,6 +1,7 @@
 package GUI.Controllers;
 
 import BasicClasses.*;
+import Interfaces.CommandReceiver;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,6 +15,7 @@ import java.util.LinkedList;
 
 public class MainStageController {
     private ObservableList<StudyGroup> observableList = FXCollections.observableArrayList();
+    private CommandReceiver commandReceiver;
 
     @FXML
     private Button toTableBtn;
@@ -55,6 +57,12 @@ public class MainStageController {
 
     @FXML
     public void initialize() {
+        fillTable();
+//        observableList.add(new StudyGroup("a", new Coordinates(12,11), 11, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
+//        observableList.add(new StudyGroup("ss", new Coordinates(11,12), 11, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
+    }
+
+    public void fillTable() {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         xColumn.setCellValueFactory(studyGroup -> new SimpleIntegerProperty((studyGroup.getValue().getCoordinates().getX())).asObject());
@@ -69,9 +77,7 @@ public class MainStageController {
         hairColorColumn.setCellValueFactory(studyGroup -> new SimpleStringProperty((studyGroup.getValue().getGroupAdmin().getHairColor().toString())));
         nationalityColumn.setCellValueFactory(studyGroup -> new SimpleStringProperty((studyGroup.getValue().getGroupAdmin().getNationality().toString())));
 
-//        observableList.add(new StudyGroup("a", new Coordinates(11,11), 11, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
         tableView.setItems(observableList);
-//        observableList.add(new StudyGroup("ss", new Coordinates(11,11), 11, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
     }
 
     public void showAlert(String alertMessage) {
@@ -85,6 +91,11 @@ public class MainStageController {
     }
 
     public void setObservableList(LinkedList<StudyGroup> linkedList) {
-        this.observableList = FXCollections.observableArrayList(linkedList);
+        observableList = FXCollections.observableArrayList(linkedList);
+        // колекция с сервера, но в табл не отображается, вероятнее всего нужно обновить картинку
+    }
+
+    public void setCommandReceiver(CommandReceiver commandReceiver) {
+        this.commandReceiver = commandReceiver;
     }
 }

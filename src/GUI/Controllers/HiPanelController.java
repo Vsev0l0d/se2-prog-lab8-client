@@ -22,6 +22,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class HiPanelController {
+    private CommandReceiver commandReceiver;
+
+    public void setCommandReceiver(CommandReceiver commandReceiver) {
+        this.commandReceiver = commandReceiver;
+    }
+
     @FXML
     private Button authUserBtn;
     @FXML
@@ -50,9 +56,6 @@ public class HiPanelController {
     @FXML
     void authUserAction(ActionEvent event) {
         if (!userLoginField.getText().isEmpty() && !userPasswordField.getText().isEmpty()) {
-            Injector injector = Guice.createInjector(new ClientModule());
-            CommandReceiver commandReceiver = injector.getInstance(CommandReceiver.class);
-
             try {
                 commandReceiver.tryAuth(userLoginField.getText().trim(), userPasswordField.getText().trim());
             } catch (ClassNotFoundException | InterruptedException e) {

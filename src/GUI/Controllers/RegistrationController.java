@@ -19,6 +19,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class RegistrationController {
+    private CommandReceiver commandReceiver;
+
+    public void setCommandReceiver(CommandReceiver commandReceiver) {
+        this.commandReceiver = commandReceiver;
+    }
 
     @FXML
     private Button regUserBtn;
@@ -36,9 +41,6 @@ public class RegistrationController {
     void regUserAction(ActionEvent event) throws IOException {
         if (!newLoginField.getText().isEmpty() && !newPasswordField.getText().isEmpty() && !repNewPasswordField.getText().isEmpty()) {
             if (newPasswordField.getText().equals(repNewPasswordField.getText())) {
-                Injector injector = Guice.createInjector(new ClientModule());
-                CommandReceiver commandReceiver = injector.getInstance(CommandReceiver.class);
-
                 try {
                     commandReceiver.register(newLoginField.getText(), newPasswordField.getText());
                 } catch (ClassNotFoundException | InterruptedException | IOException e) {
