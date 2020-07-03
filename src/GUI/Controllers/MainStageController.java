@@ -7,10 +7,13 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.util.LinkedList;
@@ -23,6 +26,12 @@ public class MainStageController implements Initializable {
     private CommandReceiver commandReceiver;
 
     @FXML
+    public FlowPane groupMap;
+    @FXML
+    public Pane executeCommand;
+    @FXML
+    public Pane aboutFagots;
+    @FXML
     private Button toTableBtn;
     @FXML
     private Button toGroupMapBtn;
@@ -30,9 +39,9 @@ public class MainStageController implements Initializable {
     private Button executeCommandBtn;
     @FXML
     private Button aboutFagotsBtn;
-
     @FXML
     private TableView<StudyGroup> tableView;
+
     @FXML
     private TableColumn<StudyGroup, Integer> idColumn;
     @FXML
@@ -103,4 +112,31 @@ public class MainStageController implements Initializable {
         this.commandReceiver = commandReceiver;
     }
 
+    public void showTable(ActionEvent actionEvent) {
+        groupMap.setVisible(false);
+        executeCommand.setVisible(false);
+        aboutFagots.setVisible(false);
+        tableView.setVisible(true);
+    }
+
+    public void showGroupMap(ActionEvent actionEvent) {
+        executeCommand.setVisible(false);
+        aboutFagots.setVisible(false);
+        tableView.setVisible(false);
+        groupMap.setVisible(true);
+    }
+
+    public void showExecuteCommand(ActionEvent actionEvent) {
+        groupMap.setVisible(false);
+        aboutFagots.setVisible(false);
+        tableView.setVisible(false);
+        executeCommand.setVisible(true);
+    }
+
+    public void showAboutFagots(ActionEvent actionEvent) {
+        groupMap.setVisible(false);
+        tableView.setVisible(false);
+        executeCommand.setVisible(false);
+        aboutFagots.setVisible(true);
+    }
 }

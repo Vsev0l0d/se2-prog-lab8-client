@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -35,22 +36,22 @@
       </Pane>
       <Pane layoutX="-1.0" layoutY="75.0" prefHeight="420.0" prefWidth="155.0" style="-fx-background-color: #293541#293541;">
          <children>
-            <Button fx:id="toTableBtn" layoutY="1.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="154.0" style="-fx-background-color: transparent;" text="К таблице" textFill="WHITE">
+            <Button fx:id="toTableBtn" layoutY="1.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="154.0" style="-fx-background-color: transparent;" text="К таблице" textFill="WHITE" onAction="#showTable">
                <font>
                   <Font name="SansSerif Regular" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="toGroupMapBtn" layoutX="1.0" layoutY="57.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="154.0" style="-fx-background-color: transparent;" text="Карта групп" textFill="WHITE">
+            <Button fx:id="toGroupMapBtn" layoutX="1.0" layoutY="57.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="154.0" style="-fx-background-color: transparent;" text="Карта групп" textFill="WHITE" onAction="#showGroupMap">
                <font>
                   <Font name="SansSerif Regular" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="executeCommandBtn" layoutX="1.0" layoutY="112.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="154.0" style="-fx-background-color: transparent;" text="Исполнить &#10;команду" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="executeCommandBtn" layoutX="1.0" layoutY="112.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="154.0" style="-fx-background-color: transparent;" text="Исполнить &#10;команду" textAlignment="CENTER" textFill="WHITE" onAction="#showExecuteCommand">
                <font>
                   <Font name="SansSerif Regular" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="aboutFagotsBtn" layoutY="183.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="154.0" style="-fx-background-color: transparent;" text="О разработчиках" textFill="WHITE">
+            <Button fx:id="aboutFagotsBtn" layoutY="183.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="154.0" style="-fx-background-color: transparent;" text="О разработчиках" textFill="WHITE" onAction="#showAboutFagots">
                <font>
                   <Font name="SansSerif Regular" size="16.0" />
                </font>
@@ -73,23 +74,26 @@
       </Pane>
       <Pane layoutX="155.0" layoutY="75.0" prefHeight="420.0" prefWidth="1180.0" style="-fx-background-color: gainsboro;">
          <children>
+            <FlowPane fx:id="groupMap" prefHeight="456.0" prefWidth="640.0" visible="false" />
             <TableView fx:id="tableView" prefHeight="401.0" prefWidth="1179.0" style="-fx-background-radius: 1em; -fx-background-color: gainsboro gainsboro;">
               <columns>
-                <TableColumn prefWidth="38.0" text="id" fx:id="idColumn"/>
-                <TableColumn prefWidth="112.0" text="name" fx:id="nameColumn"/>
-                  <TableColumn prefWidth="38.413299560546875" text="x" fx:id="xColumn"/>
-                  <TableColumn prefWidth="34.522308349609375" text="y" fx:id="yColumn"/>
-                  <TableColumn prefWidth="203.47769165039062" text="creationDate" fx:id="creationDateColumn"/>
-                  <TableColumn prefWidth="87.26116943359375" text="studentsCount" fx:id="studentsCountColumn"/>
-                  <TableColumn prefWidth="102.91595458984375" text="formOfEducation" fx:id="formOfEducationColumn"/>
-                  <TableColumn prefWidth="92.83062744140625" text="semesterEnum" fx:id="semesterEnumColumn"/>
-                  <TableColumn prefWidth="92.83062744140625" text="adminName" fx:id="adminNameColumn"/>
-                  <TableColumn prefWidth="92.83062744140625" text="height" fx:id="heightColumn"/>
-                  <TableColumn prefWidth="92.83062744140625" text="eyeColor" fx:id="eyeColorColumn"/>
-                  <TableColumn prefWidth="92.83062744140625" text="hairColor" fx:id="hairColorColumn"/>
-                  <TableColumn prefWidth="92.83062744140625" text="nationality" fx:id="nationalityColumn"/>
+                <TableColumn fx:id="idColumn" prefWidth="38.0" text="id" />
+                <TableColumn fx:id="nameColumn" prefWidth="112.0" text="name" />
+                  <TableColumn prefWidth="38.413299560546875" text="x" fx:id="xColumn" />
+                  <TableColumn fx:id="yColumn" prefWidth="34.522308349609375" text="y" />
+                  <TableColumn fx:id="creationDateColumn" prefWidth="203.47769165039062" text="creationDate" />
+                  <TableColumn fx:id="studentsCountColumn" prefWidth="87.26116943359375" text="studentsCount" />
+                  <TableColumn fx:id="formOfEducationColumn" prefWidth="102.91595458984375" text="formOfEducation" />
+                  <TableColumn fx:id="semesterEnumColumn" prefWidth="92.83062744140625" text="semesterEnum" />
+                  <TableColumn fx:id="adminNameColumn" prefWidth="92.83062744140625" text="adminName" />
+                  <TableColumn fx:id="heightColumn" prefWidth="92.83062744140625" text="height" />
+                  <TableColumn fx:id="eyeColorColumn" prefWidth="92.83062744140625" text="eyeColor" />
+                  <TableColumn fx:id="hairColorColumn" prefWidth="92.83062744140625" text="hairColor" />
+                  <TableColumn fx:id="nationalityColumn" prefWidth="92.83062744140625" text="nationality" />
               </columns>
             </TableView>
+            <Pane fx:id="executeCommand" prefHeight="420.0" prefWidth="472.0" visible="false" />
+            <Pane fx:id="aboutFagots" prefHeight="420.0" prefWidth="459.0" visible="false" />
          </children>
       </Pane>
    </children>
