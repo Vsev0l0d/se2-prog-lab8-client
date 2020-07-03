@@ -179,7 +179,7 @@ public class MainStageController implements Initializable {
 
     public void setCommandReceiver(CommandReceiver commandReceiver) {
         this.commandReceiver = commandReceiver;
-        hiText.setText(commandReceiver.getLogin());
+        hiText.setText("Hi, " + commandReceiver.getLogin());
     }
 
     public void showTable(ActionEvent actionEvent) {
