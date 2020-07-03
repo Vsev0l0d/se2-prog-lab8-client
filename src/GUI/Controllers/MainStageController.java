@@ -12,9 +12,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class MainStageController {
     private ObservableList<StudyGroup> observableList = FXCollections.observableArrayList();
+    private List<List<Integer>> idElementsAllUsers;
     private CommandReceiver commandReceiver;
 
     @FXML
@@ -90,8 +92,9 @@ public class MainStageController {
         alert.showAndWait();
     }
 
-    public void setObservableList(LinkedList<StudyGroup> linkedList) {
+    public void setCollection(LinkedList<StudyGroup> linkedList, List<List<Integer>> idElementsAllUsers) {
         observableList = FXCollections.observableArrayList(linkedList);
+        this.idElementsAllUsers = idElementsAllUsers;
         // колекция с сервера, но в табл не отображается, вероятнее всего нужно обновить картинку
     }
 

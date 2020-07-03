@@ -20,7 +20,7 @@ public class ReceiverImp implements Receiver {
 
     @Override
     public void receive(SocketChannel socketChannel) throws IOException, ClassNotFoundException {
-        ByteBuffer byteBuffer = ByteBuffer.allocate(1024*1024*64);
+        ByteBuffer byteBuffer = ByteBuffer.allocate(1024*1024*500);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
         int n;
