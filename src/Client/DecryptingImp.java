@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.List;
 
 @Singleton
 public class DecryptingImp implements Decrypting {
@@ -65,13 +66,14 @@ public class DecryptingImp implements Decrypting {
         if (o instanceof SerializedCollection) {
             SerializedCollection serializedCollection = (SerializedCollection) o;
             LinkedList<StudyGroup> linkedList = serializedCollection.getLinkedList();
+            List<List<Integer>> idElementsAllUsers = serializedCollection.getIdElementsAllUsers();
 
             FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/MainStage.fxml"));
             Parent sceneFXML = loader.load();
             MainStageController ctrl = (loader.getController());
 
             ctrl.setCommandReceiver(commandReceiver);
-            ctrl.setObservableList(linkedList);
+            ctrl.setCollection(linkedList, idElementsAllUsers);
             Stage stage = new Stage();
             stage.setTitle("StudyGroupProject. MainStage.");
             stage.setScene(new Scene(sceneFXML, 1330, 493));

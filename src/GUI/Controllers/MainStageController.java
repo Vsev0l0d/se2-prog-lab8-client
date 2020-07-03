@@ -14,10 +14,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainStageController implements Initializable {
     private ObservableList<StudyGroup> observableList = FXCollections.observableArrayList();
+    private List<List<Integer>> idElementsAllUsers;
     private CommandReceiver commandReceiver;
 
     @FXML
@@ -90,8 +92,11 @@ public class MainStageController implements Initializable {
         alert.showAndWait();
     }
 
-    public void setObservableList(LinkedList<StudyGroup> linkedList) {
+    public void setCollection(LinkedList<StudyGroup> linkedList, List<List<Integer>> idElementsAllUsers) {
+        observableList.clear();
         observableList.addAll(linkedList);
+        this.idElementsAllUsers = idElementsAllUsers;
+        System.out.println(idElementsAllUsers);
     }
 
     public void setCommandReceiver(CommandReceiver commandReceiver) {
