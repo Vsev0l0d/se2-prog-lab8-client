@@ -1,6 +1,7 @@
 import Client.ClientModule;
 import Client.DecryptingImp;
 import GUI.Controllers.HiPanelController;
+import GUI.Controllers.MainStageController;
 import Interfaces.CommandReceiver;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -22,19 +23,31 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Injector injector = Guice.createInjector(new ClientModule());
         CommandReceiver commandReceiver = injector.getInstance(CommandReceiver.class);
-        FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/HiPanel.fxml"));
-        Parent root = loader.load();
-        HiPanelController ctrl = (loader.getController());
-        ctrl.setCommandReceiver(commandReceiver);
-        primaryStage.setTitle("StudyGroupProject. Авторизация.");
-        primaryStage.setScene(new Scene(root, 350, 405));
-        primaryStage.show();
 
-        URL music = getClass().getResource("GUI/Music/HiMark.mp3");
-        Media media = new Media(music.toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        Thread.sleep(100);
-        mediaPlayer.play();
+//        для тестов, пока падает буфер
+        FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/MainStage.fxml"));
+        Parent sceneFXML = loader.load();
+        MainStageController ctrl = (loader.getController());
+
+        ctrl.setCommandReceiver(commandReceiver);
+        Stage stage = new Stage();
+        stage.setTitle("StudyGroupProject. MainStage.");
+        stage.setScene(new Scene(sceneFXML, 1198, 494));
+        stage.show();
+
+//        FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/HiPanel.fxml"));
+//        Parent root = loader.load();
+//        HiPanelController ctrl = (loader.getController());
+//        ctrl.setCommandReceiver(commandReceiver);
+//        primaryStage.setTitle("StudyGroupProject. Авторизация.");
+//        primaryStage.setScene(new Scene(root, 350, 405));
+//        primaryStage.show();
+//
+//        URL music = getClass().getResource("GUI/Music/HiMark.mp3");
+//        Media media = new Media(music.toString());
+//        MediaPlayer mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+//        Thread.sleep(100);
+//        mediaPlayer.play();
     }
 }

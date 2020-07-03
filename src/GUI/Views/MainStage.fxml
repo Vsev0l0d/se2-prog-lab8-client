@@ -8,57 +8,57 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="1332.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.MainStageController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="1198.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.MainStageController">
    <children>
-      <Pane prefHeight="75.0" prefWidth="154.0" style="-fx-background-color: #e57f31#e57f31;">
+      <Pane prefHeight="75.0" prefWidth="120.0" style="-fx-background-color: #e57f31#e57f31;">
          <children>
-            <Text layoutX="8.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Study" wrappingWidth="90.24800109863281">
+            <Text layoutX="1.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Study" wrappingWidth="90.24800109863281">
                <font>
                   <Font name="Avenir Next Bold" size="22.0" />
                </font>
             </Text>
-            <Text layoutX="29.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grou" wrappingWidth="90.24800109863281">
+            <Text layoutX="21.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grou" wrappingWidth="90.24800109863281">
                <font>
                   <Font name="Avenir Next Bold" size="22.0" />
                </font>
             </Text>
-            <Text layoutX="80.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="P" wrappingWidth="90.24800109863281">
+            <Text layoutX="67.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="P" wrappingWidth="90.24800109863281">
                <font>
                   <Font name="Avenir Next Bold" size="32.0" />
                </font>
             </Text>
-            <Text layoutX="89.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="roject" wrappingWidth="90.24800109863281">
+            <Text layoutX="78.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="roject" wrappingWidth="90.24800109863281">
                <font>
                   <Font name="Avenir Next Bold" size="16.0" />
                </font>
             </Text>
          </children>
       </Pane>
-      <Pane layoutX="-1.0" layoutY="75.0" prefHeight="420.0" prefWidth="155.0" style="-fx-background-color: #293541#293541;">
+      <Pane layoutX="-1.0" layoutY="75.0" prefHeight="420.0" prefWidth="120.0" style="-fx-background-color: #293541#293541;">
          <children>
-            <Button fx:id="toTableBtn" layoutY="1.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="154.0" style="-fx-background-color: transparent;" text="К таблице" textFill="WHITE" onAction="#showTable">
+            <Button fx:id="toTableBtn" layoutY="1.0" mnemonicParsing="false" onAction="#showTable" prefHeight="55.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="К таблице" textFill="WHITE">
                <font>
                   <Font name="SansSerif Regular" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="toGroupMapBtn" layoutX="1.0" layoutY="57.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="154.0" style="-fx-background-color: transparent;" text="Карта групп" textFill="WHITE" onAction="#showGroupMap">
+            <Button fx:id="toGroupMapBtn" layoutX="1.0" layoutY="57.0" mnemonicParsing="false" onAction="#showGroupMap" prefHeight="55.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="Карта групп" textFill="WHITE">
                <font>
                   <Font name="SansSerif Regular" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="executeCommandBtn" layoutX="1.0" layoutY="112.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="154.0" style="-fx-background-color: transparent;" text="Исполнить &#10;команду" textAlignment="CENTER" textFill="WHITE" onAction="#showExecuteCommand">
+            <Button fx:id="executeCommandBtn" layoutX="1.0" layoutY="112.0" mnemonicParsing="false" onAction="#showExecuteCommand" prefHeight="55.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="Исполнить &#10;команду" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="SansSerif Regular" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="aboutFagotsBtn" layoutY="183.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="154.0" style="-fx-background-color: transparent;" text="О разработчиках" textFill="WHITE" onAction="#showAboutFagots">
+            <Button fx:id="aboutFagotsBtn" layoutY="183.0" mnemonicParsing="false" onAction="#showAboutFagots" prefHeight="55.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="О разработчиках" textFill="WHITE">
                <font>
-                  <Font name="SansSerif Regular" size="16.0" />
+                  <Font name="SansSerif Regular" size="12.0" />
                </font>
             </Button>
          </children>
       </Pane>
-      <Pane layoutX="154.0" prefHeight="75.0" prefWidth="1184.0" style="-fx-background-color: lightblue;">
+      <Pane layoutX="119.0" prefHeight="75.0" prefWidth="1078.0" style="-fx-background-color: lightblue;">
          <children>
             <Text fill="#3f96cd" layoutX="71.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hi, USERLOGIN" wrappingWidth="337.2480010986328">
                <font>
@@ -72,28 +72,28 @@
             </Text>
          </children>
       </Pane>
-      <Pane layoutX="155.0" layoutY="75.0" prefHeight="420.0" prefWidth="1180.0" style="-fx-background-color: gainsboro;">
+      <Pane layoutX="119.0" layoutY="75.0" prefHeight="420.0" prefWidth="1078.0" style="-fx-background-color: gainsboro;">
          <children>
-            <FlowPane fx:id="groupMap" prefHeight="456.0" prefWidth="640.0" visible="false" />
-            <TableView fx:id="tableView" prefHeight="401.0" prefWidth="1179.0" style="-fx-background-radius: 1em; -fx-background-color: gainsboro gainsboro;">
+            <FlowPane fx:id="groupMap" layoutX="-2.0" prefHeight="420.0" prefWidth="1078.0" visible="false" />
+            <TableView fx:id="tableView" layoutY="-4.0" prefHeight="420.0" prefWidth="1078.0" style="-fx-background-radius: 1em; -fx-background-color: gainsboro gainsboro;">
               <columns>
                 <TableColumn fx:id="idColumn" prefWidth="38.0" text="id" />
-                <TableColumn fx:id="nameColumn" prefWidth="112.0" text="name" />
-                  <TableColumn prefWidth="38.413299560546875" text="x" fx:id="xColumn" />
+                <TableColumn fx:id="nameColumn" prefWidth="98.66665649414062" text="name" />
+                  <TableColumn prefWidth="52.0" text="x" fx:id="xColumn" />
                   <TableColumn fx:id="yColumn" prefWidth="34.522308349609375" text="y" />
-                  <TableColumn fx:id="creationDateColumn" prefWidth="203.47769165039062" text="creationDate" />
-                  <TableColumn fx:id="studentsCountColumn" prefWidth="87.26116943359375" text="studentsCount" />
-                  <TableColumn fx:id="formOfEducationColumn" prefWidth="102.91595458984375" text="formOfEducation" />
-                  <TableColumn fx:id="semesterEnumColumn" prefWidth="92.83062744140625" text="semesterEnum" />
-                  <TableColumn fx:id="adminNameColumn" prefWidth="92.83062744140625" text="adminName" />
-                  <TableColumn fx:id="heightColumn" prefWidth="92.83062744140625" text="height" />
-                  <TableColumn fx:id="eyeColorColumn" prefWidth="92.83062744140625" text="eyeColor" />
-                  <TableColumn fx:id="hairColorColumn" prefWidth="92.83062744140625" text="hairColor" />
-                  <TableColumn fx:id="nationalityColumn" prefWidth="92.83062744140625" text="nationality" />
+                  <TableColumn fx:id="creationDateColumn" prefWidth="145.3333740234375" text="creationDate" />
+                  <TableColumn fx:id="studentsCountColumn" prefWidth="94.0" text="studentsCount" />
+                  <TableColumn fx:id="formOfEducationColumn" prefWidth="114.6666259765625" text="formOfEducation" />
+                  <TableColumn fx:id="semesterEnumColumn" prefWidth="90.0" text="semesterEnum" />
+                  <TableColumn fx:id="adminNameColumn" prefWidth="84.6666259765625" text="adminName" />
+                  <TableColumn fx:id="heightColumn" prefWidth="69.33331298828125" text="height" />
+                  <TableColumn fx:id="eyeColorColumn" prefWidth="81.33331298828125" text="eyeColor" />
+                  <TableColumn fx:id="hairColorColumn" prefWidth="83.333251953125" text="hairColor" />
+                  <TableColumn fx:id="nationalityColumn" prefWidth="88.6666259765625" text="nationality" />
               </columns>
             </TableView>
-            <Pane fx:id="executeCommand" prefHeight="420.0" prefWidth="472.0" visible="false" />
-            <Pane fx:id="aboutFagots" prefHeight="420.0" prefWidth="459.0" visible="false" />
+            <Pane fx:id="executeCommand" layoutY="-2.0" prefHeight="420.0" prefWidth="1078.0" visible="false" />
+            <Pane fx:id="aboutFagots" layoutX="-1.0" prefHeight="420.0" prefWidth="1078.0" visible="false" />
          </children>
       </Pane>
    </children>

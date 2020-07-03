@@ -76,7 +76,7 @@ public class DecryptingImp implements Decrypting {
             ctrl.setCollection(linkedList, idElementsAllUsers);
             Stage stage = new Stage();
             stage.setTitle("StudyGroupProject. MainStage.");
-            stage.setScene(new Scene(sceneFXML, 1330, 493));
+            stage.setScene(new Scene(sceneFXML, 1198, 494));
             stage.show();
         }
     }
