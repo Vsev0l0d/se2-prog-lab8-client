@@ -118,7 +118,7 @@ public class MainStageController implements Initializable {
         semesterEnumFilter.setOnAction(event -> filtered.setPredicate(studyGroup -> studyGroup.getSemesterEnum().toString().contains(semesterEnumFilter.getValue())));
         adminNameFilter.textProperty().addListener((observable, oldValue, newValue) -> filtered.setPredicate(studyGroup -> studyGroup.getGroupAdmin().getName().toLowerCase().contains(newValue.toLowerCase())));
         heightFilter.textProperty().addListener((observable, oldValue, newValue) -> filtered.setPredicate(studyGroup -> Double.toString(studyGroup.getGroupAdmin().getHeight()).toLowerCase().equals(newValue.toLowerCase())));
-        eyeColorFilter.setOnAction(event -> filtered.setPredicate(studyGroup -> studyGroup.getGroupAdmin().getEyeColor().toString().contains(semesterEnumFilter.getValue())));
+        eyeColorFilter.setOnAction(event -> filtered.setPredicate(studyGroup -> studyGroup.getGroupAdmin().getEyeColor().toString().contains(eyeColorFilter.getValue())));
         hairColorFilter.setOnAction(event -> filtered.setPredicate(studyGroup -> studyGroup.getGroupAdmin().getHairColor().toString().contains(hairColorFilter.getValue())));
         nationalityFilter.setOnAction(event -> filtered.setPredicate(studyGroup -> studyGroup.getGroupAdmin().getNationality().toString().contains(nationalityFilter.getValue())));
 

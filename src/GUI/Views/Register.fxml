@@ -8,46 +8,61 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="353.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.RegistrationController">
-   <children>
-      <Pane prefHeight="417.0" prefWidth="359.0" style="-fx-background-color: #293541#293541;">
-         <children>
-            <Pane layoutX="-6.0" prefHeight="82.0" prefWidth="366.0" style="-fx-background-color: #e57f31#e57f31;">
-               <children>
-                  <ImageView fitHeight="79.0" fitWidth="103.0" layoutX="9.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Images/Smart.png" />
-                     </image>
-                  </ImageView>
-                  <Text layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Study" wrappingWidth="90.24800109863281">
-                     <font>
-                        <Font name="Avenir Next Bold" size="24.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="139.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grou" wrappingWidth="90.24800109863281">
-                     <font>
-                        <Font name="Avenir Next Bold" size="24.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="194.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="P" wrappingWidth="90.24800109863281">
-                     <font>
-                        <Font name="Avenir Next Bold" size="48.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="213.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="roject" wrappingWidth="90.24800109863281">
-                     <font>
-                        <Font name="Avenir Next Bold" size="24.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <TextField fx:id="newLoginField" layoutX="34.0" layoutY="139.0" prefHeight="27.0" prefWidth="293.0" promptText="Придумайте логин" style="-fx-background-radius: 1em;" />
-            <Button fx:id="regUserBtn" layoutX="34.0" layoutY="297.0" mnemonicParsing="false" onAction="#regUserAction" prefHeight="40.0" prefWidth="293.0" style="-fx-background-radius: 1em; -fx-background-color: #e57f31#e57f31 #e57f31#e57f31;" text="Зарегистрироваться" />
-            <Button fx:id="authUserWindowBtn" alignment="CENTER" graphicTextGap="12.0" layoutX="34.0" layoutY="356.0" mnemonicParsing="false" onAction="#displayAuthWindow" prefHeight="40.0" prefWidth="293.0" style="-fx-background-radius: 1em; -fx-background-color: #e57f31#e57f31 #e57f31#e57f31;" text="Авторизация" />
-            <PasswordField fx:id="newPasswordField" layoutX="34.0" layoutY="182.0" prefHeight="27.0" prefWidth="293.0" promptText="Придумайте пароль" style="-fx-background-radius: 1em;" />
-            <PasswordField fx:id="repNewPasswordField" layoutX="34.0" layoutY="225.0" prefHeight="27.0" prefWidth="293.0" promptText="Повторите пароль" style="-fx-background-radius: 1em;" />
-         </children>
-      </Pane>
-   </children>
-</Pane>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="GUI.Controllers.RegistrationController">
+   <Pane prefHeight="82.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" AnchorPane.rightAnchor="0.0"
+         style="-fx-background-color: #e57f31#e57f31;">
+      <ImageView fitHeight="79.0" fitWidth="103.0" layoutX="23.0" layoutY="2.0" pickOnBounds="true"
+                 preserveRatio="true">
+         <image>
+            <Image url="@Images/Smart.png"/>
+         </image>
+      </ImageView>
+      <Text layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Study"
+            wrappingWidth="90.24800109863281">
+         <font>
+            <Font name="Avenir Next Bold" size="24.0"/>
+         </font>
+      </Text>
+      <Text layoutX="139.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grou"
+            wrappingWidth="90.24800109863281">
+         <font>
+            <Font name="Avenir Next Bold" size="24.0"/>
+         </font>
+      </Text>
+      <Text layoutX="194.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="P"
+            wrappingWidth="90.24800109863281">
+         <font>
+            <Font name="Avenir Next Bold" size="48.0"/>
+         </font>
+      </Text>
+      <Text layoutX="213.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="roject"
+            wrappingWidth="90.24800109863281">
+         <font>
+            <Font name="Avenir Next Bold" size="24.0"/>
+         </font>
+      </Text>
+   </Pane>
+   <Pane style="-fx-background-color: #293541#293541;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+         AnchorPane.topAnchor="82.0" AnchorPane.rightAnchor="0.0">
+      <VBox spacing="15">
+         <TextField fx:id="newLoginField" prefHeight="27.0" prefWidth="293.0"
+                    promptText="Придумайте логин" style="-fx-background-radius: 1em;"/>
+         <PasswordField fx:id="newPasswordField" prefHeight="27.0" prefWidth="293.0"
+         promptText="Придумайте пароль" style="-fx-background-radius: 1em;"/>
+         <PasswordField fx:id="repNewPasswordField" prefHeight="27.0" prefWidth="293.0"
+         promptText="Повторите пароль" style="-fx-background-radius: 1em;"/>
+         <Button fx:id="regUserBtn" mnemonicParsing="false" onAction="#regUserAction"
+                 prefHeight="40.0" prefWidth="293.0"
+                 style="-fx-background-radius: 1em; -fx-background-color: #e57f31#e57f31 #e57f31#e57f31;"
+                 text="Зарегистрироваться"/>
+         <Button fx:id="authUserWindowBtn" alignment="CENTER" graphicTextGap="12.0"
+                 mnemonicParsing="false" onAction="#displayAuthWindow" prefHeight="40.0" prefWidth="293.0"
+                 style="-fx-background-radius: 1em; -fx-background-color: #e57f31#e57f31 #e57f31#e57f31;"
+                 text="Авторизация"/>
+      </VBox>
+   </Pane>
+</AnchorPane>
