@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -282,14 +283,28 @@ public class MainStageController implements Initializable {
     public void commandProcessing(ActionEvent actionEvent) {
         String commandName = commandChoiseComboBox.getSelectionModel().getSelectedItem();
 
-        // по идее было бы не плохо сбрасывать значения полей, если они блокируются, но на это нет времени наверн
         if (commandName.matches("add|remove_lower|remove_greater")) { aboutGroupTitiledPane.setDisable(false); aboutGroupAdminTitledPane.setDisable(false); argumentField.setDisable(true); }
         else if (commandName.equals("count_by_group_admin")) { aboutGroupTitiledPane.setDisable(true); aboutGroupAdminTitledPane.setDisable(false); argumentField.setDisable(true); }
         else if (commandName.equals("update")){ aboutGroupTitiledPane.setDisable(false); aboutGroupAdminTitledPane.setDisable(false); argumentField.setDisable(false);}
         else if (commandName.matches("execute_script|remove_by_id")){ aboutGroupTitiledPane.setDisable(true); aboutGroupAdminTitledPane.setDisable(true); argumentField.setDisable(false);}
         else { aboutGroupTitiledPane.setDisable(true); aboutGroupAdminTitledPane.setDisable(true); argumentField.setDisable(true);}
 
-        // проверить аргументы
         executeCommandBtn.setDisable(false);
+        clearTitlePanes();
+    }
+
+    void clearTitlePanes() {
+        argumentField.clear();
+        adminGroupField.clear();
+        adminHeightField.clear();
+        groupNameField.clear();
+        studentsCountField.clear();
+        xTextField.clear();
+        yTextField.clear();
+        formOfEducationComboBox.getSelectionModel().select(-1);
+        adminEyeColorComboBox.getSelectionModel().select(-1);
+        adminHairColorComboBox.getSelectionModel().select(-1);
+        semesterComboBox.getSelectionModel().select(-1);
+        adminNationalityComboBox.getSelectionModel().select(-1);
     }
 }
