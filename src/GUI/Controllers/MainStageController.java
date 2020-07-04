@@ -206,7 +206,7 @@ public class MainStageController implements Initializable {
                             xTextField.setText(selectedStudyGroup.getCoordinates().getX().toString());
                             yTextField.setText(Float.toString(selectedStudyGroup.getCoordinates().getY()));
                             studentsCountField.setText(selectedStudyGroup.getStudentsCount().toString());
-                            formOfEducationComboBox.setValue(selectedStudyGroup.getFormOfEducation().toString());
+                            formOfEducationComboBox.setValue(selectedStudyGroup.getFormOfEducation() == null ? "null" : selectedStudyGroup.getFormOfEducation().toString());
                             semesterComboBox.setValue(selectedStudyGroup.getSemesterEnum().toString());
                             adminGroupField.setText(selectedStudyGroup.getGroupAdmin().getName());
                             adminHeightField.setText(Integer.toString(selectedStudyGroup.getGroupAdmin().getHeight()));
