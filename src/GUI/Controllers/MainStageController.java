@@ -66,6 +66,7 @@ public class MainStageController implements Initializable {
     @FXML private ChoiceBox<String> hairColorFilter;
     @FXML private ChoiceBox<String> nationalityFilter;
 
+    @FXML private TextField idArgumentField;
     @FXML private TitledPane aboutGroupTitiledPane;
     @FXML private TitledPane aboutGroupAdminTitledPane;
     @FXML private TextField groupNameField;
@@ -81,7 +82,6 @@ public class MainStageController implements Initializable {
     @FXML private ComboBox<String> adminNationalityComboBox;
     @FXML private ComboBox<String> commandChoiseComboBox;
     @FXML private Button executeCommandBtn;
-    @FXML private TextField idArgumentField;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
