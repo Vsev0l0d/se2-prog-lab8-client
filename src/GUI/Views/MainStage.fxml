@@ -76,23 +76,38 @@
       <Pane layoutX="119.0" layoutY="75.0" prefHeight="420.0" prefWidth="1078.0" style="-fx-background-color: gainsboro;">
          <children>
             <Pane fx:id="groupMap" layoutX="-2.0" prefHeight="420.0" prefWidth="1078.0" visible="false" />
-            <TableView fx:id="tableView" layoutY="25.0" prefHeight="391.0" prefWidth="1078.0" style="-fx-background-radius: 1em; -fx-background-color: gainsboro gainsboro;">
-              <columns>
-                <TableColumn fx:id="idColumn" prefWidth="38.0" text="id" />
-                <TableColumn fx:id="nameColumn" prefWidth="98.66665649414062" text="name" />
-                  <TableColumn fx:id="xColumn" prefWidth="52.0" text="x" />
-                  <TableColumn fx:id="yColumn" prefWidth="34.522308349609375" text="y" />
-                  <TableColumn fx:id="creationDateColumn" prefWidth="145.3333740234375" text="creationDate" />
-                  <TableColumn fx:id="studentsCountColumn" prefWidth="94.0" text="studentsCount" />
-                  <TableColumn fx:id="formOfEducationColumn" prefWidth="114.6666259765625" text="formOfEducation" />
-                  <TableColumn fx:id="semesterEnumColumn" prefWidth="90.0" text="semesterEnum" />
-                  <TableColumn fx:id="adminNameColumn" prefWidth="84.6666259765625" text="adminName" />
-                  <TableColumn fx:id="heightColumn" prefWidth="69.33331298828125" text="height" />
-                  <TableColumn fx:id="eyeColorColumn" prefWidth="81.33331298828125" text="eyeColor" />
-                  <TableColumn fx:id="hairColorColumn" prefWidth="83.333251953125" text="hairColor" />
-                  <TableColumn fx:id="nationalityColumn" prefWidth="88.6666259765625" text="nationality" />
-              </columns>
-            </TableView>
+            <Pane fx:id="tablePane" layoutX="-2.0" prefHeight="420.0" prefWidth="1078.0" visible="true" >
+               <TableView fx:id="tableView" layoutY="25.0" prefHeight="391.0" prefWidth="1078.0" style="-fx-background-radius: 1em; -fx-background-color: gainsboro gainsboro;">
+                 <columns>
+                   <TableColumn fx:id="idColumn" prefWidth="38.0" text="id" />
+                   <TableColumn fx:id="nameColumn" prefWidth="98.66665649414062" text="name" />
+                     <TableColumn fx:id="xColumn" prefWidth="52.0" text="x" />
+                     <TableColumn fx:id="yColumn" prefWidth="34.522308349609375" text="y" />
+                     <TableColumn fx:id="creationDateColumn" prefWidth="145.3333740234375" text="creationDate" />
+                     <TableColumn fx:id="studentsCountColumn" prefWidth="94.0" text="studentsCount" />
+                     <TableColumn fx:id="formOfEducationColumn" prefWidth="114.6666259765625" text="formOfEducation" />
+                     <TableColumn fx:id="semesterEnumColumn" prefWidth="90.0" text="semesterEnum" />
+                     <TableColumn fx:id="adminNameColumn" prefWidth="84.6666259765625" text="adminName" />
+                     <TableColumn fx:id="heightColumn" prefWidth="69.33331298828125" text="height" />
+                     <TableColumn fx:id="eyeColorColumn" prefWidth="81.33331298828125" text="eyeColor" />
+                     <TableColumn fx:id="hairColorColumn" prefWidth="83.333251953125" text="hairColor" />
+                     <TableColumn fx:id="nationalityColumn" prefWidth="88.6666259765625" text="nationality" />
+                 </columns>
+               </TableView>
+               <TextField fx:id="idFilter" layoutY="1.0" prefHeight="25.0" prefWidth="39.0" promptText="id" />
+               <TextField fx:id="nameFilter" layoutX="39.0" layoutY="1.0" prefHeight="25.0" prefWidth="99.0" promptText="name" />
+               <TextField fx:id="xFilter" layoutX="138.0" layoutY="1.0" prefHeight="25.0" prefWidth="52.0" promptText="x" />
+               <TextField fx:id="yFilter" layoutX="190.0" layoutY="1.0" prefHeight="25.0" prefWidth="33.0" promptText="y" />
+               <TextField fx:id="creationDateFilter" layoutX="223.0" layoutY="1.0" prefHeight="25.0" prefWidth="144.0" promptText="creationDate" />
+               <TextField fx:id="studentsCountFilter" layoutX="367.0" layoutY="1.0" prefHeight="25.0" prefWidth="99.0" promptText="studentsCount" />
+               <ChoiceBox fx:id="formOfEducationFilter" layoutX="464.0" layoutY="1.0" prefHeight="25.0" prefWidth="108.0" />
+               <ChoiceBox fx:id="semesterEnumFilter" layoutX="572.0" layoutY="1.0" prefHeight="25.0" prefWidth="99.0" />
+               <TextField fx:id="adminNameFilter" layoutX="671.0" layoutY="1.0" prefHeight="25.0" prefWidth="83.0" promptText="adminName"/>
+               <TextField fx:id="heightFilter" layoutX="754.0" layoutY="1.0" prefHeight="25.0" prefWidth="70.0" promptText="height" />
+               <ChoiceBox fx:id="eyeColorFilter" layoutX="824.0" layoutY="1.0" prefHeight="25.0" prefWidth="83.0" />
+               <ChoiceBox fx:id="hairColorFilter" layoutX="907.0" layoutY="1.0" prefHeight="25.0" prefWidth="83.0" />
+               <ChoiceBox fx:id="nationalityFilter" layoutX="989.0" layoutY="1.0" prefHeight="25.0" prefWidth="90.0" />
+            </Pane>
             <Pane fx:id="executeCommand" layoutY="-2.0" prefHeight="420.0" prefWidth="1078.0" visible="false" />
             <Pane fx:id="aboutFagots" layoutX="-1.0" prefHeight="420.0" prefWidth="1078.0" visible="false">
                <Text fontSmoothingType="LCD" layoutX="14.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Примите лабу пожалуйста">
@@ -101,19 +116,6 @@
                   </font>
                </Text>
             </Pane>
-            <TextField fx:id="idFilter" layoutY="1.0" prefHeight="25.0" prefWidth="39.0" promptText="id" />
-            <TextField fx:id="nameFilter" layoutX="39.0" layoutY="1.0" prefHeight="25.0" prefWidth="99.0" promptText="name" />
-            <TextField fx:id="xFilter" layoutX="138.0" layoutY="1.0" prefHeight="25.0" prefWidth="52.0" promptText="x" />
-            <TextField fx:id="yFilter" layoutX="190.0" layoutY="1.0" prefHeight="25.0" prefWidth="33.0" promptText="y" />
-            <TextField fx:id="creationDateFilter" layoutX="223.0" layoutY="1.0" prefHeight="25.0" prefWidth="144.0" promptText="creationDate" />
-            <TextField fx:id="studentsCountFilter" layoutX="367.0" layoutY="1.0" prefHeight="25.0" prefWidth="99.0" promptText="studentsCount" />
-            <ChoiceBox fx:id="formOfEducationFilter" layoutX="464.0" layoutY="1.0" prefHeight="25.0" prefWidth="108.0" />
-            <ChoiceBox fx:id="semesterEnumFilter" layoutX="572.0" layoutY="1.0" prefHeight="25.0" prefWidth="99.0" />
-            <TextField fx:id="adminNameFilter" layoutX="671.0" layoutY="1.0" prefHeight="25.0" prefWidth="83.0" promptText="adminName"/>
-            <TextField fx:id="heightFilter" layoutX="754.0" layoutY="1.0" prefHeight="25.0" prefWidth="70.0" promptText="height" />
-            <ChoiceBox fx:id="eyeColorFilter" layoutX="824.0" layoutY="1.0" prefHeight="25.0" prefWidth="83.0" />
-            <ChoiceBox fx:id="hairColorFilter" layoutX="907.0" layoutY="1.0" prefHeight="25.0" prefWidth="83.0" />
-            <ChoiceBox fx:id="nationalityFilter" layoutX="989.0" layoutY="1.0" prefHeight="25.0" prefWidth="90.0" />
          </children>
       </Pane>
    </children>

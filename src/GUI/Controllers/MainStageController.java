@@ -34,6 +34,7 @@ public class MainStageController implements Initializable {
     @FXML private Pane groupMap;
     @FXML private Pane executeCommand;
     @FXML private Pane aboutFagots;
+    @FXML private Pane tablePane;
     @FXML private TableView<StudyGroup> tableView;
 
     @FXML private TableColumn<StudyGroup, Integer> idColumn;
@@ -209,26 +210,26 @@ public class MainStageController implements Initializable {
         groupMap.setVisible(false);
         executeCommand.setVisible(false);
         aboutFagots.setVisible(false);
-        tableView.setVisible(true);
+        tablePane.setVisible(true);
     }
 
     public void showGroupMap(ActionEvent actionEvent) {
         executeCommand.setVisible(false);
         aboutFagots.setVisible(false);
-        tableView.setVisible(false);
+        tablePane.setVisible(false);
         groupMap.setVisible(true);
     }
 
     public void showExecuteCommand(ActionEvent actionEvent) {
         groupMap.setVisible(false);
         aboutFagots.setVisible(false);
-        tableView.setVisible(false);
+        tablePane.setVisible(false);
         executeCommand.setVisible(true);
     }
 
     public void showAboutFagots(ActionEvent actionEvent) {
         groupMap.setVisible(false);
-        tableView.setVisible(false);
+        tablePane.setVisible(false);
         executeCommand.setVisible(false);
         aboutFagots.setVisible(true);
     }
