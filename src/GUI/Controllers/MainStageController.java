@@ -13,7 +13,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -67,7 +66,7 @@ public class MainStageController implements Initializable {
     @FXML private ChoiceBox<String> hairColorFilter;
     @FXML private ChoiceBox<String> nationalityFilter;
 
-    @FXML private TextField argumentField;
+    @FXML private TextField idArgumentField;
     @FXML private TitledPane aboutGroupTitiledPane;
     @FXML private TitledPane aboutGroupAdminTitledPane;
     @FXML private TextField groupNameField;
@@ -111,6 +110,7 @@ public class MainStageController implements Initializable {
         fillTable();
         visual();
         updateTable();
+        setListenersTextField();
     }
 
     public void fillTable() {
@@ -186,6 +186,7 @@ public class MainStageController implements Initializable {
                         Circle selectedCircle = ((Circle) (t.getSource()));
                         StudyGroup selectedStudyGroup = circleStudyGroupHashMap.get(selectedCircle);
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setHeaderText(null);
                         alert.setTitle("info");
                         alert.setContentText(selectedStudyGroup.toString());
                         ButtonType close = new ButtonType("close");
@@ -201,8 +202,8 @@ public class MainStageController implements Initializable {
                             executeCommand.setVisible(true);
 
                             commandChoiseComboBox.setValue("update");
-                            argumentField.setDisable(true);
-                            argumentField.setText(selectedStudyGroup.getId().toString());
+                            idArgumentField.setDisable(true);
+                            idArgumentField.setText(selectedStudyGroup.getId().toString());
                             groupNameField.setText(selectedStudyGroup.getName());
                             xTextField.setText(selectedStudyGroup.getCoordinates().getX().toString());
                             yTextField.setText(Float.toString(selectedStudyGroup.getCoordinates().getY()));
@@ -283,18 +284,18 @@ public class MainStageController implements Initializable {
     public void commandProcessing(ActionEvent actionEvent) {
         String commandName = commandChoiseComboBox.getSelectionModel().getSelectedItem();
 
-        if (commandName.matches("add|remove_lower|remove_greater")) { aboutGroupTitiledPane.setDisable(false); aboutGroupAdminTitledPane.setDisable(false); argumentField.setDisable(true); }
-        else if (commandName.equals("count_by_group_admin")) { aboutGroupTitiledPane.setDisable(true); aboutGroupAdminTitledPane.setDisable(false); argumentField.setDisable(true); }
-        else if (commandName.equals("update")){ aboutGroupTitiledPane.setDisable(false); aboutGroupAdminTitledPane.setDisable(false); argumentField.setDisable(false);}
-        else if (commandName.matches("execute_script|remove_by_id")){ aboutGroupTitiledPane.setDisable(true); aboutGroupAdminTitledPane.setDisable(true); argumentField.setDisable(false);}
-        else { aboutGroupTitiledPane.setDisable(true); aboutGroupAdminTitledPane.setDisable(true); argumentField.setDisable(true);}
+        // обработать execute_script
+        if (commandName.matches("add|remove_lower|remove_greater")) { aboutGroupTitiledPane.setDisable(false); aboutGroupAdminTitledPane.setDisable(false); idArgumentField.setDisable(true); }
+        else if (commandName.equals("count_by_group_admin")) { aboutGroupTitiledPane.setDisable(true); aboutGroupAdminTitledPane.setDisable(false); idArgumentField.setDisable(true); }
+        else if (commandName.equals("update")){ aboutGroupTitiledPane.setDisable(false); aboutGroupAdminTitledPane.setDisable(false); idArgumentField.setDisable(false);}
+        else if (commandName.matches("remove_by_id")){ aboutGroupTitiledPane.setDisable(true); aboutGroupAdminTitledPane.setDisable(true); idArgumentField.setDisable(false);}
+        else { aboutGroupTitiledPane.setDisable(true); aboutGroupAdminTitledPane.setDisable(true); idArgumentField.setDisable(true);}
 
-        executeCommandBtn.setDisable(false);
         clearTitlePanes();
     }
 
     void clearTitlePanes() {
-        argumentField.clear();
+        idArgumentField.clear();
         adminGroupField.clear();
         adminHeightField.clear();
         groupNameField.clear();
@@ -302,9 +303,47 @@ public class MainStageController implements Initializable {
         xTextField.clear();
         yTextField.clear();
         formOfEducationComboBox.getSelectionModel().select(-1);
+        semesterComboBox.getSelectionModel().select(-1);
         adminEyeColorComboBox.getSelectionModel().select(-1);
         adminHairColorComboBox.getSelectionModel().select(-1);
-        semesterComboBox.getSelectionModel().select(-1);
         adminNationalityComboBox.getSelectionModel().select(-1);
+    }
+
+    private void setListenersTextField(){
+        idArgumentField.textProperty().addListener((observable, oldValue, newValue) -> dataValidation());
+        adminGroupField.textProperty().addListener((observable, oldValue, newValue) -> dataValidation());
+        adminHeightField.textProperty().addListener((observable, oldValue, newValue) -> dataValidation());
+        groupNameField.textProperty().addListener((observable, oldValue, newValue) -> dataValidation());
+        studentsCountField.textProperty().addListener((observable, oldValue, newValue) -> dataValidation());
+        xTextField.textProperty().addListener((observable, oldValue, newValue) -> dataValidation());
+        yTextField.textProperty().addListener((observable, oldValue, newValue) -> dataValidation());
+    }
+
+    public void dataValidation(){
+        try {
+            executeCommandBtn.setDisable(true);
+
+            boolean isIdCorrect = true;
+            boolean isAdminCorrect = true;
+            boolean isGroupCorrect = true;
+            if (!idArgumentField.isDisable()) isIdCorrect = Integer.parseInt(idArgumentField.getText()) > 0;
+
+            if (!aboutGroupAdminTitledPane.isDisable())
+                    isAdminCorrect = (adminGroupField.getText() != null && !adminGroupField.getText().equals("")) &&
+                    (Integer.parseInt(adminHeightField.getText()) > 0) && (adminEyeColorComboBox.getSelectionModel().getSelectedItem() != null) &&
+                    (adminHairColorComboBox.getSelectionModel().getSelectedItem() != null) && (adminNationalityComboBox.getSelectionModel().getSelectedItem() != null);
+
+            if (!aboutGroupTitiledPane.isDisable())
+                    isGroupCorrect = (groupNameField.getText() != null && !groupNameField.getText().equals("")) &&
+                    (Integer.parseInt(studentsCountField.getText()) > 0) &&
+                    (Integer.parseInt(xTextField.getText()) < 531) &&
+                    (Float.parseFloat(yTextField.getText()) > -653f) &&
+                    (formOfEducationComboBox.getSelectionModel().getSelectedItem() != null) &&
+                    (semesterComboBox.getSelectionModel().getSelectedItem() != null);
+
+            if (isAdminCorrect && isIdCorrect && isGroupCorrect) executeCommandBtn.setDisable(false);
+        } catch (Exception ignored) {
+            ignored.printStackTrace();
+        }
     }
 }
