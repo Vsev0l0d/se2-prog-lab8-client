@@ -264,6 +264,14 @@ public class MainStageController implements Initializable {
     }
 
     public void commandProcessing(ActionEvent actionEvent) {
+        String commandName = commandChoiseComboBox.getSelectionModel().getSelectedItem().toString();
 
+        if (commandName.matches("add|update|remove_lower|remove_greater")) {
+            aboutGroupAdminTitledPane.setDisable(false);
+            aboutGroupTitiledPane.setDisable(false);
+        } else if (commandName.matches("max_by_group_admin|count_by_group_admin")) aboutGroupAdminTitledPane.setDisable(false);
+        else { aboutGroupAdminTitledPane.setDisable(true); aboutGroupTitiledPane.setDisable(true); }
+
+        executeCommandBtn.setDisable(false);
     }
 }
