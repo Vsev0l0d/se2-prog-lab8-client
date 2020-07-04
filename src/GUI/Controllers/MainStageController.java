@@ -342,8 +342,6 @@ public class MainStageController implements Initializable {
                     (semesterComboBox.getSelectionModel().getSelectedItem() != null);
 
             if (isAdminCorrect && isIdCorrect && isGroupCorrect) executeCommandBtn.setDisable(false);
-        } catch (Exception ignored) {
-            ignored.printStackTrace();
-        }
+        } catch (Exception ignored) {}
     }
 }
