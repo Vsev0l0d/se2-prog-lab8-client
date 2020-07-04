@@ -66,7 +66,7 @@ public class MainStageController implements Initializable {
     @FXML private ChoiceBox<String> hairColorFilter;
     @FXML private ChoiceBox<String> nationalityFilter;
 
-    @FXML private TextField idArgumentField;
+    @FXML private TextField argumentField;
     @FXML private TitledPane aboutGroupTitiledPane;
     @FXML private TitledPane aboutGroupAdminTitledPane;
     @FXML private TextField groupNameField;
@@ -189,14 +189,30 @@ public class MainStageController implements Initializable {
                         alert.setContentText(selectedStudyGroup.toString());
                         ButtonType close = new ButtonType("close");
                         ButtonType edit = new ButtonType("update");
-                        ButtonType delete = new ButtonType("removeById");
+                        ButtonType delete = new ButtonType("remove");
                         alert.getButtonTypes().clear();
                         alert.getButtonTypes().addAll(delete, edit, close);
                         Optional<ButtonType> option = alert.showAndWait();
                         if (option.get() == close)
                             alert.close();
                         else if (option.get() == edit) {
-                            // update
+                            groupMap.setVisible(false);
+                            executeCommand.setVisible(true);
+
+                            commandChoiseComboBox.setValue("update");
+                            argumentField.setDisable(true);
+                            argumentField.setText(selectedStudyGroup.getId().toString());
+                            groupNameField.setText(selectedStudyGroup.getName());
+                            xTextField.setText(selectedStudyGroup.getCoordinates().getX().toString());
+                            yTextField.setText(Float.toString(selectedStudyGroup.getCoordinates().getY()));
+                            studentsCountField.setText(selectedStudyGroup.getStudentsCount().toString());
+                            formOfEducationComboBox.setValue(selectedStudyGroup.getFormOfEducation().toString());
+                            semesterComboBox.setValue(selectedStudyGroup.getSemesterEnum().toString());
+                            adminGroupField.setText(selectedStudyGroup.getGroupAdmin().getName());
+                            adminHeightField.setText(Integer.toString(selectedStudyGroup.getGroupAdmin().getHeight()));
+                            adminEyeColorComboBox.setValue(selectedStudyGroup.getGroupAdmin().getEyeColor().toString());
+                            adminHairColorComboBox.setValue(selectedStudyGroup.getGroupAdmin().getHairColor().toString());
+                            adminNationalityComboBox.setValue(selectedStudyGroup.getGroupAdmin().getNationality().toString());
                         } else if (option.get() == delete) {
                             // removeById
                         }
@@ -264,14 +280,16 @@ public class MainStageController implements Initializable {
     }
 
     public void commandProcessing(ActionEvent actionEvent) {
-        String commandName = commandChoiseComboBox.getSelectionModel().getSelectedItem().toString();
+        String commandName = commandChoiseComboBox.getSelectionModel().getSelectedItem();
 
-        if (commandName.matches("add|update|remove_lower|remove_greater")) {
-            aboutGroupAdminTitledPane.setDisable(false);
-            aboutGroupTitiledPane.setDisable(false);
-        } else if (commandName.matches("max_by_group_admin|count_by_group_admin")) aboutGroupAdminTitledPane.setDisable(false);
-        else { aboutGroupAdminTitledPane.setDisable(true); aboutGroupTitiledPane.setDisable(true); }
+        // по идее было бы не плохо сбрасывать значения полей, если они блокируются, но на это нет времени наверн
+        if (commandName.matches("add|remove_lower|remove_greater")) { aboutGroupTitiledPane.setDisable(false); aboutGroupAdminTitledPane.setDisable(false); argumentField.setDisable(true); }
+        else if (commandName.equals("count_by_group_admin")) { aboutGroupTitiledPane.setDisable(true); aboutGroupAdminTitledPane.setDisable(false); argumentField.setDisable(true); }
+        else if (commandName.equals("update")){ aboutGroupTitiledPane.setDisable(false); aboutGroupAdminTitledPane.setDisable(false); argumentField.setDisable(false);}
+        else if (commandName.matches("execute_script|remove_by_id")){ aboutGroupTitiledPane.setDisable(true); aboutGroupAdminTitledPane.setDisable(true); argumentField.setDisable(false);}
+        else { aboutGroupTitiledPane.setDisable(true); aboutGroupAdminTitledPane.setDisable(true); argumentField.setDisable(true);}
 
+        // проверить аргументы
         executeCommandBtn.setDisable(false);
     }
 }
