@@ -1,6 +1,7 @@
 package Interfaces;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface CommandReceiver {
     void setAuthorizationData(String login, String password);
@@ -42,4 +43,6 @@ public interface CommandReceiver {
     void getCollection() throws ClassNotFoundException, InterruptedException;
 
     String getLogin();
+
+    List<String> getCommandsName();
 }

@@ -18,6 +18,7 @@ import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Ресивер(получатель), отправляет серилизованные объекты на сервер.
@@ -291,5 +292,10 @@ public class CommandReceiverImp implements CommandReceiver {
     @Override
     public String getLogin() {
         return login;
+    }
+
+    @Override
+    public List<String> getCommandsName(){
+        return commandInvoker.getCommandsName();
     }
 }

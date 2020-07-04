@@ -5,9 +5,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Инвокер(вызыватель), выполяет команды. Хранит зарегистрированные команды.
@@ -46,5 +44,12 @@ public class CommandInvokerImp implements CommandInvoker {
     @Override
     public HashMap<String, Command> getCommandMap() {
         return commandMap;
+    }
+
+    @Override
+    public List<String> getCommandsName(){
+        ArrayList<String> names = new ArrayList<>();
+        commandMap.forEach((key, value) -> names.add(key));
+        return names;
     }
 }

@@ -27,6 +27,7 @@ import java.util.stream.Stream;
 
 public class MainStageController implements Initializable {
     private ObservableList<StudyGroup> observableList = FXCollections.observableArrayList();
+    private ObservableList<String> commandNames = FXCollections.observableArrayList();
     private List<List<Integer>> idElementsAllUsers = new ArrayList<>();
     private CommandReceiver commandReceiver;
 
@@ -65,8 +66,26 @@ public class MainStageController implements Initializable {
     @FXML private ChoiceBox<String> hairColorFilter;
     @FXML private ChoiceBox<String> nationalityFilter;
 
+    @FXML private TitledPane aboutGroupTitiledPane;
+    @FXML private TitledPane aboutGroupAdminTitledPane;
+    @FXML private TextField groupNameField;
+    @FXML private TextField xTextField;
+    @FXML private TextField yTextField;
+    @FXML private TextField studentsCountField;
+    @FXML private ComboBox<String> formOfEducationComboBox;
+    @FXML private ComboBox<String> semesterComboBox;
+    @FXML private TextField adminGroupField;
+    @FXML private TextField adminHeightField;
+    @FXML private ComboBox<String> adminEyeColorComboBox;
+    @FXML private ComboBox<String> adminHairColorComboBox;
+    @FXML private ComboBox<String> adminNationalityComboBox;
+    @FXML private ComboBox<String> commandChoiseComboBox;
+    @FXML private Button executeCommandBtn;
+    @FXML private TextField idArgumentField;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // для тестов, пока падает буфер
         ArrayList<Integer> objects = new ArrayList<>();
         objects.add(0);
         idElementsAllUsers.add(objects);
@@ -81,6 +100,19 @@ public class MainStageController implements Initializable {
         hairColorFilter.setItems(FXCollections.observableArrayList(Stream.concat(Stream.of(Color.values()).map(Enum::toString), Stream.of("")).collect(Collectors.toList())));
         nationalityFilter.setItems(FXCollections.observableArrayList(Stream.concat(Stream.of(Country.values()).map(Enum::toString), Stream.of("")).collect(Collectors.toList())));
 
+        formOfEducationComboBox.setItems(FXCollections.observableArrayList(Stream.concat(Stream.of(FormOfEducation.values()).map(Enum::toString), Stream.of("null")).collect(Collectors.toList())));
+        semesterComboBox.setItems(FXCollections.observableArrayList(Stream.of(Semester.values()).map(Enum::toString).collect(Collectors.toList())));
+        adminEyeColorComboBox.setItems(FXCollections.observableArrayList(Stream.of(Color.values()).map(Enum::toString).collect(Collectors.toList())));
+        adminHairColorComboBox.setItems(FXCollections.observableArrayList(Stream.of(Color.values()).map(Enum::toString).collect(Collectors.toList())));
+        adminNationalityComboBox.setItems(FXCollections.observableArrayList(Stream.of(Country.values()).map(Enum::toString).collect(Collectors.toList())));
+        commandChoiseComboBox.setItems(commandNames);
+
+        fillTable();
+        visual();
+        updateTable();
+    }
+
+    public void fillTable() {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         xColumn.setCellValueFactory(studyGroup -> new SimpleIntegerProperty((studyGroup.getValue().getCoordinates().getX())).asObject());
@@ -94,12 +126,7 @@ public class MainStageController implements Initializable {
         eyeColorColumn.setCellValueFactory(studyGroup -> new SimpleStringProperty((studyGroup.getValue().getGroupAdmin().getEyeColor().toString())));
         hairColorColumn.setCellValueFactory(studyGroup -> new SimpleStringProperty((studyGroup.getValue().getGroupAdmin().getHairColor().toString())));
         nationalityColumn.setCellValueFactory(studyGroup -> new SimpleStringProperty((studyGroup.getValue().getGroupAdmin().getNationality().toString())));
-        fillTable();
-        visual();
-        updateTable();
-    }
 
-    public void fillTable() {
         tableView.setItems(observableList);
     }
 
@@ -203,6 +230,8 @@ public class MainStageController implements Initializable {
 
     public void setCommandReceiver(CommandReceiver commandReceiver) {
         this.commandReceiver = commandReceiver;
+        commandNames.clear();
+        commandNames.addAll(commandReceiver.getCommandsName());
         hiText.setText("Hi, " + commandReceiver.getLogin());
     }
 
@@ -232,5 +261,9 @@ public class MainStageController implements Initializable {
         tablePane.setVisible(false);
         executeCommand.setVisible(false);
         aboutFagots.setVisible(true);
+    }
+
+    public void commandProcessing(ActionEvent actionEvent) {
+
     }
 }
