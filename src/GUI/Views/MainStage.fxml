@@ -8,10 +8,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="1198.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.MainStageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="1198.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.MainStageController">
    <children>
-      <Pane prefHeight="75.0" prefWidth="120.0" style="-fx-background-color: #e57f31#e57f31;">
+      <Pane prefHeight="75.0" prefWidth="120.0" style="-fx-background-color: #e57f31#e57f31; " AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Text layoutX="1.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Study" wrappingWidth="90.24800109863281">
                <font>
@@ -35,7 +36,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane layoutX="-1.0" layoutY="75.0" prefHeight="420.0" prefWidth="120.0" style="-fx-background-color: #293541#293541;">
+      <Pane prefHeight="420.0" prefWidth="120.0" style="-fx-background-color: #293541#293541;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.topAnchor="75.0">
          <children>
             <Button fx:id="toTableBtn" layoutY="1.0" mnemonicParsing="false" onAction="#showTable" prefHeight="55.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="К таблице" textFill="WHITE">
                <font>
@@ -59,7 +60,7 @@
             </Button>
          </children>
       </Pane>
-      <Pane layoutX="119.0" prefHeight="75.0" prefWidth="1078.0" style="-fx-background-color: lightblue;">
+      <Pane prefHeight="75.0" style="-fx-background-color: lightblue;" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Text fx:id="hiText" fill="#3f96cd" layoutX="71.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hi, USERLOGIN" wrappingWidth="337.2480010986328">
                <font>
@@ -73,11 +74,11 @@
             </Text>
          </children>
       </Pane>
-      <Pane layoutX="119.0" layoutY="75.0" prefHeight="420.0" prefWidth="1078.0" style="-fx-background-color: gainsboro;">
+      <Pane style="-fx-background-color: gainsboro;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="119.0" AnchorPane.topAnchor="75.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Pane fx:id="groupMap" layoutX="-2.0" prefHeight="420.0" prefWidth="1078.0" visible="false" />
-            <Pane fx:id="tablePane" layoutX="-2.0" prefHeight="420.0" prefWidth="1078.0" visible="true" >
-               <TableView fx:id="tableView" layoutY="25.0" prefHeight="391.0" prefWidth="1078.0" style="-fx-background-radius: 1em; -fx-background-color: gainsboro gainsboro;">
+            <Pane fx:id="groupMap" visible="false" />
+            <Pane fx:id="tablePane" >
+               <TableView fx:id="tableView" layoutY="25.0" style="-fx-background-radius: 1em; -fx-background-color: gainsboro gainsboro;">
                  <columns>
                    <TableColumn fx:id="idColumn" prefWidth="38.0" text="id" />
                    <TableColumn fx:id="nameColumn" prefWidth="98.66665649414062" text="name" />
@@ -108,8 +109,8 @@
                <ChoiceBox fx:id="hairColorFilter" layoutX="907.0" layoutY="1.0" prefHeight="25.0" prefWidth="83.0" />
                <ChoiceBox fx:id="nationalityFilter" layoutX="989.0" layoutY="1.0" prefHeight="25.0" prefWidth="90.0" />
             </Pane>
-            <Pane fx:id="executeCommand" layoutY="-2.0" prefHeight="420.0" prefWidth="1078.0" visible="false" />
-            <Pane fx:id="aboutFagots" layoutX="-1.0" prefHeight="420.0" prefWidth="1078.0" visible="false">
+            <Pane fx:id="executeCommand" visible="false" />
+            <Pane fx:id="aboutFagots" visible="false">
                <Text fontSmoothingType="LCD" layoutX="14.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Примите лабу пожалуйста">
                   <font>
                      <Font size="47.0" />
@@ -119,4 +120,4 @@
          </children>
       </Pane>
    </children>
-</Pane>
+</AnchorPane>
