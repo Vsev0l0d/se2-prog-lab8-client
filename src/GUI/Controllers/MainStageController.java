@@ -90,13 +90,13 @@ public class MainStageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // для тестов, пока падает буфер
-        ArrayList<Integer> objects = new ArrayList<>();
-        objects.add(0);
-        idElementsAllUsers.add(objects);
-        observableList.add(new StudyGroup("a", new Coordinates(100,11), 16, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
-        observableList.add(new StudyGroup("a", new Coordinates(11,100), 100, FormOfEducation.FULL_TIME_EDUCATION, Semester.FOURTH, new Person("11", 11, Color.RED, Color.BLACK, Country.CHINA)));
-        observableList.add(new StudyGroup("a", new Coordinates(11,100), 30, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.USA)));
-        observableList.add(new StudyGroup("a", new Coordinates(300,51), 1, null, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
+//        ArrayList<Integer> objects = new ArrayList<>();
+//        objects.add(0);
+//        idElementsAllUsers.add(objects);
+//        observableList.add(new StudyGroup("a", new Coordinates(100,11), 16, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
+//        observableList.add(new StudyGroup("a", new Coordinates(11,100), 100, FormOfEducation.FULL_TIME_EDUCATION, Semester.FOURTH, new Person("11", 11, Color.RED, Color.BLACK, Country.CHINA)));
+//        observableList.add(new StudyGroup("a", new Coordinates(11,100), 30, FormOfEducation.DISTANCE_EDUCATION, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.USA)));
+//        observableList.add(new StudyGroup("a", new Coordinates(300,51), 1, null, Semester.FIFTH, new Person("11", 11, Color.BLUE, Color.BLACK, Country.CHINA)));
 
         formOfEducationFilter.setItems(FXCollections.observableArrayList(Stream.concat(Stream.of(FormOfEducation.values()).map(Enum::toString), Stream.of("null", "")).collect(Collectors.toList())));
         semesterEnumFilter.setItems(FXCollections.observableArrayList((Stream.concat(Stream.of(Semester.values()).map(Enum::toString), Stream.of("")).collect(Collectors.toList()))));

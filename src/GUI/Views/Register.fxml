@@ -48,7 +48,7 @@
    </Pane>
    <Pane style="-fx-background-color: #293541#293541;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
          AnchorPane.topAnchor="82.0" AnchorPane.rightAnchor="0.0">
-      <VBox spacing="15">
+      <VBox spacing="15" layoutX="30.0" layoutY="54.0">
          <TextField fx:id="newLoginField" prefHeight="27.0" prefWidth="293.0"
                     promptText="Придумайте логин" style="-fx-background-radius: 1em;"/>
          <PasswordField fx:id="newPasswordField" prefHeight="27.0" prefWidth="293.0"

@@ -57,7 +57,7 @@ public class RegistrationController {
             root = FXMLLoader.load(getClass().getClassLoader().getResource("GUI/Views/HiPanel.fxml"));
             Stage stage = new Stage();
             stage.setTitle("StudyGroupProject. Авторизация.");
-            stage.setScene(new Scene(root, 350, 405));
+            stage.setScene(new Scene(root, 350, 400));
             stage.show();
             ((Node)(event.getSource())).getScene().getWindow().hide();
         }

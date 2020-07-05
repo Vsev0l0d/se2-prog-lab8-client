@@ -25,24 +25,24 @@ public class Main extends Application {
         CommandReceiver commandReceiver = injector.getInstance(CommandReceiver.class);
 
 //        для тестов, пока падает буфер
-        FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/MainStage.fxml"));
-        Parent sceneFXML = loader.load();
-        MainStageController ctrl = (loader.getController());
-
-        ctrl.setCommandReceiver(commandReceiver);
-        Stage stage = new Stage();
-        stage.setTitle("StudyGroupProject. MainStage.");
-        stage.setScene(new Scene(sceneFXML, 1198, 494));
-        stage.show();
-
-//        FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/HiPanel.fxml"));
-//        Parent root = loader.load();
-//        HiPanelController ctrl = (loader.getController());
-//        ctrl.setCommandReceiver(commandReceiver);
-//        primaryStage.setTitle("StudyGroupProject. Авторизация.");
-//        primaryStage.setScene(new Scene(root, 350, 405));
-//        primaryStage.show();
+//        FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/MainStage.fxml"));
+//        Parent sceneFXML = loader.load();
+//        MainStageController ctrl = (loader.getController());
 //
+//        ctrl.setCommandReceiver(commandReceiver);
+//        Stage stage = new Stage();
+//        stage.setTitle("StudyGroupProject. MainStage.");
+//        stage.setScene(new Scene(sceneFXML, 1198, 494));
+//        stage.show();
+
+        FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/HiPanel.fxml"));
+        Parent root = loader.load();
+        HiPanelController ctrl = (loader.getController());
+        ctrl.setCommandReceiver(commandReceiver);
+        primaryStage.setTitle("StudyGroupProject. Авторизация.");
+        primaryStage.setScene(new Scene(root, 350, 350));
+        primaryStage.show();
+
 //        URL music = getClass().getResource("GUI/Music/HiMark.mp3");
 //        Media media = new Media(music.toString());
 //        MediaPlayer mediaPlayer = new MediaPlayer(media);
