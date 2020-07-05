@@ -140,7 +140,9 @@ public class MainStageController implements Initializable {
                         StudyGroup selectedStudyGgroup = row.getItem();
                         showInfoElement(selectedStudyGgroup);
                     } else {
-                        // add
+                        tablePane.setVisible(false);
+                        executeCommand.setVisible(true);
+                        commandChoiseComboBox.setValue("add");
                     }
                 }
             });
@@ -369,6 +371,7 @@ public class MainStageController implements Initializable {
             alert.close();
         else if (option.get() == edit) {
             groupMap.setVisible(false);
+            tablePane.setVisible(false);
             executeCommand.setVisible(true);
 
             commandChoiseComboBox.setValue("update");
