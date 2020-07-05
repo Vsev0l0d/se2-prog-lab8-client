@@ -13,13 +13,17 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -271,13 +275,18 @@ public class MainStageController implements Initializable {
     private void commandProcessing(ActionEvent actionEvent) {
         String commandName = commandChoiseComboBox.getSelectionModel().getSelectedItem();
 
-        // обработать execute_script
         if (commandName.matches("add|remove_lower|remove_greater")) { aboutGroupTitiledPane.setDisable(false); aboutGroupAdminTitledPane.setDisable(false); idArgumentField.setDisable(true); }
         else if (commandName.equals("count_by_group_admin")) { aboutGroupTitiledPane.setDisable(true); aboutGroupAdminTitledPane.setDisable(false); idArgumentField.setDisable(true); }
         else if (commandName.equals("update")){ aboutGroupTitiledPane.setDisable(false); aboutGroupAdminTitledPane.setDisable(false); idArgumentField.setDisable(false);}
         else if (commandName.matches("remove_by_id")){ aboutGroupTitiledPane.setDisable(true); aboutGroupAdminTitledPane.setDisable(true); idArgumentField.setDisable(false);}
         else { aboutGroupTitiledPane.setDisable(true); aboutGroupAdminTitledPane.setDisable(true); idArgumentField.setDisable(true);}
 
+        if (commandName.equals("execute_script")){
+            String path = selectScriptFile();
+            if (path != null) {
+                // отправить execute_script
+            }
+        }
         clearTitlePanes();
     }
 
@@ -294,6 +303,17 @@ public class MainStageController implements Initializable {
         adminEyeColorComboBox.getSelectionModel().select(-1);
         adminHairColorComboBox.getSelectionModel().select(-1);
         adminNationalityComboBox.getSelectionModel().select(-1);
+    }
+
+    private String selectScriptFile(){
+        FileChooser fileChooser = new FileChooser();
+        Stage stage = new Stage();
+        stage.setTitle("SelectScriptFile");
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            return file.getPath();
+        }
+        return null;
     }
 
     private void setListenersTextField(){
