@@ -28,7 +28,6 @@ public class CommandReceiverImp implements CommandReceiver {
     private final CommandInvoker commandInvoker;
     private final Sender sender;
     private final SocketChannel socketChannel;
-    private final ElementCreator elementCreator;
     private final Receiver receiver;
     private final Register register;
     private final Selector selector;
@@ -37,12 +36,11 @@ public class CommandReceiverImp implements CommandReceiver {
     private String password;
 
     @Inject
-    public CommandReceiverImp(CommandInvoker commandInvoker, Session session, Sender sender, ElementCreator elementCreator,
-                              Receiver receiver, Register register, HashEncrypter hashEncrypter) throws IOException {
+    public CommandReceiverImp(CommandInvoker commandInvoker, Session session, Sender sender, Receiver receiver,
+                              Register register, HashEncrypter hashEncrypter) throws IOException {
         this.commandInvoker = commandInvoker;
         socketChannel = session.getSocketChannel();
         this.sender = sender;
-        this.elementCreator = elementCreator;
         this.receiver = receiver;
         this.register = register;
         this.hashEncrypter = hashEncrypter;
@@ -89,8 +87,8 @@ public class CommandReceiverImp implements CommandReceiver {
             System.out.println("Вы не авторизированы");
             return;
         }
-        requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("add"),
-                elementCreator.createStudyGroup(), login, password));
+//        requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("add"),
+//                elementCreator.createStudyGroup(), login, password));
     }
 
     @Override
@@ -99,8 +97,8 @@ public class CommandReceiverImp implements CommandReceiver {
             System.out.println("Вы не авторизированы");
             return;
         }
-        requestHandler(new SerializedCombinedCommand(commandInvoker.getCommandMap().get("update"),
-                elementCreator.createStudyGroup(), ID, login, password));
+//        requestHandler(new SerializedCombinedCommand(commandInvoker.getCommandMap().get("update"),
+//                elementCreator.createStudyGroup(), ID, login, password));
     }
 
     @Override
@@ -143,8 +141,8 @@ public class CommandReceiverImp implements CommandReceiver {
             System.out.println("Вы не авторизированы");
             return;
         }
-        requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("remove_greater"),
-                elementCreator.createStudyGroup(), login, password));
+//        requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("remove_greater"),
+//                elementCreator.createStudyGroup(), login, password));
     }
 
     @Override
@@ -153,8 +151,8 @@ public class CommandReceiverImp implements CommandReceiver {
             System.out.println("Вы не авторизированы");
             return;
         }
-        requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("remove_lower"),
-                elementCreator.createStudyGroup(), login, password));
+//        requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("remove_lower"),
+//                elementCreator.createStudyGroup(), login, password));
     }
 
     @Override
@@ -181,8 +179,8 @@ public class CommandReceiverImp implements CommandReceiver {
             System.out.println("Вы не авторизированы");
             return;
         }
-        requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("count_by_group_admin"),
-                elementCreator.createPerson(), login, password));
+//        requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("count_by_group_admin"),
+//                elementCreator.createPerson(), login, password));
     }
 
     @Override
@@ -210,27 +208,27 @@ public class CommandReceiverImp implements CommandReceiver {
                             parameters.add(line);
                         } else { System.out.println("Не хватает параметров для создания объекта."); break; }
                     }
-                    StudyGroup studyGroup = elementCreator.createScriptStudyGroup(parameters);
-                    if (studyGroup != null) {
-                        switch (command.split(" ")[0]) {
-                            case "add":
-                                requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("add"),
-                                        studyGroup, login, password));
-                                break;
-                            case "update":
-                                requestHandler(new SerializedCombinedCommand(commandInvoker.getCommandMap().get("update"),
-                                        elementCreator.createStudyGroup(), command.split(" ")[1], login, password));
-                                break;
-                            case "remove_greater":
-                                requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("remove_greater"),
-                                        studyGroup, login, password));
-                                break;
-                            case "remove_lower":
-                                requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("remove_lower"),
-                                        studyGroup, login, password));
-                                break;
-                        }
-                    }
+//                    StudyGroup studyGroup = elementCreator.createScriptStudyGroup(parameters);
+//                    if (studyGroup != null) {
+//                        switch (command.split(" ")[0]) {
+//                            case "add":
+//                                requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("add"),
+//                                        studyGroup, login, password));
+//                                break;
+//                            case "update":
+//                                requestHandler(new SerializedCombinedCommand(commandInvoker.getCommandMap().get("update"),
+//                                        elementCreator.createStudyGroup(), command.split(" ")[1], login, password));
+//                                break;
+//                            case "remove_greater":
+//                                requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("remove_greater"),
+//                                        studyGroup, login, password));
+//                                break;
+//                            case "remove_lower":
+//                                requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("remove_lower"),
+//                                        studyGroup, login, password));
+//                                break;
+//                        }
+//                    }
                 } else if(line.split(" ")[0].equals("count_by_group_admin")) {
                     parameters.clear();
                     for (int i = 0; i < 5; i++) {
@@ -239,18 +237,18 @@ public class CommandReceiverImp implements CommandReceiver {
                             parameters.add(line);
                         } else { System.out.println("Не хватает параметров для создания объекта."); break; }
                     }
-                    Person person = elementCreator.createScriptPerson(parameters);
-                    if (person != null) {
-                        requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("count_by_group_admin"),
-                                person, login, password));
-                    }
+//                    Person person = elementCreator.createScriptPerson(parameters);
+//                    if (person != null) {
+//                        requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("count_by_group_admin"),
+//                                person, login, password));
+//                    }
                 } else if (line.split(" ")[0].equals("execute_script")
                         && line.split(" ")[1].equals(((ExecuteScript)commandInvoker.getCommandMap().get("execute_script")).getPath())) {
                     System.out.println("Пресечена попытка рекурсивного вызова скрипта.");
                 }
                 else { commandInvoker.executeCommand(line.split(" ")); }
             }
-        } catch (IOException | InterruptedException | ClassNotFoundException e) {
+        } catch (IOException e) { //| InterruptedException | ClassNotFoundException e) {
             System.out.println("Ошибка! " + e.getMessage());
         }
     }

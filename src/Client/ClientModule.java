@@ -1,17 +1,10 @@
 package Client;
 
-import Client.DecryptingImp;
-import Client.ReceiverImp;
-import Client.SenderImp;
-import Client.SessionImp;
 import Commands.Command;
 import Commands.CommandInvokerImp;
 import Commands.CommandReceiverImp;
 import Commands.ConcreteCommands.*;
-import Commands.Utils.Creaters.ElementCreatorImp;
 import Commands.Utils.HashEncrypterImp;
-import Commands.Utils.Readers.EnumReaders.*;
-import Commands.Utils.Readers.PrimitiveAndReferenceReaders.*;
 import Interfaces.*;
 import com.google.inject.AbstractModule;
 import com.google.inject.multibindings.Multibinder;
@@ -24,21 +17,12 @@ public class ClientModule extends AbstractModule {
     @Override
     protected void configure() {
         bind(CommandInvoker.class).to(CommandInvokerImp.class);
-        bind(ElementCreator.class).to(ElementCreatorImp.class);
         bind(Sender.class).to(SenderImp.class);
         bind(Session.class).to(SessionImp.class);
         bind(CommandReceiver.class).to(CommandReceiverImp.class);
         bind(Receiver.class).to(ReceiverImp.class);
         bind(Decrypting.class).to(DecryptingImp.class);
         bind(HashEncrypter.class).to(HashEncrypterImp.class);
-        bind(PrimitiveFloatReader.class).to(PrimitiveFloatReaderImp.class);
-        bind(PrimitiveIntReader.class).to(PrimitiveIntReaderImp.class);
-        bind(RefIntReader.class).to(RefIntReaderImp.class);
-        bind(StringReader.class).to(StringReaderImp.class);
-        bind(ColorReader.class).to(ColorReaderImp.class);
-        bind(CountryReader.class).to(CountryReaderImp.class);
-        bind(FormOfEducationReader.class).to(FormOfEducationReaderImp.class);
-        bind(SemesterReader.class).to(SemesterReaderImp.class);
 
 
         Multibinder<Command> commandBinder = Multibinder.newSetBinder(binder(), Command.class);
