@@ -108,12 +108,11 @@ public class MainStageController implements Initializable {
         commandChoiseComboBox.setItems(commandNames);
 
         fillTable();
-        visual();
         updateTable();
         setListenersTextField();
     }
 
-    public void fillTable() {
+    private void fillTable() {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         xColumn.setCellValueFactory(studyGroup -> new SimpleIntegerProperty((studyGroup.getValue().getCoordinates().getX())).asObject());
@@ -129,9 +128,23 @@ public class MainStageController implements Initializable {
         nationalityColumn.setCellValueFactory(studyGroup -> new SimpleStringProperty((studyGroup.getValue().getGroupAdmin().getNationality().toString())));
 
         tableView.setItems(observableList);
+        tableView.setRowFactory(tv -> {
+            TableRow<StudyGroup> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2) {
+                    if ((!row.isEmpty())) {
+                        StudyGroup selectedStudyGgroup = row.getItem();
+                        showInfoElement(selectedStudyGgroup);
+                    } else {
+                        // add
+                    }
+                }
+            });
+            return row;
+        });
     }
 
-    public void updateTable() {
+    private void updateTable() {
         FilteredList<StudyGroup> filtered = new FilteredList<>(observableList, t -> true);
         idFilter.textProperty().addListener((observable, oldValue, newValue) -> filtered.setPredicate(studyGroup -> Integer.toString(studyGroup.getId()).equals(newValue)));
         nameFilter.textProperty().addListener((observable, oldValue, newValue) -> filtered.setPredicate(studyGroup -> studyGroup.getName().toLowerCase().contains(newValue.toLowerCase())));
@@ -155,7 +168,7 @@ public class MainStageController implements Initializable {
         tableView.setItems(sorted);
     }
 
-    public void visual() {
+    private void visual() {
         ArrayList<Circle> circles = new ArrayList<>();
         HashMap<Circle, StudyGroup> circleStudyGroupHashMap = new HashMap<>();
         HashMap<javafx.scene.paint.Color, List<Integer>> colorListHashMap = new HashMap<>();
@@ -185,39 +198,7 @@ public class MainStageController implements Initializable {
                     if (t.getSource() instanceof Circle) {
                         Circle selectedCircle = ((Circle) (t.getSource()));
                         StudyGroup selectedStudyGroup = circleStudyGroupHashMap.get(selectedCircle);
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setHeaderText(null);
-                        alert.setTitle("info");
-                        alert.setContentText(selectedStudyGroup.toString());
-                        ButtonType close = new ButtonType("close");
-                        ButtonType edit = new ButtonType("update");
-                        ButtonType delete = new ButtonType("remove");
-                        alert.getButtonTypes().clear();
-                        alert.getButtonTypes().addAll(delete, edit, close);
-                        Optional<ButtonType> option = alert.showAndWait();
-                        if (option.get() == close)
-                            alert.close();
-                        else if (option.get() == edit) {
-                            groupMap.setVisible(false);
-                            executeCommand.setVisible(true);
-
-                            commandChoiseComboBox.setValue("update");
-                            idArgumentField.setDisable(true);
-                            idArgumentField.setText(selectedStudyGroup.getId().toString());
-                            groupNameField.setText(selectedStudyGroup.getName());
-                            xTextField.setText(selectedStudyGroup.getCoordinates().getX().toString());
-                            yTextField.setText(Float.toString(selectedStudyGroup.getCoordinates().getY()));
-                            studentsCountField.setText(selectedStudyGroup.getStudentsCount().toString());
-                            formOfEducationComboBox.setValue(selectedStudyGroup.getFormOfEducation() == null ? "null" : selectedStudyGroup.getFormOfEducation().toString());
-                            semesterComboBox.setValue(selectedStudyGroup.getSemesterEnum().toString());
-                            adminGroupField.setText(selectedStudyGroup.getGroupAdmin().getName());
-                            adminHeightField.setText(Integer.toString(selectedStudyGroup.getGroupAdmin().getHeight()));
-                            adminEyeColorComboBox.setValue(selectedStudyGroup.getGroupAdmin().getEyeColor().toString());
-                            adminHairColorComboBox.setValue(selectedStudyGroup.getGroupAdmin().getHairColor().toString());
-                            adminNationalityComboBox.setValue(selectedStudyGroup.getGroupAdmin().getNationality().toString());
-                        } else if (option.get() == delete) {
-                            // removeById
-                        }
+                        showInfoElement(selectedStudyGroup);
                     }
                 }
             });
@@ -253,35 +234,41 @@ public class MainStageController implements Initializable {
         hiText.setText("Hi, " + commandReceiver.getLogin());
     }
 
-    public void showTable(ActionEvent actionEvent) {
+    @FXML
+    private void showTable(ActionEvent actionEvent) {
         groupMap.setVisible(false);
         executeCommand.setVisible(false);
         aboutFagots.setVisible(false);
         tablePane.setVisible(true);
     }
 
-    public void showGroupMap(ActionEvent actionEvent) {
+    @FXML
+    private void showGroupMap(ActionEvent actionEvent) {
+        visual();
         executeCommand.setVisible(false);
         aboutFagots.setVisible(false);
         tablePane.setVisible(false);
         groupMap.setVisible(true);
     }
 
-    public void showExecuteCommand(ActionEvent actionEvent) {
+    @FXML
+    private void showExecuteCommand(ActionEvent actionEvent) {
         groupMap.setVisible(false);
         aboutFagots.setVisible(false);
         tablePane.setVisible(false);
         executeCommand.setVisible(true);
     }
 
-    public void showAboutFagots(ActionEvent actionEvent) {
+    @FXML
+    private void showAboutFagots(ActionEvent actionEvent) {
         groupMap.setVisible(false);
         tablePane.setVisible(false);
         executeCommand.setVisible(false);
         aboutFagots.setVisible(true);
     }
 
-    public void commandProcessing(ActionEvent actionEvent) {
+    @FXML
+    private void commandProcessing(ActionEvent actionEvent) {
         String commandName = commandChoiseComboBox.getSelectionModel().getSelectedItem();
 
         // обработать execute_script
@@ -294,7 +281,7 @@ public class MainStageController implements Initializable {
         clearTitlePanes();
     }
 
-    void clearTitlePanes() {
+    private void clearTitlePanes() {
         idArgumentField.clear();
         adminGroupField.clear();
         adminHeightField.clear();
@@ -319,7 +306,8 @@ public class MainStageController implements Initializable {
         yTextField.textProperty().addListener((observable, oldValue, newValue) -> dataValidation());
     }
 
-    public void dataValidation(){
+    @FXML
+    private void dataValidation(){
         try {
             executeCommandBtn.setDisable(true);
 
@@ -343,5 +331,41 @@ public class MainStageController implements Initializable {
 
             if (isAdminCorrect && isIdCorrect && isGroupCorrect) executeCommandBtn.setDisable(false);
         } catch (Exception ignored) {}
+    }
+
+    private void showInfoElement(StudyGroup studyGroup){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("info");
+        alert.setContentText(studyGroup.toString());
+        ButtonType close = new ButtonType("close");
+        ButtonType edit = new ButtonType("update");
+        ButtonType delete = new ButtonType("remove");
+        alert.getButtonTypes().clear();
+        alert.getButtonTypes().addAll(delete, edit, close);
+        Optional<ButtonType> option = alert.showAndWait();
+        if (option.get() == close)
+            alert.close();
+        else if (option.get() == edit) {
+            groupMap.setVisible(false);
+            executeCommand.setVisible(true);
+
+            commandChoiseComboBox.setValue("update");
+            idArgumentField.setDisable(true);
+            idArgumentField.setText(studyGroup.getId().toString());
+            groupNameField.setText(studyGroup.getName());
+            xTextField.setText(studyGroup.getCoordinates().getX().toString());
+            yTextField.setText(Float.toString(studyGroup.getCoordinates().getY()));
+            studentsCountField.setText(studyGroup.getStudentsCount().toString());
+            formOfEducationComboBox.setValue(studyGroup.getFormOfEducation() == null ? "null" : studyGroup.getFormOfEducation().toString());
+            semesterComboBox.setValue(studyGroup.getSemesterEnum().toString());
+            adminGroupField.setText(studyGroup.getGroupAdmin().getName());
+            adminHeightField.setText(Integer.toString(studyGroup.getGroupAdmin().getHeight()));
+            adminEyeColorComboBox.setValue(studyGroup.getGroupAdmin().getEyeColor().toString());
+            adminHairColorComboBox.setValue(studyGroup.getGroupAdmin().getHairColor().toString());
+            adminNationalityComboBox.setValue(studyGroup.getGroupAdmin().getNationality().toString());
+        } else if (option.get() == delete) {
+            // removeById
+        }
     }
 }
