@@ -307,6 +307,7 @@ public class MainStageController implements Initializable {
 
     private String selectScriptFile(){
         FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("txt", "*.txt"));
         Stage stage = new Stage();
         stage.setTitle("SelectScriptFile");
         File file = fileChooser.showOpenDialog(stage);
