@@ -132,7 +132,7 @@
             </VBox>
          </TitledPane>
          <ComboBox fx:id="commandChoiseComboBox" layoutX="50.0" layoutY="18.0" onAction="#commandProcessing" prefHeight="27.0" prefWidth="691.0" promptText="Выберите команду" />
-         <Button fx:id="executeCommandBtn" disable="true" layoutX="50.0" layoutY="350.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="692.0" text="Выполнить" />
+         <Button fx:id="executeCommandBtn" onAction="#sendCommand" disable="true" layoutX="50.0" layoutY="350.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="692.0" text="Выполнить" />
          <TextField fx:id="idArgumentField" disable="true" layoutX="50.0" layoutY="65.0" prefHeight="27.0" prefWidth="688.0" promptText="Введите id элемента (целое положительное число)" />
       </Pane>
       <Pane fx:id="aboutFagots" visible="false">

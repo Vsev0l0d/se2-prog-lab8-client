@@ -389,4 +389,31 @@ public class MainStageController implements Initializable {
             // removeById
         }
     }
+
+    @FXML
+    private void sendCommand(ActionEvent actionEvent) {
+        Integer id;
+        Person adminGroup = null;
+        StudyGroup studyGroup;
+
+        if (!idArgumentField.isDisable()) id = Integer.parseInt(idArgumentField.getText());
+
+        if (!aboutGroupAdminTitledPane.isDisable())
+            adminGroup = new Person(adminGroupField.getText(), Integer.parseInt(adminHeightField.getText()),
+                    Color.valueOf(adminEyeColorComboBox.getSelectionModel().getSelectedItem()),
+                    Color.valueOf(adminHairColorComboBox.getSelectionModel().getSelectedItem()),
+                    Country.valueOf(adminNationalityComboBox.getSelectionModel().getSelectedItem()));
+
+        if (!aboutGroupTitiledPane.isDisable()) {
+            FormOfEducation formOfEducation = null;
+            if (!formOfEducationComboBox.getSelectionModel().getSelectedItem().equals("null"))
+                formOfEducation = FormOfEducation.valueOf(formOfEducationComboBox.getSelectionModel().getSelectedItem());
+            studyGroup = new StudyGroup(groupNameField.getText(),
+                    new Coordinates(Integer.parseInt(xTextField.getText()), Float.parseFloat(yTextField.getText())),
+                    Integer.parseInt(studentsCountField.getText()), formOfEducation,
+                    Semester.valueOf(semesterComboBox.getSelectionModel().getSelectedItem()), adminGroup);
+        }
+
+        // отправка команд с необходимыми аргументами
+    }
 }
