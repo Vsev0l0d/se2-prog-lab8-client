@@ -276,14 +276,16 @@ public class MainStageController implements Initializable {
     @FXML
     private void commandProcessing(ActionEvent actionEvent) {
         String commandName = commandChoiseComboBox.getSelectionModel().getSelectedItem();
+        executeCommandBtn.setDisable(true);
 
         if (commandName.matches("add|remove_lower|remove_greater")) { aboutGroupTitiledPane.setDisable(false); aboutGroupAdminTitledPane.setDisable(false); idArgumentField.setDisable(true); }
         else if (commandName.equals("count_by_group_admin")) { aboutGroupTitiledPane.setDisable(true); aboutGroupAdminTitledPane.setDisable(false); idArgumentField.setDisable(true); }
         else if (commandName.equals("update")){ aboutGroupTitiledPane.setDisable(false); aboutGroupAdminTitledPane.setDisable(false); idArgumentField.setDisable(false);}
         else if (commandName.matches("remove_by_id")){ aboutGroupTitiledPane.setDisable(true); aboutGroupAdminTitledPane.setDisable(true); idArgumentField.setDisable(false);}
-        else { aboutGroupTitiledPane.setDisable(true); aboutGroupAdminTitledPane.setDisable(true); idArgumentField.setDisable(true);}
+        else { aboutGroupTitiledPane.setDisable(true); aboutGroupAdminTitledPane.setDisable(true); idArgumentField.setDisable(true); executeCommandBtn.setDisable(false);}
 
         if (commandName.equals("execute_script")){
+            executeCommandBtn.setDisable(true);
             String path = selectScriptFile();
             if (path != null) {
                 // отправить execute_script
