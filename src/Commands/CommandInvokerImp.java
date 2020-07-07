@@ -32,6 +32,7 @@ public class CommandInvokerImp implements CommandInvoker {
             } else { System.out.println("Вы не ввели команду."); }
         } catch (NullPointerException ex) {
             System.out.println("Не существует команды " + commandName[0] + ". Для справки используйте – help");
+            ex.printStackTrace();
         } catch (IllegalStateException | IOException | ClassNotFoundException | InterruptedException ex) {
             if (ex.getMessage().equals("Connection reset by peer")) {
                 System.out.println("Там это... Сервер помер, но ты приходи в следующий раз и обязательно сможешь пошалить с коллекцией");

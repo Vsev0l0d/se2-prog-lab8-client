@@ -1,12 +1,15 @@
 package Interfaces;
 
+import BasicClasses.Person;
+import BasicClasses.StudyGroup;
+
 import java.io.IOException;
 import java.util.List;
 
 public interface CommandReceiver {
     void setAuthorizationData(String login, String password);
 
-    void help();
+    void help() throws IOException;
 
     void info() throws IOException, ClassNotFoundException, InterruptedException;
 
@@ -45,4 +48,10 @@ public interface CommandReceiver {
     String getLogin();
 
     List<String> getCommandsName();
+
+    CommandInvoker getCommandInvoker();
+
+    void setStudyGroup(StudyGroup studyGroup);
+
+    void setGroupAdmin(Person groupAdmin);
 }

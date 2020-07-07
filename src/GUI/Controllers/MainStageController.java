@@ -24,6 +24,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -396,10 +397,10 @@ public class MainStageController implements Initializable {
     }
 
     @FXML
-    private void sendCommand(ActionEvent actionEvent) {
+    private void sendCommand(ActionEvent actionEvent) throws InterruptedException, IOException, ClassNotFoundException {
         Integer id;
         Person adminGroup = null;
-        StudyGroup studyGroup;
+        StudyGroup studyGroup = null;
 
         if (!idArgumentField.isDisable()) id = Integer.parseInt(idArgumentField.getText());
 
@@ -419,6 +420,33 @@ public class MainStageController implements Initializable {
                     Semester.valueOf(semesterComboBox.getSelectionModel().getSelectedItem()), adminGroup);
         }
 
-        // отправка команд с необходимыми аргументами
+        String command = commandChoiseComboBox.getSelectionModel().getSelectedItem().toString();
+
+        if (command.matches("add|remove_lower|remove_greater")) {
+            commandReceiver.setStudyGroup(studyGroup);
+            commandReceiver.getCommandInvoker().executeCommand(command.split(" "));
+        } else if (command.equals("count_by_group_admin")) {
+            commandReceiver.setGroupAdmin(adminGroup);
+            commandReceiver.countByGroupAdmin();
+        } else if (command.equals("update")) {
+            commandReceiver.setStudyGroup(studyGroup);
+            commandReceiver.update(idArgumentField.getText());
+        } else if (command.matches("remove_by_id")) {
+            commandReceiver.removeById(idArgumentField.getText());
+        } else if (command.equals("execute_script")) {
+            showAlert("Мы не сделали эту команду, извините...");
+        } else {
+            commandReceiver.getCommandInvoker().executeCommand(command.split(" "));
+        }
+    }
+
+    public void showInfo(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Информация!");
+
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+
+        alert.showAndWait();
     }
 }

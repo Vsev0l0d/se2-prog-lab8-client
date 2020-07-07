@@ -2,14 +2,18 @@ package Commands;
 
 import BasicClasses.Person;
 import BasicClasses.StudyGroup;
+import Client.DecryptingImp;
 import Commands.ConcreteCommands.*;
 import Commands.SerializedCommands.SerializedArgumentCommand;
 import Commands.SerializedCommands.SerializedCombinedCommand;
 import Commands.SerializedCommands.SerializedMessage;
 import Commands.SerializedCommands.SerializedObjectCommand;
+import GUI.Controllers.MainStageController;
 import Interfaces.*;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 
 import java.io.*;
 import java.net.PortUnreachableException;
@@ -34,6 +38,8 @@ public class CommandReceiverImp implements CommandReceiver {
     private final HashEncrypter hashEncrypter;
     private String login;
     private String password;
+    private StudyGroup studyGroup;  // КАК ЖЕ СТЫДНО ЗА КОСТЫЛИ
+    private Person groupAdmin;
 
     @Inject
     public CommandReceiverImp(CommandInvoker commandInvoker, Session session, Sender sender, Receiver receiver,
@@ -50,6 +56,7 @@ public class CommandReceiverImp implements CommandReceiver {
     @Override
     public void tryAuth(String login, String password) throws ClassNotFoundException, InterruptedException {
         requestHandler(new SerializedAuthOrReg(login, hashEncrypter.encryptString(password), "auth"));
+        setAuthorizationData(login, hashEncrypter.encryptString(password));
     }
 
     @Override
@@ -59,8 +66,13 @@ public class CommandReceiverImp implements CommandReceiver {
     }
 
     @Override
-    public void help() {
-        commandInvoker.getCommandMap().forEach((name, command) -> System.out.println(command.writeInfo()));
+    public void help() throws IOException {
+        StringBuilder sb = new StringBuilder();
+        FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/MainStage.fxml"));
+        Parent sceneFXML = loader.load();
+        MainStageController ctrl = (loader.getController());
+        commandInvoker.getCommandMap().forEach((name, command) -> sb.append(command.writeInfo()).append("\n"));
+        ctrl.showInfo(sb.toString());
     }
 
     @Override
@@ -87,8 +99,8 @@ public class CommandReceiverImp implements CommandReceiver {
             System.out.println("Вы не авторизированы");
             return;
         }
-//        requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("add"),
-//                elementCreator.createStudyGroup(), login, password));
+        requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("add"),
+                studyGroup, login, password));
     }
 
     @Override
@@ -97,8 +109,8 @@ public class CommandReceiverImp implements CommandReceiver {
             System.out.println("Вы не авторизированы");
             return;
         }
-//        requestHandler(new SerializedCombinedCommand(commandInvoker.getCommandMap().get("update"),
-//                elementCreator.createStudyGroup(), ID, login, password));
+        requestHandler(new SerializedCombinedCommand(commandInvoker.getCommandMap().get("update"),
+                studyGroup, ID, login, password));
     }
 
     @Override
@@ -141,8 +153,8 @@ public class CommandReceiverImp implements CommandReceiver {
             System.out.println("Вы не авторизированы");
             return;
         }
-//        requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("remove_greater"),
-//                elementCreator.createStudyGroup(), login, password));
+        requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("remove_greater"),
+                studyGroup, login, password));
     }
 
     @Override
@@ -151,8 +163,8 @@ public class CommandReceiverImp implements CommandReceiver {
             System.out.println("Вы не авторизированы");
             return;
         }
-//        requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("remove_lower"),
-//                elementCreator.createStudyGroup(), login, password));
+        requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("remove_lower"),
+                studyGroup, login, password));
     }
 
     @Override
@@ -295,5 +307,18 @@ public class CommandReceiverImp implements CommandReceiver {
     @Override
     public List<String> getCommandsName(){
         return commandInvoker.getCommandsName();
+    }
+
+    @Override
+    public CommandInvoker getCommandInvoker() {
+        return commandInvoker;
+    }
+
+    public void setStudyGroup(StudyGroup studyGroup) {
+        this.studyGroup = studyGroup;
+    }
+
+    public void setGroupAdmin(Person groupAdmin) {
+        this.groupAdmin = groupAdmin;
     }
 }

@@ -33,7 +33,10 @@ public class DecryptingImp implements Decrypting {
     public void decrypt(Object o) throws IOException {
         if (o instanceof SerializedMessage) {
             SerializedMessage serializedMessage = (SerializedMessage) o;
-            System.out.println(serializedMessage.getMessage());
+            FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/MainStage.fxml"));
+            Parent sceneFXML = loader.load();
+            MainStageController ctrl = (loader.getController());
+            ctrl.showInfo(serializedMessage.getMessage());
         }
         if (o instanceof SerializedResAuth) {
             SerializedResAuth serializedResAuth = (SerializedResAuth) o;
