@@ -48,7 +48,7 @@ public class DecryptingImp implements Decrypting {
                 ctrl.setCommandReceiver(commandReceiver);
                 if (serializedResAuth.getRes()) {
                     try {
-                        commandReceiver.getCollection();
+                        commandReceiver.getCollection("return_collection_init");
                     } catch (ClassNotFoundException | InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -70,17 +70,54 @@ public class DecryptingImp implements Decrypting {
             SerializedCollection serializedCollection = (SerializedCollection) o;
             LinkedList<StudyGroup> linkedList = serializedCollection.getLinkedList();
             List<List<Integer>> idElementsAllUsers = serializedCollection.getIdElementsAllUsers();
+            if (serializedCollection.getRequireType().equals("init")) {
 
-            FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/MainStage.fxml"));
-            Parent sceneFXML = loader.load();
-            MainStageController ctrl = (loader.getController());
+                Runnable task = () -> {
+                    while (!Thread.currentThread().isInterrupted()) {
+                        try {
+                            System.out.println(Thread.currentThread().getName());
+                            commandReceiver.getCollection("regular");
+                            Thread.sleep(1000);
+                        } catch (InterruptedException | ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
 
-            ctrl.setCommandReceiver(commandReceiver);
-            ctrl.setCollection(linkedList, idElementsAllUsers);
-            Stage stage = new Stage();
-            stage.setTitle("StudyGroupProject. MainStage.");
-            stage.setScene(new Scene(sceneFXML, 1198, 494));
-            stage.show();
+                Thread tableThread = new Thread(task);
+                tableThread.setName("asdsssss");
+                tableThread.start();
+
+                FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/MainStage.fxml"));
+                Parent sceneFXML = loader.load();
+                MainStageController ctrl = (loader.getController());
+
+                ctrl.setCommandReceiver(commandReceiver);
+                ctrl.setCollection(linkedList, idElementsAllUsers);
+                Stage stage = new Stage();
+                stage.setTitle("StudyGroupProject. MainStage.");
+                stage.setScene(new Scene(sceneFXML, 1198, 494));
+                stage.show();
+
+            } else {
+                FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/MainStage.fxml"));
+                Parent sceneFXML = loader.load();
+                MainStageController ctrl = (loader.getController());
+
+            }
+        }
+    }
+
+    @Override
+    public void requireCollection() {
+        while (true) {
+            System.out.println("asd");
+            try {
+                commandReceiver.getCollection("regular");
+                Thread.sleep(3000);
+            } catch (InterruptedException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

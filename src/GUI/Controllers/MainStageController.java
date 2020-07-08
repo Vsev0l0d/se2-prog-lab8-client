@@ -142,7 +142,7 @@ public class MainStageController implements Initializable {
         });
     }
 
-    private void updateTable() {
+    public void updateTable() {
         FilteredList<StudyGroup> filtered = new FilteredList<>(observableList, t -> true);
         idFilter.textProperty().addListener((observable, oldValue, newValue) -> filtered.setPredicate(studyGroup -> Integer.toString(studyGroup.getId()).equals(newValue)));
         nameFilter.textProperty().addListener((observable, oldValue, newValue) -> filtered.setPredicate(studyGroup -> studyGroup.getName().toLowerCase().contains(newValue.toLowerCase())));

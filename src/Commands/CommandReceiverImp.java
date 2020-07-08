@@ -295,8 +295,8 @@ public class CommandReceiverImp implements CommandReceiver {
     }
 
     @Override
-    public void getCollection() throws ClassNotFoundException, InterruptedException {
-        requestHandler(new SerializedMessage("return_collection"));
+    public void getCollection(String requireType) throws ClassNotFoundException, InterruptedException {
+        requestHandler(new SerializedMessage(requireType));
     }
 
     @Override
