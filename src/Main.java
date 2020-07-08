@@ -24,17 +24,6 @@ public class Main extends Application {
         Injector injector = Guice.createInjector(new ClientModule());
         CommandReceiver commandReceiver = injector.getInstance(CommandReceiver.class);
 
-//        для тестов, пока падает буфер
-//        FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/MainStage.fxml"));
-//        Parent sceneFXML = loader.load();
-//        MainStageController ctrl = (loader.getController());
-//
-//        ctrl.setCommandReceiver(commandReceiver);
-//        Stage stage = new Stage();
-//        stage.setTitle("StudyGroupProject. MainStage.");
-//        stage.setScene(new Scene(sceneFXML, 1198, 494));
-//        stage.show();
-
         FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/HiPanel.fxml"));
         Parent root = loader.load();
         HiPanelController ctrl = (loader.getController());
