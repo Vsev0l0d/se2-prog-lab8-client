@@ -17,15 +17,23 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class HiPanelController {
     private CommandReceiver commandReceiver;
+    private Stage primaryStage;
+    private AnchorPane pane;
+    private Scene scene;
 
     public void setCommandReceiver(CommandReceiver commandReceiver) {
         this.commandReceiver = commandReceiver;
+    }
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
 
     @FXML
@@ -39,14 +47,17 @@ public class HiPanelController {
 
     @FXML
     void displayRegWindow(ActionEvent event) {
-        Parent root;
         try {
-            root = FXMLLoader.load(getClass().getClassLoader().getResource("GUI/Views/Register.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("StudyGroupProject. Регистрация.");
-            stage.setScene(new Scene(root, 359, 417));
-            stage.show();
-            ((Node)(event.getSource())).getScene().getWindow().hide();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/GUI/Views/Register.fxml"));
+            pane = (AnchorPane) loader.load();
+            scene = new Scene(pane, 350, 390);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+
+            RegistrationController controller = loader.getController();
+            controller.setCommandReceiver(commandReceiver);
+            controller.setPrimaryStage(primaryStage);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -57,6 +68,7 @@ public class HiPanelController {
     void authUserAction(ActionEvent event) {
         if (!userLoginField.getText().isEmpty() && !userPasswordField.getText().isEmpty()) {
             try {
+                commandReceiver.setPrimaryStage(primaryStage);
                 commandReceiver.tryAuth(userLoginField.getText().trim(), userPasswordField.getText().trim());
             } catch (ClassNotFoundException | InterruptedException e) {
                 e.printStackTrace();
@@ -73,5 +85,20 @@ public class HiPanelController {
         alert.setContentText(alertMessage);
 
         alert.showAndWait();
+    }
+
+    public void changeToMain(Stage primaryStage, CommandReceiver commandReceiver) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/GUI/Views/MainStage.fxml"));
+        pane = loader.load();
+        scene = new Scene(pane, 1198, 494);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("StudyGroupProject. Окно работы.");
+        primaryStage.show();
+
+        MainStageController controller = loader.getController();
+        commandReceiver.setMainStageController(controller);
+        controller.setCommandReceiver(commandReceiver);
+        controller.setPrimaryStage(primaryStage);
     }
 }

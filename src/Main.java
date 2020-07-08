@@ -28,6 +28,7 @@ public class Main extends Application {
         Parent root = loader.load();
         HiPanelController ctrl = (loader.getController());
         ctrl.setCommandReceiver(commandReceiver);
+        ctrl.setPrimaryStage(primaryStage);
         primaryStage.setTitle("StudyGroupProject. Авторизация.");
         primaryStage.setScene(new Scene(root, 350, 350));
         primaryStage.show();

@@ -2,12 +2,18 @@ package Interfaces;
 
 import BasicClasses.Person;
 import BasicClasses.StudyGroup;
+import GUI.Controllers.MainStageController;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
 
 public interface CommandReceiver {
     void setAuthorizationData(String login, String password);
+
+    Stage getPrimaryStage();
+
+    void setPrimaryStage(Stage primaryStage);
 
     void help() throws IOException;
 
@@ -54,4 +60,8 @@ public interface CommandReceiver {
     void setStudyGroup(StudyGroup studyGroup);
 
     void setGroupAdmin(Person groupAdmin);
+
+    MainStageController getMainStageController();
+
+    void setMainStageController(MainStageController mainStageController);
 }

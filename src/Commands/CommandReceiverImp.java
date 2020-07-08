@@ -14,6 +14,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.PortUnreachableException;
@@ -40,6 +41,8 @@ public class CommandReceiverImp implements CommandReceiver {
     private String password;
     private StudyGroup studyGroup;  // КАК ЖЕ СТЫДНО ЗА КОСТЫЛИ
     private Person groupAdmin;
+    private Stage primaryStage;
+    private MainStageController mainStageController;
 
     @Inject
     public CommandReceiverImp(CommandInvoker commandInvoker, Session session, Sender sender, Receiver receiver,
@@ -55,8 +58,8 @@ public class CommandReceiverImp implements CommandReceiver {
 
     @Override
     public void tryAuth(String login, String password) throws ClassNotFoundException, InterruptedException {
-        requestHandler(new SerializedAuthOrReg(login, hashEncrypter.encryptString(password), "auth"));
         setAuthorizationData(login, hashEncrypter.encryptString(password));
+        requestHandler(new SerializedAuthOrReg(login, hashEncrypter.encryptString(password), "auth"));
     }
 
     @Override
@@ -191,8 +194,8 @@ public class CommandReceiverImp implements CommandReceiver {
             System.out.println("Вы не авторизированы");
             return;
         }
-//        requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("count_by_group_admin"),
-//                elementCreator.createPerson(), login, password));
+        requestHandler(new SerializedObjectCommand(commandInvoker.getCommandMap().get("count_by_group_admin"),
+                groupAdmin, login, password));
     }
 
     @Override
@@ -314,11 +317,33 @@ public class CommandReceiverImp implements CommandReceiver {
         return commandInvoker;
     }
 
+    @Override
     public void setStudyGroup(StudyGroup studyGroup) {
         this.studyGroup = studyGroup;
     }
 
+    @Override
     public void setGroupAdmin(Person groupAdmin) {
         this.groupAdmin = groupAdmin;
+    }
+
+    @Override
+    public MainStageController getMainStageController() {
+        return mainStageController;
+    }
+
+    @Override
+    public void setMainStageController(MainStageController mainStageController) {
+        this.mainStageController = mainStageController;
+    }
+
+    @Override
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    @Override
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
 }

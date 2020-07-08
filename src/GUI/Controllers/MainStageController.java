@@ -2,6 +2,7 @@ package GUI.Controllers;
 
 import BasicClasses.*;
 import Interfaces.CommandReceiver;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -35,6 +36,7 @@ public class MainStageController implements Initializable {
     private ObservableList<String> commandNames = FXCollections.observableArrayList();
     private List<List<Integer>> idElementsAllUsers = new ArrayList<>();
     private CommandReceiver commandReceiver;
+    private Stage primaryStage;
 
     @FXML private Text hiText;
     @FXML private Pane groupMap;
@@ -108,6 +110,10 @@ public class MainStageController implements Initializable {
         setListenersTextField();
     }
 
+    void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
+
     private void fillTable() {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -166,7 +172,7 @@ public class MainStageController implements Initializable {
         tableView.setItems(sorted);
     }
 
-    private void visual() {
+    public void visual() {
         ArrayList<Circle> circles = new ArrayList<>();
         HashMap<Circle, StudyGroup> circleStudyGroupHashMap = new HashMap<>();
         HashMap<javafx.scene.paint.Color, List<Integer>> colorListHashMap = new HashMap<>();
@@ -203,10 +209,12 @@ public class MainStageController implements Initializable {
             circles.add(circle);
             circleStudyGroupHashMap.put(circle,studyGroup);
         }
-        groupMap.getChildren().clear();
-        circles.sort(Comparator.comparing(Circle::getRadius));
-        Collections.reverse(circles);
-        groupMap.getChildren().setAll(circles);
+        Platform.runLater(() -> {
+            groupMap.getChildren().clear();
+            circles.sort(Comparator.comparing(Circle::getRadius));
+            Collections.reverse(circles);
+            groupMap.getChildren().setAll(circles);
+        });
     }
 
     public void showAlert(String alertMessage) {
@@ -383,7 +391,11 @@ public class MainStageController implements Initializable {
             adminHairColorComboBox.setValue(studyGroup.getGroupAdmin().getHairColor().toString());
             adminNationalityComboBox.setValue(studyGroup.getGroupAdmin().getNationality().toString());
         } else if (option.get() == delete) {
-            // removeById
+            try {
+                commandReceiver.removeById(studyGroup.getId().toString());
+            } catch (InterruptedException | IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
 
             visual();
         }
@@ -435,12 +447,14 @@ public class MainStageController implements Initializable {
     }
 
     public void showInfo(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Информация!");
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Информация!");
 
-        alert.setHeaderText(null);
-        alert.setContentText(message);
+            alert.setHeaderText(null);
+            alert.setContentText(message);
 
-        alert.showAndWait();
+            alert.showAndWait();
+        });
     }
 }
