@@ -11,6 +11,7 @@ import Interfaces.CommandReceiver;
 import Interfaces.Decrypting;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -48,6 +49,7 @@ public class DecryptingImp implements Decrypting {
                 ctrl.setCommandReceiver(commandReceiver);
                 if (serializedResAuth.getRes()) {
                     try {
+                        ctrl.changeToMain(commandReceiver.getPrimaryStage(), commandReceiver);
                         commandReceiver.getCollection("return_collection_init");
                     } catch (ClassNotFoundException | InterruptedException e) {
                         e.printStackTrace();
@@ -61,7 +63,13 @@ public class DecryptingImp implements Decrypting {
                 RegistrationController ctrl = (loader.getController());
                 ctrl.setCommandReceiver(commandReceiver);
                 if (serializedResAuth.getRes()) {
-                    ctrl.showSuccessMessage("Пользователь успешно зарегистрирован");
+                    try {
+                        ctrl.changeToMain(commandReceiver.getPrimaryStage(), commandReceiver);
+                        ctrl.showSuccessMessage("Пользователь успешно зарегистрирован");
+                        commandReceiver.getCollection("return_collection_init");
+                    } catch (ClassNotFoundException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 } else ctrl.showAlert("Пользователь с таким логином уже существует!");
             }
         }
@@ -72,38 +80,27 @@ public class DecryptingImp implements Decrypting {
             List<List<Integer>> idElementsAllUsers = serializedCollection.getIdElementsAllUsers();
             if (serializedCollection.getRequireType().equals("init")) {
 
-                Runnable task = () -> {
-                    while (!Thread.currentThread().isInterrupted()) {
+                new Thread(()->{
+                   while (!Thread.currentThread().isInterrupted()) {
                         try {
-                            System.out.println(Thread.currentThread().getName());
                             commandReceiver.getCollection("regular");
-                            Thread.sleep(1000);
-                        } catch (InterruptedException | ClassNotFoundException e) {
-                            e.printStackTrace();
+                            Thread.sleep(3000);
+                       } catch (InterruptedException | ClassNotFoundException e) {
+                           e.printStackTrace();
                         }
                     }
-                };
+                }).start();
 
-                Thread tableThread = new Thread(task);
-                tableThread.setName("asdsssss");
-                tableThread.start();
+                MainStageController mainStageController = commandReceiver.getMainStageController();
 
-                FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/MainStage.fxml"));
-                Parent sceneFXML = loader.load();
-                MainStageController ctrl = (loader.getController());
-
-                ctrl.setCommandReceiver(commandReceiver);
-                ctrl.setCollection(linkedList, idElementsAllUsers);
-                Stage stage = new Stage();
-                stage.setTitle("StudyGroupProject. MainStage.");
-                stage.setScene(new Scene(sceneFXML, 1198, 494));
-                stage.show();
+                mainStageController.setCommandReceiver(commandReceiver);
+                mainStageController.setCollection(linkedList, idElementsAllUsers);
 
             } else {
-                FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/MainStage.fxml"));
-                Parent sceneFXML = loader.load();
-                MainStageController ctrl = (loader.getController());
-
+                MainStageController mainStageController = commandReceiver.getMainStageController();
+                mainStageController.setCollection(linkedList, idElementsAllUsers);
+                mainStageController.updateTable();
+                mainStageController.visual();
             }
         }
     }
