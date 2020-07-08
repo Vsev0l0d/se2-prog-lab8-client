@@ -7,6 +7,8 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -70,30 +72,53 @@
             <Font name="Avenir Next Bold" size="22.0" />
          </font>
       </Text>
-      <Button fx:id="toTableBtn1" layoutX="608.0" layoutY="22.0" mnemonicParsing="false" onAction="#showTable" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" text="К таблице" textFill="WHITE">
+      <Button fx:id="toTableBtn1" layoutX="608.0" layoutY="22.0" mnemonicParsing="false" onAction="#showTable" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE">
          <font>
             <Font name="SansSerif Regular" size="16.0" />
          </font>
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/Flags/russia-flag-16x16.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
-      <Button fx:id="toTableBtn11" layoutX="643.0" layoutY="23.0" mnemonicParsing="false" onAction="#showTable" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" text="К таблице" textFill="WHITE">
+      <Button fx:id="toTableBtn111" layoutX="662.0" layoutY="26.0" mnemonicParsing="false" onAction="#showTable" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE">
          <font>
             <Font name="SansSerif Regular" size="16.0" />
          </font>
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/Flags/france-flag-icon-16.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
-      <Button fx:id="toTableBtn111" layoutX="678.0" layoutY="23.0" mnemonicParsing="false" onAction="#showTable" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" text="К таблице" textFill="WHITE">
+      <Button fx:id="toTableBtn112" layoutX="635.0" layoutY="26.0" mnemonicParsing="false" onAction="#showTable" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE">
          <font>
             <Font name="SansSerif Regular" size="16.0" />
          </font>
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/Flags/norway-flag-icon-16.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
-      <Button fx:id="toTableBtn1111" layoutX="914.0" layoutY="13.0" mnemonicParsing="false" onAction="#showTable" prefHeight="49.0" prefWidth="103.0" style="-fx-background-color: transparent;" text="К таблице" textFill="WHITE">
+      <Button fx:id="toTableBtn1121" layoutX="689.0" layoutY="26.0" mnemonicParsing="false" onAction="#showTable" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE">
          <font>
             <Font name="SansSerif Regular" size="16.0" />
          </font>
-      </Button>
-      <Button fx:id="toTableBtn1112" layoutX="713.0" layoutY="23.0" mnemonicParsing="false" onAction="#showTable" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" text="К таблице" textFill="WHITE">
-         <font>
-            <Font name="SansSerif Regular" size="16.0" />
-         </font>
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/Flags/nicaragua-flag-icon-16.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
    </Pane>
    <Pane style="-fx-background-color: gainsboro;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
