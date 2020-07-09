@@ -40,6 +40,46 @@
       </Text>
    </Pane>
    <Pane style="-fx-background-color: #293541#293541;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="82.0">
+      <Button fx:id="setRu" layoutX="30.0" layoutY="10.0" mnemonicParsing="false" onAction="#setRuLanguage" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE" disable="true">
+         <font>
+            <Font name="SansSerif Regular" size="16.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@Images/Flags/russia-flag-16x16.png"/>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="setFr" layoutX="55.0" layoutY="10.0" mnemonicParsing="false" onAction="#setFrLanguage" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE">
+         <font>
+            <Font name="SansSerif Regular" size="16.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@Images/Flags/france-flag-icon-16.png"/>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="setNo" layoutX="80.0" layoutY="10.0" mnemonicParsing="false" onAction="#setNoLanguage" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE">
+         <font>
+            <Font name="SansSerif Regular" size="16.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@Images/Flags/norway-flag-icon-16.png"/>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="setEsNI" layoutX="125.0" layoutY="10.0" mnemonicParsing="false" onAction="#setEsNILanguage" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE">
+         <font>
+            <Font name="SansSerif Regular" size="16.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@Images/Flags/nicaragua-flag-icon-16.png"/>
+            </ImageView>
+         </graphic>
+      </Button>
       <VBox spacing="15" layoutX="30.0" layoutY="54.0">
          <TextField fx:id="userLoginField" prefHeight="27.0" promptText="Введите ваш логин" style="-fx-background-radius: 1em;" />
          <PasswordField fx:id="userPasswordField" prefHeight="27.0" promptText="Введите ваш пароль" style="-fx-background-radius: 1em;" />

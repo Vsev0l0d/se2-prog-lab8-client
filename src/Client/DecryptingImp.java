@@ -115,7 +115,8 @@ public class DecryptingImp implements Decrypting {
                 commandReceiver.getCollection("regular");
                 Thread.sleep(3000);
             } catch (InterruptedException | ClassNotFoundException e) {
-                e.printStackTrace();
+                System.out.println(e);
+                System.exit(1);
             }
         }
     }

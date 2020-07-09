@@ -6,6 +6,7 @@ import java.time.ZonedDateTime;
 
 
 public class StudyGroup implements Comparable<StudyGroup>, Serializable {
+    private static final long serialVersionUID = 32L;
     private Integer id;
     private String name;
     private Coordinates coordinates;
@@ -87,7 +88,7 @@ public class StudyGroup implements Comparable<StudyGroup>, Serializable {
     }
 
     @Override
-    public String toString() {
+     public String toString() {
         String info = "";
         info = String.format("ID элемента коллекции – %s\n" +
                         "Название группы – %s\n" +

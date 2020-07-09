@@ -72,51 +72,43 @@
             <Font name="Avenir Next Bold" size="22.0" />
          </font>
       </Text>
-      <Button fx:id="toTableBtn1" layoutX="608.0" layoutY="22.0" mnemonicParsing="false" onAction="#showTable" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE">
+      <Button fx:id="setRu" layoutX="608.0" layoutY="22.0" mnemonicParsing="false" onAction="#setRuLanguage" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE" disable="true">
          <font>
             <Font name="SansSerif Regular" size="16.0" />
          </font>
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Images/Flags/russia-flag-16x16.png" />
-               </image>
+               <Image url="@Images/Flags/russia-flag-16x16.png"/>
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="toTableBtn111" layoutX="662.0" layoutY="26.0" mnemonicParsing="false" onAction="#showTable" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE">
+      <Button fx:id="setFr" layoutX="662.0" layoutY="26.0" mnemonicParsing="false" onAction="#setFrLanguage" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE">
          <font>
             <Font name="SansSerif Regular" size="16.0" />
          </font>
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Images/Flags/france-flag-icon-16.png" />
-               </image>
+               <Image url="@Images/Flags/france-flag-icon-16.png"/>
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="toTableBtn112" layoutX="635.0" layoutY="26.0" mnemonicParsing="false" onAction="#showTable" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE">
+      <Button fx:id="setNo" layoutX="635.0" layoutY="26.0" mnemonicParsing="false" onAction="#setNoLanguage" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE">
          <font>
             <Font name="SansSerif Regular" size="16.0" />
          </font>
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Images/Flags/norway-flag-icon-16.png" />
-               </image>
+               <Image url="@Images/Flags/norway-flag-icon-16.png"/>
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="toTableBtn1121" layoutX="689.0" layoutY="26.0" mnemonicParsing="false" onAction="#showTable" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE">
+      <Button fx:id="setEsNI" layoutX="689.0" layoutY="26.0" mnemonicParsing="false" onAction="#setEsNILanguage" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE">
          <font>
             <Font name="SansSerif Regular" size="16.0" />
          </font>
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Images/Flags/nicaragua-flag-icon-16.png" />
-               </image>
+               <Image url="@Images/Flags/nicaragua-flag-icon-16.png"/>
             </ImageView>
          </graphic>
       </Button>

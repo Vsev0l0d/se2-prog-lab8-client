@@ -37,12 +37,17 @@ public class MainStageController implements Initializable {
     private List<List<Integer>> idElementsAllUsers = new ArrayList<>();
     private CommandReceiver commandReceiver;
     private Stage primaryStage;
+    private ResourceBundle currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("ru"));
 
     @FXML private Text hiText;
     @FXML private Pane groupMap;
     @FXML private Pane executeCommand;
     @FXML private Pane aboutFagots;
     @FXML private Pane tablePane;
+    @FXML private Button toTableBtn;
+    @FXML private Button toGroupMapBtn;
+    @FXML private Button executeCommandsBtn;
+    @FXML private Button aboutFagotsBtn;
     @FXML private TableView<StudyGroup> tableView;
 
     @FXML private TableColumn<StudyGroup, Integer> idColumn;
@@ -89,6 +94,11 @@ public class MainStageController implements Initializable {
     @FXML private ComboBox<String> adminNationalityComboBox;
     @FXML private ComboBox<String> commandChoiseComboBox;
     @FXML private Button executeCommandBtn;
+
+    @FXML private Button setRu;
+    @FXML private Button setFr;
+    @FXML private Button setNo;
+    @FXML private Button setEsNI;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -454,5 +464,56 @@ public class MainStageController implements Initializable {
 
             alert.showAndWait();
         });
+    }
+
+    public ResourceBundle getCurrentBundle() {
+        return currentBundle;
+    }
+
+    public void setCurrentBundle(ResourceBundle currentBundle) {
+        this.currentBundle = currentBundle;
+    }
+
+    public void changeLanguage(){
+        toGroupMapBtn.setText(currentBundle.getString("groupMap"));
+        toTableBtn.setText(currentBundle.getString("toTheTable"));
+        executeCommandsBtn.setText(currentBundle.getString("executeCommand"));
+        aboutFagotsBtn.setText(currentBundle.getString("aboutDevelopers"));
+    }
+
+    @FXML private void setFrLanguage(){
+        currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("fr"));
+        setFr.setDisable(true);
+        setRu.setDisable(false);
+        setEsNI.setDisable(false);
+        setNo.setDisable(false);
+        changeLanguage();
+    }
+
+    @FXML private void setRuLanguage(){
+        currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("ru"));
+        setRu.setDisable(true);
+        setFr.setDisable(false);
+        setEsNI.setDisable(false);
+        setNo.setDisable(false);
+        changeLanguage();
+    }
+
+    @FXML private void setNoLanguage(){
+        currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("no"));
+        setNo.setDisable(true);
+        setFr.setDisable(false);
+        setRu.setDisable(false);
+        setEsNI.setDisable(false);
+        changeLanguage();
+    }
+
+    @FXML private void setEsNILanguage(){
+        currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("es", "NI"));
+        setEsNI.setDisable(true);
+        setFr.setDisable(false);
+        setRu.setDisable(false);
+        setNo.setDisable(false);
+        changeLanguage();
     }
 }

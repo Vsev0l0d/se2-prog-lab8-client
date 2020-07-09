@@ -18,27 +18,29 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class RegistrationController {
     private CommandReceiver commandReceiver;
     private AnchorPane pane;
     private Scene scene;
     private Stage primaryStage;
+    private ResourceBundle currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("ru"));
 
     public void setCommandReceiver(CommandReceiver commandReceiver) {
         this.commandReceiver = commandReceiver;
     }
 
-    @FXML
-    private Button regUserBtn;
-    @FXML
-    private Button authUserWindowBtn;
-    @FXML
-    private TextField newLoginField;
-    @FXML
-    private PasswordField newPasswordField;
-    @FXML
-    private PasswordField repNewPasswordField;
+    @FXML private Button regUserBtn;
+    @FXML private Button authUserWindowBtn;
+    @FXML private TextField newLoginField;
+    @FXML private PasswordField newPasswordField;
+    @FXML private PasswordField repNewPasswordField;
+    @FXML private Button setRu;
+    @FXML private Button setFr;
+    @FXML private Button setNo;
+    @FXML private Button setEsNI;
 
 
     @FXML
@@ -68,6 +70,8 @@ public class RegistrationController {
             HiPanelController controller = loader.getController();
             controller.setCommandReceiver(commandReceiver);
             controller.setPrimaryStage(primaryStage);
+            controller.setCurrentBundle(currentBundle);
+            controller.changeLanguage();
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -111,5 +115,55 @@ public class RegistrationController {
         commandReceiver.setMainStageController(controller);
         controller.setCommandReceiver(commandReceiver);
         controller.setPrimaryStage(primaryStage);
+        controller.setCurrentBundle(currentBundle);
+        controller.changeLanguage();
+    }
+
+    public void changeLanguage(){
+        regUserBtn.setText(currentBundle.getString("signUp"));
+        authUserWindowBtn.setText(currentBundle.getString("login"));
+        newLoginField.setPromptText(currentBundle.getString("createAUsername"));
+        newPasswordField.setPromptText(currentBundle.getString("createAPassword"));
+        repNewPasswordField.setPromptText(currentBundle.getString("confirmPassword"));
+    }
+
+    public void setFrLanguage(){
+        currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("fr"));
+        setFr.setDisable(true);
+        setRu.setDisable(false);
+        setEsNI.setDisable(false);
+        setNo.setDisable(false);
+        changeLanguage();
+    }
+
+    public void setRuLanguage(){
+        currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("ru"));
+        setRu.setDisable(true);
+        setFr.setDisable(false);
+        setEsNI.setDisable(false);
+        setNo.setDisable(false);
+        changeLanguage();
+    }
+
+    public void setNoLanguage(){
+        currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("no"));
+        setNo.setDisable(true);
+        setFr.setDisable(false);
+        setRu.setDisable(false);
+        setEsNI.setDisable(false);
+        changeLanguage();
+    }
+
+    public void setEsNILanguage(){
+        currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("es", "NI"));
+        setEsNI.setDisable(true);
+        setFr.setDisable(false);
+        setRu.setDisable(false);
+        setNo.setDisable(false);
+        changeLanguage();
+    }
+
+    public void setCurrentBundle(ResourceBundle currentBundle) {
+        this.currentBundle = currentBundle;
     }
 }
