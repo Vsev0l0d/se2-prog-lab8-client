@@ -109,6 +109,7 @@ public class RegistrationController {
         scene = new Scene(pane, 1198, 494);
         primaryStage.setScene(scene);
         primaryStage.setTitle("StudyGroupProject");
+        primaryStage.centerOnScreen();
         primaryStage.show();
 
         MainStageController controller = loader.getController();

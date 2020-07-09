@@ -39,7 +39,7 @@ public class CommandReceiverImp implements CommandReceiver {
     private final HashEncrypter hashEncrypter;
     private String login;
     private String password;
-    private StudyGroup studyGroup;  // КАК ЖЕ СТЫДНО ЗА КОСТЫЛИ
+    private StudyGroup studyGroup;
     private Person groupAdmin;
     private Stage primaryStage;
     private MainStageController mainStageController;
@@ -200,6 +200,7 @@ public class CommandReceiverImp implements CommandReceiver {
 
     @Override
     public void register(String login, String password) throws InterruptedException, ClassNotFoundException {
+        setAuthorizationData(login, hashEncrypter.encryptString(password));
         requestHandler(new SerializedAuthOrReg(login, hashEncrypter.encryptString(password), "reg"));
     }
 

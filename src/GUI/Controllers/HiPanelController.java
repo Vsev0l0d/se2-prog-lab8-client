@@ -90,6 +90,7 @@ public class HiPanelController {
         pane = loader.load();
         scene = new Scene(pane, 1198, 494);
         primaryStage.setScene(scene);
+        primaryStage.centerOnScreen();
         primaryStage.setTitle("StudyGroupProject");
         primaryStage.show();
 

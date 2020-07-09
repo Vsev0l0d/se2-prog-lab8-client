@@ -40,22 +40,22 @@
       </Text>
    </Pane>
    <Pane prefWidth="120.0" style="-fx-background-color: #293541#293541;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.topAnchor="75.0">
-      <Button fx:id="toTableBtn" layoutY="1.0" mnemonicParsing="false" onAction="#showTable" prefHeight="55.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="К таблице" textFill="WHITE">
+      <Button fx:id="toTableBtn" layoutY="1.0" mnemonicParsing="false" onAction="#showTable" prefHeight="55.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="К таблице" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="SansSerif Regular" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="toGroupMapBtn" layoutX="1.0" layoutY="57.0" mnemonicParsing="false" onAction="#showGroupMap" prefHeight="55.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="Карта групп" textFill="WHITE">
+      <Button fx:id="toGroupMapBtn" layoutX="1.0" layoutY="57.0" mnemonicParsing="false" onAction="#showGroupMap" prefHeight="55.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="Карта групп" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="SansSerif Regular" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="executeCommandsBtn" layoutX="1.0" layoutY="112.0" mnemonicParsing="false" onAction="#showExecuteCommand" prefHeight="55.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="Исполнить команду" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="executeCommandsBtn" layoutX="1.0" layoutY="112.0" mnemonicParsing="false" onAction="#showExecuteCommand" prefHeight="55.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="Исполнить команду" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="SansSerif Regular" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="aboutFagotsBtn" layoutY="183.0" mnemonicParsing="false" onAction="#showAboutFagots" prefHeight="55.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="О разработчиках" textFill="WHITE">
+      <Button fx:id="aboutFagotsBtn" layoutY="183.0" mnemonicParsing="false" onAction="#showAboutFagots" prefHeight="55.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="О разработчиках" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="SansSerif Regular" size="12.0" />
          </font>
@@ -72,13 +72,13 @@
             <Font name="Avenir Next Bold" size="22.0" />
          </font>
       </Text>
-      <Button fx:id="setRu" layoutX="608.0" layoutY="22.0" mnemonicParsing="false" onAction="#setRuLanguage" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE" disable="true">
+      <Button fx:id="setRu" disable="true" layoutX="608.0" layoutY="22.0" mnemonicParsing="false" onAction="#setRuLanguage" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE">
          <font>
             <Font name="SansSerif Regular" size="16.0" />
          </font>
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@Images/Flags/russia-flag-16x16.png"/>
+               <Image url="@Images/Flags/russia-flag-16x16.png" />
             </ImageView>
          </graphic>
       </Button>
@@ -88,7 +88,7 @@
          </font>
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@Images/Flags/france-flag-icon-16.png"/>
+               <Image url="@Images/Flags/france-flag-icon-16.png" />
             </ImageView>
          </graphic>
       </Button>
@@ -98,7 +98,7 @@
          </font>
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@Images/Flags/norway-flag-icon-16.png"/>
+               <Image url="@Images/Flags/norway-flag-icon-16.png" />
             </ImageView>
          </graphic>
       </Button>
@@ -108,7 +108,7 @@
          </font>
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@Images/Flags/nicaragua-flag-icon-16.png"/>
+               <Image url="@Images/Flags/nicaragua-flag-icon-16.png" />
             </ImageView>
          </graphic>
       </Button>

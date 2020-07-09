@@ -462,6 +462,13 @@ public class MainStageController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText(message);
 
+            TextArea area = new TextArea(message);
+            area.setWrapText(true);
+            area.setEditable(false);
+
+            alert.getDialogPane().setContent(area);
+            alert.setResizable(true);
+
             alert.showAndWait();
         });
     }
