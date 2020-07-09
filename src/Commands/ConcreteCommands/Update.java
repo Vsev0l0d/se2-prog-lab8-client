@@ -25,7 +25,12 @@ public class Update extends Command {
     }
 
     @Override
+    public String getName() {
+        return "update";
+    }
+
+    @Override
     protected String writeInfo() {
-        return "Команда update – синтаксис: update id – обновить значение элемента коллекции, id которого равен заданному.";
+        return String.format(commandReceiver.getCurrentBundle().getString("updateInf"),"update");
     }
 }

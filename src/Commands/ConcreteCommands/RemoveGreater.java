@@ -27,7 +27,12 @@ public class RemoveGreater extends Command {
     }
 
     @Override
+    public String getName() {
+        return "remove_greater";
+    }
+
+    @Override
     protected String writeInfo() {
-        return "Команда remove_greater – удалить из коллекции все элементы, превышающие заданный.";
+        return String.format(commandReceiver.getCurrentBundle().getString("removeGreaterInf"),"remove_greater");
     }
 }

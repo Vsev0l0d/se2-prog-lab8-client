@@ -27,7 +27,12 @@ public class Add extends Command {
     }
 
     @Override
+    public String getName() {
+        return "add";
+    }
+
+    @Override
     protected String writeInfo() {
-        return "Команда add – добавить новый элемент в коллекцию.";
+        return String.format(commandReceiver.getCurrentBundle().getString("addInf"),"add");
     }
 }

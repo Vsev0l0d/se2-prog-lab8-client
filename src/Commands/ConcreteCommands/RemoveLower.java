@@ -27,7 +27,12 @@ public class RemoveLower extends Command {
     }
 
     @Override
+    public String getName() {
+        return "remove_lower";
+    }
+
+    @Override
     protected String writeInfo() {
-        return "Команда remove_lower – удалить из коллекции все элементы, меньше, чем заданный.";
+        return String.format(commandReceiver.getCurrentBundle().getString("removeLowerInf"),"remove_lower");
     }
 }

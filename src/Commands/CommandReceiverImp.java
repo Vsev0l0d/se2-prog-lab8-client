@@ -21,9 +21,7 @@ import java.net.PortUnreachableException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Ресивер(получатель), отправляет серилизованные объекты на сервер.
@@ -43,6 +41,7 @@ public class CommandReceiverImp implements CommandReceiver {
     private Person groupAdmin;
     private Stage primaryStage;
     private MainStageController mainStageController;
+    private ResourceBundle currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("ru"));
 
     @Inject
     public CommandReceiverImp(CommandInvoker commandInvoker, Session session, Sender sender, Receiver receiver,
@@ -346,5 +345,15 @@ public class CommandReceiverImp implements CommandReceiver {
     @Override
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
+    }
+
+    @Override
+    public ResourceBundle getCurrentBundle() {
+        return currentBundle;
+    }
+
+    @Override
+    public void setCurrentBundle(ResourceBundle currentBundle) {
+        this.currentBundle = currentBundle;
     }
 }

@@ -10,4 +10,5 @@ public abstract class Command implements Serializable {
     private static final long serialVersionUID = 32L;
     protected abstract String writeInfo();
     protected abstract void execute(String[] args) throws IOException, ClassNotFoundException, InterruptedException;
+    public abstract String getName();
 }

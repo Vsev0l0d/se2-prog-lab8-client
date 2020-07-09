@@ -20,7 +20,7 @@ public class CommandInvokerImp implements CommandInvoker {
     }
 
     private void register(Command... commands) {
-        Arrays.stream(commands).forEach(command -> commandMap.put(command.writeInfo().split(" ")[1], command));
+        Arrays.stream(commands).forEach(command -> commandMap.put(command.getName(), command));
     }
 
     @Override

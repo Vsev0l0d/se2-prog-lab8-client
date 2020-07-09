@@ -25,7 +25,12 @@ public class RemoveByID extends Command {
     }
 
     @Override
+    public String getName() {
+        return "remove_by_id";
+    }
+
+    @Override
     protected String writeInfo() {
-        return "Команда remove_by_id – синтаксис: remove_by_id id – удалить элемент из коллекции по его id.";
+        return String.format(commandReceiver.getCurrentBundle().getString("removeByID"),"remove_by_id");
     }
 }

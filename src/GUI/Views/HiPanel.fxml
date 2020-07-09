@@ -40,7 +40,7 @@
       </Text>
    </Pane>
    <Pane style="-fx-background-color: #293541#293541;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="82.0">
-      <Button fx:id="setRu" disable="true" layoutX="90.0" layoutY="10.0" mnemonicParsing="false" onAction="#setRuLanguage" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE">
+      <Button fx:id="setRu" layoutX="90.0" layoutY="10.0" mnemonicParsing="false" onAction="#setRuLanguage" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE">
          <font>
             <Font name="SansSerif Regular" size="16.0" />
          </font>

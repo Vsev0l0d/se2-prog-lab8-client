@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public interface CommandReceiver {
     void setAuthorizationData(String login, String password);
@@ -64,4 +65,8 @@ public interface CommandReceiver {
     MainStageController getMainStageController();
 
     void setMainStageController(MainStageController mainStageController);
+
+    ResourceBundle getCurrentBundle();
+
+    void setCurrentBundle(ResourceBundle currentBundle);
 }

@@ -10,7 +10,8 @@ import java.io.IOException;
  * Конкретная команда помощи.
  */
 public class Help extends Command {
-    private final CommandReceiver commandReceiver;
+    private static final long serialVersionUID = 32L;
+    transient private final CommandReceiver commandReceiver;
 
     @Inject
     public Help (CommandReceiver commandReceiver) {
@@ -26,7 +27,12 @@ public class Help extends Command {
     }
 
     @Override
+    public String getName() {
+        return "help";
+    }
+
+    @Override
     protected String writeInfo() {
-        return "Команда help – получить справку по доступным командам.";
+        return String.format(commandReceiver.getCurrentBundle().getString("helpInf"),"help");
     }
 }

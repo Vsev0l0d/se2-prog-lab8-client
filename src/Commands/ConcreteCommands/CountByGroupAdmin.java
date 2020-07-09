@@ -27,7 +27,12 @@ public class CountByGroupAdmin extends Command {
     }
 
     @Override
+    public String getName() {
+        return "count_by_group_admin";
+    }
+
+    @Override
     protected String writeInfo() {
-        return "Команда count_by_group_admin  – вывести количество элементов, значение поля groupAdmin которых равно заданному.";
+        return String.format(commandReceiver.getCurrentBundle().getString("countByGroupAdminInf"),"count_by_group_admin");
     }
 }

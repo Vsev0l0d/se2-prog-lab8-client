@@ -70,13 +70,13 @@ public class HiPanelController {
             } catch (ClassNotFoundException | InterruptedException e) {
                 e.printStackTrace();
             }
-        } else showAlert("Вы не ввели логин или пароль!");
+        } else showAlert(currentBundle.getString("didNotEnterUsernameOrPassword"));
     }
 
 
     public void showAlert(String alertMessage) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Ошибка!");
+        alert.setTitle(currentBundle.getString("err"));
 
         alert.setHeaderText(null);
         alert.setContentText(alertMessage);
@@ -111,6 +111,7 @@ public class HiPanelController {
 
     @FXML private void setFrLanguage(){
         currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("fr"));
+        commandReceiver.setCurrentBundle(currentBundle);
         setFr.setDisable(true);
         setRu.setDisable(false);
         setEsNI.setDisable(false);
@@ -120,6 +121,7 @@ public class HiPanelController {
 
     @FXML private void setRuLanguage(){
         currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("ru"));
+        commandReceiver.setCurrentBundle(currentBundle);
         setRu.setDisable(true);
         setFr.setDisable(false);
         setEsNI.setDisable(false);
@@ -129,6 +131,7 @@ public class HiPanelController {
 
     @FXML private void setNoLanguage(){
         currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("no"));
+        commandReceiver.setCurrentBundle(currentBundle);
         setNo.setDisable(true);
         setFr.setDisable(false);
         setRu.setDisable(false);
@@ -138,6 +141,7 @@ public class HiPanelController {
 
     public void setEsNILanguage(){
         currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("es", "NI"));
+        commandReceiver.setCurrentBundle(currentBundle);
         setEsNI.setDisable(true);
         setFr.setDisable(false);
         setRu.setDisable(false);
@@ -147,5 +151,9 @@ public class HiPanelController {
 
     public void setCurrentBundle(ResourceBundle currentBundle) {
         this.currentBundle = currentBundle;
+    }
+
+    public ResourceBundle getCurrentBundle() {
+        return currentBundle;
     }
 }

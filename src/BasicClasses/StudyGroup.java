@@ -3,6 +3,7 @@ package BasicClasses;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.ResourceBundle;
 
 
 public class StudyGroup implements Comparable<StudyGroup>, Serializable {
@@ -87,29 +88,12 @@ public class StudyGroup implements Comparable<StudyGroup>, Serializable {
         this.id = id;
     }
 
-    @Override
-     public String toString() {
-        String info = "";
-        info = String.format("ID элемента коллекции – %s\n" +
-                        "Название группы – %s\n" +
-                        "Координата X – %s\n" +
-                        "Координата Y – %s\n" +
-                        "Дата и время создания элемента – %s\n" +
-                        "Количество студентов в группе – %s\n" +
-                        "Форма обучения –  %s\n" +
-                        "Номер семестра – %s\n" +
-                        "Имя админа группы – %s\n" +
-                        "Рост админа группы – %s\n" +
-                        "Цвет глаз админа группы – %s\n" +
-                        "Цвет волос админа группы – %s\n" +
-                        "Национальность админа группы – %s\n" +
-                        "_________________________________________________________\n",  id, name, coordinates.getX(),
-                coordinates.getY(), creationDate, studentsCount,
-                formOfEducation, semesterEnum, groupAdmin.getName(),
-                groupAdmin.getHeight(), groupAdmin.getEyeColor(), groupAdmin.getHairColor(),
-                groupAdmin.getNationality());
-
-        return info;
+    public String toLanguageString(ResourceBundle currentBundle) {
+        return String.format(currentBundle.getString("toStringGroup"),  id, name, coordinates.getX(),
+            coordinates.getY(), creationDate, studentsCount,
+            formOfEducation, semesterEnum, groupAdmin.getName(),
+            groupAdmin.getHeight(), groupAdmin.getEyeColor(), groupAdmin.getHairColor(),
+            groupAdmin.getNationality());
     }
 
     @Override

@@ -27,7 +27,12 @@ public class Show extends Command {
     }
 
     @Override
+    public String getName() {
+        return "show";
+    }
+
+    @Override
     protected String writeInfo() {
-        return "Команда show – вывести все элементы коллекции в строковом представлении.";
+        return String.format(commandReceiver.getCurrentBundle().getString("showInf"),"show");
     }
 }

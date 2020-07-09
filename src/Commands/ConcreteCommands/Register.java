@@ -25,6 +25,11 @@ public class Register extends Command {
     }
 
     @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
     protected String writeInfo() {
         return "";
     }

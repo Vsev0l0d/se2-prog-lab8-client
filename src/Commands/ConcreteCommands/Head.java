@@ -27,7 +27,12 @@ public class Head extends Command {
     }
 
     @Override
+    public String getName() {
+        return "head";
+    }
+
+    @Override
     protected String writeInfo() {
-        return "Команда head – вывести первый элемент коллекции.";
+        return String.format(commandReceiver.getCurrentBundle().getString("headInf"),"head");
     }
 }

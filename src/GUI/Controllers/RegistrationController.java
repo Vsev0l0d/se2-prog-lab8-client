@@ -53,8 +53,8 @@ public class RegistrationController {
                 } catch (ClassNotFoundException | InterruptedException | IOException e) {
                     e.printStackTrace();
                 }
-            } else showAlert("Введенные пароли не совпадают!");
-        } else showAlert("Одно из требуемых полей пустое!");
+            } else showAlert(currentBundle.getString("passwordsEnteredDoNotMatch"));
+        } else showAlert(currentBundle.getString("oneOfTheFieldsIsEmpty"));
     }
 
     @FXML
@@ -80,7 +80,7 @@ public class RegistrationController {
 
     public void showAlert(String alertMessage) throws IOException {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Ошибка!");
+        alert.setTitle(currentBundle.getString("err"));
 
         alert.setHeaderText(null);
         alert.setContentText(alertMessage);
@@ -90,7 +90,7 @@ public class RegistrationController {
 
     public void showSuccessMessage(String alertMessage) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Успех!");
+        alert.setTitle(currentBundle.getString("success"));
 
         alert.setHeaderText(null);
         alert.setContentText(alertMessage);
@@ -130,6 +130,7 @@ public class RegistrationController {
 
     public void setFrLanguage(){
         currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("fr"));
+        commandReceiver.setCurrentBundle(currentBundle);
         setFr.setDisable(true);
         setRu.setDisable(false);
         setEsNI.setDisable(false);
@@ -139,6 +140,7 @@ public class RegistrationController {
 
     public void setRuLanguage(){
         currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("ru"));
+        commandReceiver.setCurrentBundle(currentBundle);
         setRu.setDisable(true);
         setFr.setDisable(false);
         setEsNI.setDisable(false);
@@ -148,6 +150,7 @@ public class RegistrationController {
 
     public void setNoLanguage(){
         currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("no"));
+        commandReceiver.setCurrentBundle(currentBundle);
         setNo.setDisable(true);
         setFr.setDisable(false);
         setRu.setDisable(false);
@@ -157,6 +160,7 @@ public class RegistrationController {
 
     public void setEsNILanguage(){
         currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("es", "NI"));
+        commandReceiver.setCurrentBundle(currentBundle);
         setEsNI.setDisable(true);
         setFr.setDisable(false);
         setRu.setDisable(false);

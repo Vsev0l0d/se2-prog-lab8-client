@@ -27,7 +27,12 @@ public class MinBySemesterEnum extends Command {
     }
 
     @Override
+    public String getName() {
+        return "min_by_semester_enum";
+    }
+
+    @Override
     protected String writeInfo() {
-        return "Команда min_by_semester_enum – вывести любой объект из коллекции, значение поля semesterEnum которого является минимальным.";
+        return String.format(commandReceiver.getCurrentBundle().getString("minBySemesterEnumInf"),"min_by_semester_enum","semesterEnum");
     }
 }

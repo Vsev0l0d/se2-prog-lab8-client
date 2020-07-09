@@ -38,8 +38,9 @@ public class DecryptingImp implements Decrypting {
             if (serializedMessage.getMessage() != null) ctrl.showInfo(translate(serializedMessage.getMessage()));
             else {
                 if (serializedMessage.getLinkedList().isEmpty()){
-                    ctrl.showInfo("коллекция пуста");
-                } else ctrl.showInfo(serializedMessage.getLinkedList().stream().map(StudyGroup::toString).collect(Collectors.joining()));
+                    ctrl.showInfo(commandReceiver.getCurrentBundle().getString("collectionIsEmpty"));
+                } else ctrl.showInfo(serializedMessage.getLinkedList()
+                        .stream().map(studyGroup -> studyGroup.toLanguageString(commandReceiver.getCurrentBundle())).collect(Collectors.joining()));
             }
         }
         if (o instanceof SerializedResAuth) {
@@ -57,7 +58,7 @@ public class DecryptingImp implements Decrypting {
                     } catch (ClassNotFoundException | InterruptedException e) {
                         e.printStackTrace();
                     }
-                } else ctrl.showAlert("Не удается зайти");
+                } else ctrl.showAlert(commandReceiver.getCurrentBundle().getString("unableToLogIn"));
             }
 
             if (serializedResAuth.getType().equals("reg")) {
@@ -68,12 +69,12 @@ public class DecryptingImp implements Decrypting {
                 if (serializedResAuth.getRes()) {
                     try {
                         ctrl.changeToMain(commandReceiver.getPrimaryStage(), commandReceiver);
-                        ctrl.showSuccessMessage("Пользователь успешно зарегистрирован");
+                        ctrl.showSuccessMessage(commandReceiver.getCurrentBundle().getString("userSuccessfullyRegistered"));
                         commandReceiver.getCollection("return_collection_init");
                     } catch (ClassNotFoundException | InterruptedException e) {
                         e.printStackTrace();
                     }
-                } else ctrl.showAlert("Пользователь с таким логином уже существует!");
+                } else ctrl.showAlert(commandReceiver.getCurrentBundle().getString("aUserWithThisLoginAlreadyExists"));
             }
         }
 
@@ -123,27 +124,28 @@ public class DecryptingImp implements Decrypting {
 
     private String translate(String message){
         switch (message.toLowerCase()) {
-            case "элемент добавлен": return "";
-            case "элемент не добавлен": return "";
-            case "элемент обновлен": return "";
-            case "элемент не обновлен": return "";
-            case "элемент создан другим пользователем": return "";
-            case "элемента с таким ID нет в коллекции": return "";
-            case "некорректный аргумент": return "";
-            case "элемент удален": return "";
-            case "ваши элементы коллекции удалены": return "";
-            case "таких элементов не найдено": return "";
-            case "элемент не прошел валидацию на стороне сервера": return "";
+            case "элемент добавлен": return commandReceiver.getCurrentBundle().getString("itemAdded");
+            case "элемент не добавлен": return commandReceiver.getCurrentBundle().getString("itemNotAdded");
+            case "элемент обновлен": return commandReceiver.getCurrentBundle().getString("itemUpdated");
+            case "элемент не обновлен": return commandReceiver.getCurrentBundle().getString("itemNotUpdated");
+            case "элемент создан другим пользователем": return commandReceiver.getCurrentBundle().getString("itemCreatedByAnotherUser");
+            case "элемента с таким ID нет в коллекции": return commandReceiver.getCurrentBundle().getString("anItemWithThisIdIsNotInTheCollection");
+            case "некорректный аргумент": return commandReceiver.getCurrentBundle().getString("invalidArgument");
+            case "элемент удален": return commandReceiver.getCurrentBundle().getString("itemDeleted");
+            case "ваши элементы коллекции удалены": return commandReceiver.getCurrentBundle().getString("yourCollectionItemsHaveBeenDeleted");
+            case "таких элементов не найдено": return commandReceiver.getCurrentBundle().getString("noSuchItemsFound");
+            case "элемент не прошел валидацию на стороне сервера": return commandReceiver.getCurrentBundle().getString("itemFailedServerSideValidation");
         }
 
         if (message.contains("removeElements")){
-            message = message.replace("removeElements", "удалены элементы с ID: ");
+            message = message.replace("removeElements", commandReceiver.getCurrentBundle().getString("deletedItemsWithID"));
         } else if (message.contains("ошибка при удалении из бд элемента с id=")){
-            message = message.replace("Ошибка при удалении из бд элемента с id=", "err");
+            message = message.replace("Ошибка при удалении из бд элемента с id=",
+                    commandReceiver.getCurrentBundle().getString("anErrorOccurredWhileDeletingAnElementWithIdFromTheDatabase"));
         } else if (message.contains("%data")){
-            message = message.replace("%type", "Тип коллекции –");
-            message = message.replace("%data", "Дата инициализации коллекции –");
-            message = message.replace("%size", "Количество элементов в коллекции –");
+            message = message.replace("%type", commandReceiver.getCurrentBundle().getString("collectionType"));
+            message = message.replace("%data", commandReceiver.getCurrentBundle().getString("collectionInitializationDate"));
+            message = message.replace("%size", commandReceiver.getCurrentBundle().getString("collectionLength"));
         }
         return message;
     }

@@ -26,7 +26,12 @@ public class Exit extends Command {
     }
 
     @Override
+    public String getName() {
+        return "exit";
+    }
+
+    @Override
     protected String writeInfo() {
-        return "Команда exit – завершить программу (без сохранения в файл).";
+        return String.format(commandReceiver.getCurrentBundle().getString("exitInf"),"exit");
     }
 }

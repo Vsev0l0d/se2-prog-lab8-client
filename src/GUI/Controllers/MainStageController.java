@@ -14,7 +14,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -39,6 +38,7 @@ public class MainStageController implements Initializable {
     private Stage primaryStage;
     private ResourceBundle currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("ru"));
 
+    @FXML private Text aboutFagotsText;
     @FXML private Text hiText;
     @FXML private Pane groupMap;
     @FXML private Pane executeCommand;
@@ -229,7 +229,7 @@ public class MainStageController implements Initializable {
 
     public void showAlert(String alertMessage) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Ошибка!");
+        alert.setTitle(currentBundle.getString("err"));
 
         alert.setHeaderText(null);
         alert.setContentText(alertMessage);
@@ -298,7 +298,7 @@ public class MainStageController implements Initializable {
             executeCommandBtn.setDisable(true);
             String path = selectScriptFile();
             if (path != null) {
-                showAlert("execute_script больше не поддерживается");
+                showAlert("execute_script" + currentBundle.getString("noLongerSupported"));
             }
         }
         clearTitlePanes();
@@ -371,8 +371,8 @@ public class MainStageController implements Initializable {
     private void showInfoElement(StudyGroup studyGroup){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
-        alert.setTitle("info");
-        alert.setContentText(studyGroup.toString());
+        alert.setTitle(currentBundle.getString("information"));
+        alert.setContentText(studyGroup.toLanguageString(currentBundle));
         ButtonType close = new ButtonType("close");
         ButtonType edit = new ButtonType("update");
         ButtonType delete = new ButtonType("remove");
@@ -406,8 +406,6 @@ public class MainStageController implements Initializable {
             } catch (InterruptedException | IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-
-            visual();
         }
     }
 
@@ -457,7 +455,7 @@ public class MainStageController implements Initializable {
     public void showInfo(String message) {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Информация!");
+            alert.setTitle(currentBundle.getString("information"));
 
             alert.setHeaderText(null);
             alert.setContentText(message);
@@ -486,10 +484,29 @@ public class MainStageController implements Initializable {
         toTableBtn.setText(currentBundle.getString("toTheTable"));
         executeCommandsBtn.setText(currentBundle.getString("executeCommand"));
         aboutFagotsBtn.setText(currentBundle.getString("aboutDevelopers"));
+        hiText.setText(currentBundle.getString("hi") + ", " + commandReceiver.getLogin());
+        idArgumentField.setPromptText(currentBundle.getString("enterItemId"));
+        aboutGroupTitiledPane.setText(currentBundle.getString("groupInformation"));
+        aboutGroupAdminTitledPane.setText(currentBundle.getString("groupAdminInformation"));
+        groupNameField.setPromptText(currentBundle.getString("enterGroupName"));
+        xTextField.setPromptText(currentBundle.getString("enter") + " X (max = 531)");
+        yTextField.setPromptText(currentBundle.getString("enter") + " Y (min = -653.0)");
+        studentsCountField.setPromptText(currentBundle.getString("enterTheNumberOfStudents"));
+        formOfEducationComboBox.setPromptText(currentBundle.getString("chooseAFormOfTraining"));
+        semesterComboBox.setPromptText(currentBundle.getString("chooseSemester"));
+        adminGroupField.setPromptText(currentBundle.getString("enterTheGroupAdminName"));
+        adminHeightField.setPromptText(currentBundle.getString("enterAdminHeight"));
+        adminEyeColorComboBox.setPromptText(currentBundle.getString("enterAdminEyeColor"));
+        adminHairColorComboBox.setPromptText(currentBundle.getString("enterAdminHairColor"));
+        adminNationalityComboBox.setPromptText(currentBundle.getString("enterTheNationalityOfTheAdmin"));
+        commandChoiseComboBox.setPromptText(currentBundle.getString("chooseACommand"));
+        executeCommandBtn.setText(currentBundle.getString("run"));
+        aboutFagotsText.setText(currentBundle.getString("acceptTheLabPlease"));
     }
 
     @FXML private void setFrLanguage(){
         currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("fr"));
+        commandReceiver.setCurrentBundle(currentBundle);
         setFr.setDisable(true);
         setRu.setDisable(false);
         setEsNI.setDisable(false);
@@ -499,6 +516,7 @@ public class MainStageController implements Initializable {
 
     @FXML private void setRuLanguage(){
         currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("ru"));
+        commandReceiver.setCurrentBundle(currentBundle);
         setRu.setDisable(true);
         setFr.setDisable(false);
         setEsNI.setDisable(false);
@@ -508,6 +526,7 @@ public class MainStageController implements Initializable {
 
     @FXML private void setNoLanguage(){
         currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("no"));
+        commandReceiver.setCurrentBundle(currentBundle);
         setNo.setDisable(true);
         setFr.setDisable(false);
         setRu.setDisable(false);
@@ -517,6 +536,7 @@ public class MainStageController implements Initializable {
 
     @FXML private void setEsNILanguage(){
         currentBundle = ResourceBundle.getBundle("bundles/bundle", new Locale("es", "NI"));
+        commandReceiver.setCurrentBundle(currentBundle);
         setEsNI.setDisable(true);
         setFr.setDisable(false);
         setRu.setDisable(false);

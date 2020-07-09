@@ -72,7 +72,7 @@
             <Font name="Avenir Next Bold" size="22.0" />
          </font>
       </Text>
-      <Button fx:id="setRu" disable="true" layoutX="608.0" layoutY="22.0" mnemonicParsing="false" onAction="#setRuLanguage" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE">
+      <Button fx:id="setRu" layoutX="608.0" layoutY="22.0" mnemonicParsing="false" onAction="#setRuLanguage" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE">
          <font>
             <Font name="SansSerif Regular" size="16.0" />
          </font>
@@ -178,7 +178,7 @@
          <TextField fx:id="idArgumentField" disable="true" layoutX="50.0" layoutY="65.0" prefHeight="27.0" prefWidth="688.0" promptText="Введите id элемента (целое положительное число)" />
       </Pane>
       <Pane fx:id="aboutFagots" visible="false">
-         <Text fontSmoothingType="LCD" layoutX="14.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Примите лабу пожалуйста">
+         <Text fx:id="aboutFagotsText" fontSmoothingType="LCD" layoutX="14.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Примите лабу пожалуйста">
             <font>
                <Font size="47.0" />
             </font>

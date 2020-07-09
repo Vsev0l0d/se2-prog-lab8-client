@@ -28,7 +28,12 @@ public class Info extends Command implements Serializable {
     }
 
     @Override
+    public String getName() {
+        return "info";
+    }
+
+    @Override
     protected String writeInfo() {
-        return "Команда info – вывести в стандартный поток вывода информацию о коллекции.";
+        return String.format(commandReceiver.getCurrentBundle().getString("infoInf"),"info");
     }
 }

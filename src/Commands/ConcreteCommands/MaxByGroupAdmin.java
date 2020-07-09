@@ -27,7 +27,12 @@ public class MaxByGroupAdmin extends Command {
     }
 
     @Override
+    public String getName() {
+        return "max_by_group_admin";
+    }
+
+    @Override
     protected String writeInfo() {
-        return "Команда max_by_group_admin – вывести любой объект из коллекции, значение поля groupAdmin которого является максимальным.";
+        return String.format(commandReceiver.getCurrentBundle().getString("maxByGroupAdminInf"),"max_by_group_admin", "groupAdmin");
     }
 }

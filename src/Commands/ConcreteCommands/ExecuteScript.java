@@ -29,9 +29,13 @@ public class ExecuteScript extends Command {
     }
 
     @Override
+    public String getName() {
+        return "execute_script";
+    }
+
+    @Override
     protected String writeInfo() {
-        return "Команда execute_script Синтаксис: execute_script file_name – считать и исполнить скрипт из указанного файла. " +
-                "В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.";
+        return String.format(commandReceiver.getCurrentBundle().getString("executeScriptInf"),"execute_script");
     }
 
     public String getPath() {

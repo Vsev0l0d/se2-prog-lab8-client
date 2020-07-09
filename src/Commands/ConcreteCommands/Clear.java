@@ -27,7 +27,12 @@ public class Clear extends Command {
     }
 
     @Override
+    public String getName() {
+        return "clear";
+    }
+
+    @Override
     protected String writeInfo() {
-        return "Команда clear – очистить коллекцию.";
+        return String.format(commandReceiver.getCurrentBundle().getString("clearInf"),"clear");
     }
 }

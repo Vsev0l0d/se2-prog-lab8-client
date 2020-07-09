@@ -37,17 +37,16 @@ public class SessionImp implements Session {
             port = Integer.parseInt(data[1]);
             fileReader.close();
         } catch (FileNotFoundException e) {
-            ctrl.showAlert("Не найден файл config.txt, создайте его в директории " +
-                    System.getProperty("user.dir") +" и напишите туда хост и порт через пробел");
+            ctrl.showAlert(String.format(ctrl.getCurrentBundle().getString("configurationFileFound"),"config.txt",System.getProperty("user.dir")));
             return;
         } catch (IOException e) {
-            ctrl.showAlert("Ошибка при чтении из конфигурационного файла: " + e);
+            ctrl.showAlert(ctrl.getCurrentBundle().getString("errorReadingFromConfigurationFile") + e);
             return;
         } catch (NumberFormatException ex) {
-            ctrl.showAlert("Порт должен быть целым числом");
+            ctrl.showAlert(ctrl.getCurrentBundle().getString("thePortMustBeAnInteger"));
             return;
         } catch (NoSuchElementException e) {
-            ctrl.showAlert("Напишите в файл config.txt хост и порт через пробел");
+            ctrl.showAlert(ctrl.getCurrentBundle().getString("writeTheHostAndPortInAFileWithASpace") + " config.txt");
             return;
         }
 
@@ -58,7 +57,7 @@ public class SessionImp implements Session {
             socketChannel.configureBlocking(false);
 
         } catch (SocketException ex) {
-            ctrl.showAlert("Не удалось подключиться к удаленному адресу");
+            ctrl.showAlert(ctrl.getCurrentBundle().getString("failedToConnectToRemoteAddress"));
             System.exit(1);
         } catch (IOException e) {
             e.printStackTrace();
