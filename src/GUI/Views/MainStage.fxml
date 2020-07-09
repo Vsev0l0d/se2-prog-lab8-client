@@ -123,7 +123,7 @@
    </Pane>
    <Pane style="-fx-background-color: gainsboro;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
       <Pane fx:id="groupMap" visible="false" />
-      <Pane fx:id="tablePane" visible="false">
+      <Pane fx:id="tablePane">
          <TableView fx:id="tableView" layoutX="2.0" layoutY="25.0" style="-fx-background-radius: 1em; -fx-background-color: gainsboro gainsboro;" AnchorPane.bottomAnchor="0.0">
             <columns>
                <TableColumn fx:id="idColumn" prefWidth="38.0" text="id" />
@@ -155,7 +155,7 @@
          <ChoiceBox fx:id="hairColorFilter" layoutX="907.0" layoutY="1.0" prefHeight="25.0" prefWidth="83.0" />
          <ChoiceBox fx:id="nationalityFilter" layoutX="989.0" layoutY="1.0" prefHeight="25.0" prefWidth="90.0" />
       </Pane>
-      <Pane fx:id="executeCommand" prefHeight="425.0" prefWidth="1078.0">
+      <Pane fx:id="executeCommand" prefHeight="425.0" prefWidth="1078.0" visible="false">
          <TitledPane fx:id="aboutGroupTitiledPane" disable="true" layoutX="50.0" layoutY="100.0" prefHeight="234.0" prefWidth="332.0" text="Информация о группе">
             <VBox prefHeight="218.0" prefWidth="330.0" spacing="10.0">
                <TextField fx:id="groupNameField" prefHeight="27.0" prefWidth="334.0" promptText="Введите имя группы" style="-fx-background-radius: 1em;" />

@@ -11,15 +11,13 @@ import Interfaces.CommandReceiver;
 import Interfaces.Decrypting;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Singleton
 public class DecryptingImp implements Decrypting {
@@ -37,7 +35,12 @@ public class DecryptingImp implements Decrypting {
             FXMLLoader loader = new FXMLLoader(DecryptingImp.class.getResource("/GUI/Views/MainStage.fxml"));
             Parent sceneFXML = loader.load();
             MainStageController ctrl = (loader.getController());
-            ctrl.showInfo(serializedMessage.getMessage());
+            if (serializedMessage.getMessage() != null) ctrl.showInfo(translate(serializedMessage.getMessage()));
+            else {
+                if (serializedMessage.getLinkedList().isEmpty()){
+                    ctrl.showInfo("коллекция пуста");
+                } else ctrl.showInfo(serializedMessage.getLinkedList().stream().map(StudyGroup::toString).collect(Collectors.joining()));
+            }
         }
         if (o instanceof SerializedResAuth) {
             SerializedResAuth serializedResAuth = (SerializedResAuth) o;
@@ -54,7 +57,7 @@ public class DecryptingImp implements Decrypting {
                     } catch (ClassNotFoundException | InterruptedException e) {
                         e.printStackTrace();
                     }
-                } else ctrl.showAlert("Вы не зарегистрированы!");
+                } else ctrl.showAlert("Не удается зайти");
             }
 
             if (serializedResAuth.getType().equals("reg")) {
@@ -108,7 +111,6 @@ public class DecryptingImp implements Decrypting {
     @Override
     public void requireCollection() {
         while (true) {
-            System.out.println("asd");
             try {
                 commandReceiver.getCollection("regular");
                 Thread.sleep(3000);
@@ -116,5 +118,33 @@ public class DecryptingImp implements Decrypting {
                 e.printStackTrace();
             }
         }
+    }
+
+    private String translate(String message){
+        switch (message.toLowerCase()) {
+            case "выполнено": return "";
+            case "элемент добавлен": return "";
+            case "элемент не добавлен": return "";
+            case "элемент обновлен": return "";
+            case "элемент не обновлен": return "";
+            case "элемент создан другим пользователем": return "";
+            case "элемента с таким ID нет в коллекции": return "";
+            case "некорректный аргумент": return "";
+            case "элемент удален": return "";
+            case "свои элементы коллекции удалены": return "";
+            case "таких элементов не найдено": return "";
+            case "элемент не прошел валидацию на стороне сервера": return "";
+        }
+
+        if (message.contains("removeElements")){
+            message = message.replace("removeElements", "удалены элементы с ID");
+        } else if (message.contains("ошибка при удалении из бд элемента с id=")){
+            message = message.replace("Ошибка при удалении из бд элемента с id=", "err");
+        } else if (message.contains("%data")){
+            message = message.replace("%type", "Тип коллекции –");
+            message = message.replace("%data", "Дата инициализации коллекции –");
+            message = message.replace("%size", "Количество элементов в коллекции –");
+        }
+        return message;
     }
 }

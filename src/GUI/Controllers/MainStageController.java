@@ -288,7 +288,7 @@ public class MainStageController implements Initializable {
             executeCommandBtn.setDisable(true);
             String path = selectScriptFile();
             if (path != null) {
-                // отправить execute_script
+                showAlert("execute_script больше не поддерживается");
             }
         }
         clearTitlePanes();
@@ -439,8 +439,6 @@ public class MainStageController implements Initializable {
             commandReceiver.update(idArgumentField.getText());
         } else if (command.matches("remove_by_id")) {
             commandReceiver.removeById(idArgumentField.getText());
-        } else if (command.equals("execute_script")) {
-            showAlert("Мы не сделали эту команду, извините...");
         } else {
             commandReceiver.getCommandInvoker().executeCommand(command.split(" "));
         }
