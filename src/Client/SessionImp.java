@@ -58,7 +58,7 @@ public class SessionImp implements Session {
             socketChannel.configureBlocking(false);
 
         } catch (SocketException ex) {
-            ctrl.showAlert("Не удалось подключиться к удаленному адресу...");
+            ctrl.showAlert("Не удалось подключиться к удаленному адресу");
             System.exit(1);
         } catch (IOException e) {
             e.printStackTrace();

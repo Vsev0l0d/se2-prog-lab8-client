@@ -50,7 +50,7 @@
             <Font name="SansSerif Regular" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="executeCommandsBtn" layoutX="1.0" layoutY="112.0" mnemonicParsing="false" onAction="#showExecuteCommand" prefHeight="55.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="Исполнить &#10;команду" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="executeCommandsBtn" layoutX="1.0" layoutY="112.0" mnemonicParsing="false" onAction="#showExecuteCommand" prefHeight="55.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="Исполнить команду" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="SansSerif Regular" size="16.0" />
          </font>

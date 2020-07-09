@@ -1,17 +1,9 @@
 package GUI.Controllers;
 
-import Client.ClientModule;
-import Commands.Utils.HashEncrypterImp;
 import Interfaces.CommandReceiver;
-import Interfaces.HashEncrypter;
-import com.google.inject.Guice;
-import com.google.inject.Inject;
-import com.google.inject.Injector;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -93,7 +85,7 @@ public class HiPanelController {
         pane = loader.load();
         scene = new Scene(pane, 1198, 494);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("StudyGroupProject. Окно работы.");
+        primaryStage.setTitle("StudyGroupProject");
         primaryStage.show();
 
         MainStageController controller = loader.getController();

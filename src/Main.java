@@ -1,7 +1,6 @@
 import Client.ClientModule;
 import Client.DecryptingImp;
 import GUI.Controllers.HiPanelController;
-import GUI.Controllers.MainStageController;
 import Interfaces.CommandReceiver;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -11,8 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.media.*;
 import javafx.stage.Stage;
-
 import java.net.URL;
+
 
 public class Main extends Application {
     public static void main(String[] args) {
@@ -29,7 +28,7 @@ public class Main extends Application {
         HiPanelController ctrl = (loader.getController());
         ctrl.setCommandReceiver(commandReceiver);
         ctrl.setPrimaryStage(primaryStage);
-        primaryStage.setTitle("StudyGroupProject. Авторизация.");
+        primaryStage.setTitle("StudyGroupProject");
         primaryStage.setScene(new Scene(root, 350, 350));
         primaryStage.show();
 

@@ -122,7 +122,6 @@ public class DecryptingImp implements Decrypting {
 
     private String translate(String message){
         switch (message.toLowerCase()) {
-            case "выполнено": return "";
             case "элемент добавлен": return "";
             case "элемент не добавлен": return "";
             case "элемент обновлен": return "";
@@ -131,13 +130,13 @@ public class DecryptingImp implements Decrypting {
             case "элемента с таким ID нет в коллекции": return "";
             case "некорректный аргумент": return "";
             case "элемент удален": return "";
-            case "свои элементы коллекции удалены": return "";
+            case "ваши элементы коллекции удалены": return "";
             case "таких элементов не найдено": return "";
             case "элемент не прошел валидацию на стороне сервера": return "";
         }
 
         if (message.contains("removeElements")){
-            message = message.replace("removeElements", "удалены элементы с ID");
+            message = message.replace("removeElements", "удалены элементы с ID: ");
         } else if (message.contains("ошибка при удалении из бд элемента с id=")){
             message = message.replace("Ошибка при удалении из бд элемента с id=", "err");
         } else if (message.contains("%data")){
