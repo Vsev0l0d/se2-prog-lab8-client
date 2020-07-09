@@ -484,7 +484,7 @@ public class MainStageController implements Initializable {
         toTableBtn.setText(currentBundle.getString("toTheTable"));
         executeCommandsBtn.setText(currentBundle.getString("executeCommand"));
         aboutFagotsBtn.setText(currentBundle.getString("aboutDevelopers"));
-        hiText.setText(currentBundle.getString("hi") + ", " + commandReceiver.getLogin());
+        hiText.setText(currentBundle.getString("hi").replace("\n", "") + ", " + commandReceiver.getLogin());
         idArgumentField.setPromptText(currentBundle.getString("enterItemId"));
         aboutGroupTitiledPane.setText(currentBundle.getString("groupInformation"));
         aboutGroupAdminTitledPane.setText(currentBundle.getString("groupAdminInformation"));
