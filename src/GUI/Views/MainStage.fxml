@@ -67,11 +67,6 @@
             <Font name="Avenir Next Bold" size="22.0" />
          </font>
       </Text>
-      <Text fill="#3f96cd" layoutX="441.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00" wrappingWidth="108.24800109863281">
-         <font>
-            <Font name="Avenir Next Bold" size="22.0" />
-         </font>
-      </Text>
       <Button fx:id="setRu" layoutX="608.0" layoutY="22.0" mnemonicParsing="false" onAction="#setRuLanguage" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: transparent;" textFill="WHITE">
          <font>
             <Font name="SansSerif Regular" size="16.0" />
