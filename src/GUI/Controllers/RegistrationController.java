@@ -48,6 +48,7 @@ public class RegistrationController {
         if (!newLoginField.getText().isEmpty() && !newPasswordField.getText().isEmpty() && !repNewPasswordField.getText().isEmpty()) {
             if (newPasswordField.getText().equals(repNewPasswordField.getText())) {
                 try {
+                    commandReceiver.setCurrentBundle(currentBundle);
                     commandReceiver.setPrimaryStage(primaryStage);
                     commandReceiver.register(newLoginField.getText(), newPasswordField.getText());
                 } catch (ClassNotFoundException | InterruptedException | IOException e) {
@@ -102,7 +103,7 @@ public class RegistrationController {
         this.primaryStage = primaryStage;
     }
 
-    public void changeToMain(Stage primaryStage, CommandReceiver commandReceiver) throws IOException {
+    public void changeToMain(Stage primaryStage, CommandReceiver commandReceiver, ResourceBundle resourceBundle) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/GUI/Views/MainStage.fxml"));
         pane = loader.load();
@@ -116,7 +117,7 @@ public class RegistrationController {
         commandReceiver.setMainStageController(controller);
         controller.setCommandReceiver(commandReceiver);
         controller.setPrimaryStage(primaryStage);
-        controller.setCurrentBundle(currentBundle);
+        controller.setCurrentBundle(resourceBundle);
         controller.changeLanguage();
     }
 

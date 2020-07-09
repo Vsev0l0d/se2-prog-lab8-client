@@ -65,6 +65,7 @@ public class HiPanelController {
     void authUserAction(ActionEvent event) {
         if (!userLoginField.getText().isEmpty() && !userPasswordField.getText().isEmpty()) {
             try {
+                commandReceiver.setCurrentBundle(currentBundle);
                 commandReceiver.setPrimaryStage(primaryStage);
                 commandReceiver.tryAuth(userLoginField.getText().trim(), userPasswordField.getText().trim());
             } catch (ClassNotFoundException | InterruptedException e) {
@@ -84,7 +85,7 @@ public class HiPanelController {
         alert.showAndWait();
     }
 
-    public void changeToMain(Stage primaryStage, CommandReceiver commandReceiver) throws IOException {
+    public void changeToMain(Stage primaryStage, CommandReceiver commandReceiver, ResourceBundle resourceBundle) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/GUI/Views/MainStage.fxml"));
         pane = loader.load();
@@ -98,7 +99,7 @@ public class HiPanelController {
         commandReceiver.setMainStageController(controller);
         controller.setCommandReceiver(commandReceiver);
         controller.setPrimaryStage(primaryStage);
-        controller.setCurrentBundle(currentBundle);
+        controller.setCurrentBundle(resourceBundle);
         controller.changeLanguage();
     }
 

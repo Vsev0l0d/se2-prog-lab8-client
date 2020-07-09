@@ -62,7 +62,7 @@
       </Button>
    </Pane>
    <Pane prefHeight="75.0" style="-fx-background-color: lightblue;" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <Text fx:id="hiText" fill="#3f96cd" layoutX="71.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hi, USERLOGIN" wrappingWidth="337.2480010986328">
+      <Text fx:id="hiText" fill="#3f96cd" layoutX="71.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Привет, USERLOGIN" wrappingWidth="337.2480010986328">
          <font>
             <Font name="Avenir Next Bold" size="22.0" />
          </font>

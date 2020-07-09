@@ -53,7 +53,7 @@ public class DecryptingImp implements Decrypting {
                 ctrl.setCommandReceiver(commandReceiver);
                 if (serializedResAuth.getRes()) {
                     try {
-                        ctrl.changeToMain(commandReceiver.getPrimaryStage(), commandReceiver);
+                        ctrl.changeToMain(commandReceiver.getPrimaryStage(), commandReceiver, commandReceiver.getCurrentBundle());
                         commandReceiver.getCollection("return_collection_init");
                     } catch (ClassNotFoundException | InterruptedException e) {
                         e.printStackTrace();
@@ -68,7 +68,7 @@ public class DecryptingImp implements Decrypting {
                 ctrl.setCommandReceiver(commandReceiver);
                 if (serializedResAuth.getRes()) {
                     try {
-                        ctrl.changeToMain(commandReceiver.getPrimaryStage(), commandReceiver);
+                        ctrl.changeToMain(commandReceiver.getPrimaryStage(), commandReceiver, commandReceiver.getCurrentBundle());
                         ctrl.showSuccessMessage(commandReceiver.getCurrentBundle().getString("userSuccessfullyRegistered"));
                         commandReceiver.getCollection("return_collection_init");
                     } catch (ClassNotFoundException | InterruptedException e) {

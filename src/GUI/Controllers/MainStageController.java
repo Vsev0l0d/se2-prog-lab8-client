@@ -247,7 +247,7 @@ public class MainStageController implements Initializable {
         this.commandReceiver = commandReceiver;
         commandNames.clear();
         commandNames.addAll(commandReceiver.getCommandsName());
-        hiText.setText("Hi, " + commandReceiver.getLogin());
+        changeLanguage();
     }
 
     @FXML
